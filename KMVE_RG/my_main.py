@@ -1,6 +1,6 @@
 import numpy as np
 import torch
-from config import config as args
+
 from models.SGF_model import SGF
 from modules.MyTrainer import Trainer
 from modules.dataloaders import MyDataLoader
@@ -10,7 +10,7 @@ from modules.optimizers import build_optimizer, build_lr_scheduler
 from modules.tokenizers import Tokenizer
 
 
-def main():
+def main(args):
     # fix random seed
     torch.manual_seed(args.seed)
     torch.backends.cudnn.deterministic = True
@@ -36,4 +36,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    for dataset in ['Liver', 'Thyroid', 'Mammary']:
+        print(f"\033[1;35mtrain for {dataset}...\033[0m")
+        from config_nassir_urg import Config
+        config = Config(dataset_name = dataset)
+        main(config)

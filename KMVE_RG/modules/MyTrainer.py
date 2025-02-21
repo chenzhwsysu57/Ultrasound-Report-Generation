@@ -1,3 +1,8 @@
+import sys
+sys.path.append('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG')
+
+
+
 import os
 from abc import abstractmethod
 import time
@@ -9,6 +14,7 @@ import warnings
 from sentence_transformers import SentenceTransformer, util
 from torch.nn import functional as F
 from tqdm import tqdm
+
 
 warnings.filterwarnings("ignore")
 os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
@@ -66,16 +72,22 @@ class BaseTrainer(object):
     def train(self):
         not_improved_count = 0
         df = None
-        path = 'E:/Captionv0/Code/SGF/Result/log.csv'
+        path = f'{self.args.Result_prefix}/{self.args.dataset_name}_log.csv'
+        file_exists = os.path.isfile(path)
         for epoch in range(self.start_epoch, self.epochs + 1):
             result = self._train_epoch(epoch)
             log = {'epoch': epoch}
             log.update(result)
-            if df is None:
-                df = pd.DataFrame.from_dict(log, orient='index').T
-            else:
-                df = pd.concat([df, pd.Series(log)], ignore_index=True)
-            df.to_csv(path, index=False)
+            df = pd.DataFrame([log])  
+            df.to_csv(path, mode='a', index=False, header=not file_exists)
+            file_exists = True
+
+
+            # if df is None:
+            #     df = pd.DataFrame.from_dict(log, orient='index').T
+            # else:
+            #     df = pd.concat([df, pd.Series(log)], ignore_index=True)
+            # df.to_csv(path, index=False)
             self._record_best(log)
 
             for key, value in log.items():
@@ -150,13 +162,13 @@ class BaseTrainer(object):
             'optimizer': self.optimizer.state_dict(),
             'monitor_best': self.mnt_best
         }
-        filename = os.path.join(self.checkpoint_dir, 'current_checkpoint.pth')
+        filename = os.path.join(self.checkpoint_dir, f'{self.args.dataset_name}_epoch_{epoch}_checkpoint.pth')
         torch.save(state, filename)
         print("Saving checkpoint: {} ...".format(filename))
         if save_best:
-            best_path = os.path.join(self.checkpoint_dir, 'model_best.pth')
+            best_path = os.path.join(self.checkpoint_dir, f'{self.args.dataset_name}_best.pth')
             torch.save(state, best_path)
-            print("Saving current best: model_best.pth ...")
+            print(f"Saving current best: {self.args.dataset_name}_best.pth ...")
 
     def _resume_checkpoint(self, resume_path):
         resume_path = str(resume_path)
@@ -166,7 +178,9 @@ class BaseTrainer(object):
         self.mnt_best = checkpoint['monitor_best']
         self.model.load_state_dict(checkpoint['state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer'])
-
+        if self.start_epoch > self.args.epochs:
+            print("Trained done. Return.")
+            return
         print("Checkpoint loaded. Resume training from epoch {}".format(self.start_epoch))
 
     def _record_best(self, log):
@@ -293,8 +307,8 @@ class Trainer(BaseTrainer):
                                         {i: [re] for i, re in enumerate(test_res)})
 
             df = pd.concat([df, pd.Series(test_met)], ignore_index=True)
-            filen_name = 'E:/Captionv0/Code/SGF/Result/test_restult_{}.csv'.format(epoch)
-            df.to_csv(filen_name, index=False, encoding='utf-8-sig')
+            file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_restult_{epoch}.csv'
+            df.to_csv(file_name, index=False, encoding='utf-8-sig')
             log.update(**{'test_' + k: v for k, v in test_met.items()})
 
         self.lr_scheduler.step()

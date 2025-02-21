@@ -1,8 +1,8 @@
 import sys
 sys.path.append('../')
 from pycocoevalcap.bleu.bleu import Bleu
-from pycocoevalcap.meteor import Meteor
-from pycocoevalcap.rouge import Rouge
+from pycocoevalcap.meteor.meteor import Meteor
+from pycocoevalcap.rouge.rouge  import Rouge
 from pycocoevalcap.cider.cider import Cider
 
 
@@ -26,7 +26,7 @@ def compute_scores(gts, res):
     # Compute score for each metric
     for scorer, method in scorers:
         try:
-            score, scores = scorer.compute_score(gts, res, verbose=0)
+            score, scores = scorer.compute_score(gts, res) # , verbose=0)
         except TypeError:
             score, scores = scorer.compute_score(gts, res)
         if type(method) == list:
