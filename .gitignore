@@ -3,3 +3,7 @@
 **/__pycache__
 **/__MACOSX__
 **/.DS_Store
+KMVE_RG/pycocoevalcap/
+KMVE_RG/pycocoevalcap_bk/
+Result/
+wandb/
