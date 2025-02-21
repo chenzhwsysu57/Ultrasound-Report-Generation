@@ -7,8 +7,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn import cluster
 import sys
 import json
-sys.path.append('../')
-from KMVE_RG.config import config as args
+sys.path.append('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen')
+from KMVE_RG.config_nassir_urg import config as args
 
 
 def _preprocess_text(documents):
@@ -71,7 +71,7 @@ def shuffle_result(topics, topic_model, ann, data, all_sentence, shuffle=False):
 if __name__ == '__main__':
     ann_path = args.ann_path
     split = ['train', 'val', 'test']
-    data, all_sentence, origin_ann, cut_data, labels = get_all_data(split=split, ann_path=ann_path)
+    data, all_sentence, origin_ann, cut_data = get_all_data(split=split, ann_path=ann_path)
     cut_data = cut_data
     documents = pd.DataFrame({"Document": data,
                               "ID": range(len(data)),
@@ -108,7 +108,7 @@ if __name__ == '__main__':
     model.fit(umap_embeddings)
     documents['Topic'] = model.labels_
     labels = model.labels_
-    probabilities = model.probabilities_
+    # probabilities = model.probabilities_
     sizes = documents.groupby(['Topic']).count().sort_values("Document", ascending=False).reset_index()
     topic_num = sizes.shape[0]
     topic_size = dict(zip(sizes.Topic, sizes.Document))

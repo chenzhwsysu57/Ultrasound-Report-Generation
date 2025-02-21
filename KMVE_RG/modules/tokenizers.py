@@ -1,11 +1,14 @@
+import jieba
 import json
 from collections import Counter
-from config import config as args
-import jieba
-jieba.load_userdict(args.technical_word)
+
+
 
 class Tokenizer(object):
+    
     def __init__(self, args):
+        
+        jieba.load_userdict(args.technical_word)
         self.ann_path = args.ann_path
         self.threshold = args.threshold
         # self.dataset_name = args.dataset_name  #
