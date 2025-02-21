@@ -8,3 +8,4 @@ KMVE_RG/pycocoevalcap/
 KMVE_RG/pycocoevalcap_bk/
 Result/
 wandb/
+env.yaml
