@@ -13,8 +13,10 @@ from config_nassir_urg import Config
 parser = argparse.ArgumentParser(description='Run WandB logging for ultrasound report generation.')
 parser.add_argument('--dataset', type=str, required=True, help='Name of the dataset to log metrics for.')
 parser.add_argument('--project', type=str, default="Nassir-US-Report-Gen", help='Name of the dataset to log metrics for.')
+parser.add_argument('--comment', type=str, default='today', help='a very short comment without blankspace.')
+parser.add_argument('--result', type=str, default='TF_only', help='result path')
 args = parser.parse_args()
-config=Config(dataset_name = args.dataset)
+config=Config(dataset_name = args.dataset, result = args.result)
 # Update log_file_path based on the dataset argument
 log_file_path = f'{config.Result_prefix}/{args.dataset}_log.csv'
 
@@ -23,7 +25,7 @@ print(config)
 wandb.init(
     project=args.project,
     config=config,
-    name=args.dataset
+    name=args.comment
 )
 
 def read_all_metrics(log_file):

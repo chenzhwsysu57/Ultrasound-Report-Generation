@@ -316,3 +316,118 @@ class Trainer(BaseTrainer):
         return log
 
 
+class TFTrainer(BaseTrainer):
+    def __init__(self, model, criterion, metric_ftns, optimizer, args, lr_scheduler, train_dataloader, val_dataloader,
+                 test_dataloader):
+        super(TFTrainer, self).__init__(model, criterion, metric_ftns, optimizer, args)
+        self.lr_scheduler = lr_scheduler
+        self.train_dataloader = train_dataloader
+        self.val_dataloader = val_dataloader
+        self.test_dataloader = test_dataloader
+
+        self.lambada1 = torch.nn.Parameter(torch.tensor(1.0), requires_grad=True) # tf自身的loss
+        self.lambada3 = torch.nn.Parameter(torch.tensor(0.0), requires_grad=True) # 最终生成的报告之间对比loss
+
+
+    def logloss(self, y_true, y_pred, eps=1e-15):
+        y_true = np.array(y_true)
+        y_pred = np.array(y_pred)
+        assert (len(y_true) and len(y_true) == len(y_pred))
+
+        p = np.clip(y_pred, eps, 1 - eps)
+        loss = np.sum(- y_true * np.log(p) - (1 - y_true) * np.log(1 - p))
+
+        return loss / len(y_true)
+
+    def _train_epoch(self, epoch):
+        train_loss = 0
+        self.model.train()
+
+        for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(enumerate \
+                    (self.train_dataloader), total=len(self.train_dataloader)):
+            images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(self.device), \
+                                                             reports_masks.to(self.device), mesh_label.to(self.device)
+
+
+            indices = torch.randperm(images.shape[0])[:5]
+            images_select = images[indices]
+            reports_select = reports_ids[indices]
+
+            self.model.eval()
+
+            pred_output  = self.model(images_select, mode='sample')
+            predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
+            ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
+
+            self.model.train()
+            pred_embeddings = self.sentence_bert.encode(predcit_reports, convert_to_tensor=True)
+            gt_embeddings = self.sentence_bert.encode(ground_truths, convert_to_tensor=True)
+            pred_embeddings = pred_embeddings.unsqueeze(0)
+            gt_embeddings = gt_embeddings.unsqueeze(1)
+            similarity_scores = F.cosine_similarity(pred_embeddings, gt_embeddings)
+            mean_similarity_score = torch.mean(similarity_scores)
+            similarity_loss = 1 - mean_similarity_score
+            CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
+
+            output  = self.model(images, reports_ids, mode='train')
+            
+            RG_L = self.criterion(output, reports_ids, reports_masks)
+            total_loss = self.lambada1 * RG_L + self.lambada3 * CS_L
+            train_loss = train_loss + self.lambada1.item() * RG_L.item() + \
+                          + self.lambada3.item() * CS_L.item()
+
+            self.optimizer.zero_grad()
+            total_loss.backward()
+            torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
+            self.optimizer.step()
+        log = {'train_loss': train_loss / len(self.train_dataloader)}
+        print(log['train_loss'])
+
+        self.model.eval()
+        with torch.no_grad():
+            val_gts, val_res = [], []
+            for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(enumerate(
+                    self.val_dataloader), total=len(self.val_dataloader)):
+                images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(
+                    self.device), reports_masks.to(self.device), mesh_label.to(self.device)
+                output  = self.model(images, mode='sample')
+
+                reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
+                ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
+                val_res.extend(reports)
+                val_gts.extend(ground_truths)
+            val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
+                                       {i: [re] for i, re in enumerate(val_res)})
+
+            log.update(**{'val_' + k: v for k, v in val_met.items()})
+
+        df = pd.DataFrame(columns=('key', 'gt', 'pred'))
+        self.model.eval()
+        with torch.no_grad():
+            test_gts, test_res = [], []
+            for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in \
+                tqdm(enumerate(self.test_dataloader), total=len(self.test_dataloader)):
+                
+                images, reports_ids, reports_masks, mesh_label = \
+                    images.to(self.device), reports_ids.to(self.device), reports_masks.to(self.device), mesh_label.to(self.device)
+                
+                output = self.model(images, mode='sample')
+
+                reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
+                ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
+                df = pd.concat([df, pd.Series({'key': images_id, 'gt': ground_truths, 'pred': reports, 'TestAcurracy': 0})],
+                               ignore_index=True)
+                test_res.extend(reports)
+                test_gts.extend(ground_truths)
+            test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},
+                                        {i: [re] for i, re in enumerate(test_res)})
+
+            df = pd.concat([df, pd.Series(test_met)], ignore_index=True)
+            
+            file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_restult_{epoch}.csv'
+            df.to_csv(file_name, index=False, encoding='utf-8-sig')
+            log.update(**{'test_' + k: v for k, v in test_met.items()})
+
+        self.lr_scheduler.step()
+
+        return log

@@ -2,17 +2,28 @@ import os
 from yacs.config import CfgNode as CN
 
 class Config(CN):
-    def __init__(self, dataset_name):
+    def __init__(self, dataset_name, result):
         super().__init__()  # 调用父类构造函数
         self.data_prefix = '/home/chenzhw/ultrasound_report_gen/USData'
-        self.Result_prefix = '/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result'
+        self.Result_prefix = f'/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/{result}'
 
         
         
         self.dataset_name = dataset_name
         
         
+        self.organ_mapping = [
+            ('Liver', 1),
+            ('Mammary', 2),
+            ('Thyroid', 3)
+        ]
+
+        # Optionally, you can still have the reverse mapping as a dictionary
+        self.reverse_organ_mapping = [(v, k) for k, v in self.organ_mapping]
+
         
+
+
         self.image_dir = f'{self.data_prefix}/{self.dataset_name}_report'
         self.ann_path = f'{self.data_prefix}/new_{self.dataset_name}2.json'
         # Static configurations
@@ -112,7 +123,17 @@ class Config(CN):
         }
         return distiller_mapping.get(self.dataset_name, 0)
 
-
+    def get_label_from_organ(self, organ_name):
+            for organ, label in self.organ_mapping:
+                if organ == organ_name:
+                    return label
+            return None  # If not found
+    
+    def get_organs_from_label(self, label):
+        for organ, l in self.organ_mapping:
+            if l == label:
+                return organ
+        return None
 
 if __name__ == '__main__':
     
