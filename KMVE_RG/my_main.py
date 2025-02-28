@@ -1,6 +1,7 @@
 import numpy as np
 import torch
-
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from KMVE_RG.models.AllOrgan import AllOrgan
 from modules.MyTrainer import TFTrainer as Trainer
 from modules.dataloaders import MyDataLoader

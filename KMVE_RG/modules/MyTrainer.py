@@ -325,8 +325,8 @@ class TFTrainer(BaseTrainer):
         self.val_dataloader = val_dataloader
         self.test_dataloader = test_dataloader
 
-        self.lambada1 = torch.nn.Parameter(torch.tensor(1.0), requires_grad=True) # tf自身的loss
-        self.lambada3 = torch.nn.Parameter(torch.tensor(0.0), requires_grad=True) # 最终生成的报告之间对比loss
+        self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf自身的loss
+        self.lambada3 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 最终生成的报告之间对比loss
 
 
     def logloss(self, y_true, y_pred, eps=1e-15):
