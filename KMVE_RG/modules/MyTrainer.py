@@ -328,6 +328,7 @@ class TFTrainer(BaseTrainer):
         self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf自身的loss
         self.lambada3 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 最终生成的报告之间对比loss
 
+    
 
     def logloss(self, y_true, y_pred, eps=1e-15):
         y_true = np.array(y_true)
@@ -344,11 +345,11 @@ class TFTrainer(BaseTrainer):
         self.model.train()
 
         for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(enumerate \
-                    (self.train_dataloader), total=len(self.train_dataloader)):
+                    (self.train_dataloader), total=len(self.train_dataloader),desc=f'Training with batch size {self.args.batch_size}'):
             images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(self.device), \
                                                              reports_masks.to(self.device), mesh_label.to(self.device)
 
-
+            # break
             indices = torch.randperm(images.shape[0])[:5]
             images_select = images[indices]
             reports_select = reports_ids[indices]
@@ -387,7 +388,7 @@ class TFTrainer(BaseTrainer):
         with torch.no_grad():
             val_gts, val_res = [], []
             for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(enumerate(
-                    self.val_dataloader), total=len(self.val_dataloader)):
+                    self.val_dataloader), total=len(self.val_dataloader),desc=f'Validation with batch size {self.args.batch_size}'):
                 images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(
                     self.device), reports_masks.to(self.device), mesh_label.to(self.device)
                 output  = self.model(images, mode='sample')
@@ -401,12 +402,12 @@ class TFTrainer(BaseTrainer):
 
             log.update(**{'val_' + k: v for k, v in val_met.items()})
 
-        df = pd.DataFrame(columns=('key', 'gt', 'pred'))
+        results = []
         self.model.eval()
         with torch.no_grad():
             test_gts, test_res = [], []
             for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in \
-                tqdm(enumerate(self.test_dataloader), total=len(self.test_dataloader)):
+                tqdm(enumerate(self.test_dataloader), total=len(self.test_dataloader),desc=f'Test with batch size {self.args.batch_size}'):
                 
                 images, reports_ids, reports_masks, mesh_label = \
                     images.to(self.device), reports_ids.to(self.device), reports_masks.to(self.device), mesh_label.to(self.device)
@@ -415,16 +416,43 @@ class TFTrainer(BaseTrainer):
 
                 reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
                 ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
-                df = pd.concat([df, pd.Series({'key': images_id, 'gt': ground_truths, 'pred': reports, 'TestAcurracy': 0})],
-                               ignore_index=True)
+                
+                # 不计算 metrics，改为patch函数计算
+                results.extend(
+                    [{'ID': ID, 'gt': gt, 'pred': pred, } for ID, gt, pred in zip(images_id, ground_truths, reports)]
+                )
+
+                # for ID, gt, pred in tqdm(zip(images_id, ground_truths, reports), desc='Computing metrics for single image-caption pair', total=len(images_id)):
+                #     single_metrics = self.metric_ftns({0: [gt]}, {0: [pred]})
+                #     results.append({'ID': ID, 'gt': gt, 'pred': pred, **single_metrics})
+                #     print(f"results: {results}")
+
+                # 利用多线程快速计算所有的metrics
+                # def compute_single_metric(ID, gt, pred, metric_ftns):
+                #     single_metrics = metric_ftns({0: [gt]}, {0: [pred]})
+                #     return {'ID': ID, 'gt': gt, 'pred': pred, **single_metrics}
+
+                # from concurrent.futures import  as_completed, ThreadPoolExecutor # ProcessPoolExecutor
+                # with ThreadPoolExecutor(max_workers=16) as executor:
+                #     futures = {
+                #         executor.submit(compute_single_metric, ID, gt, pred, self.metric_ftns): (ID, gt, pred)
+                #         for ID, gt, pred in zip(images_id, ground_truths, reports)
+                #     }
+                    
+                #     for future in tqdm(as_completed(futures), desc='Computing metrics for single image-caption pair', total=len(images_id)):
+                #         result = future.result()
+                #         results.append(result)
+                
                 test_res.extend(reports)
                 test_gts.extend(ground_truths)
             test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},
                                         {i: [re] for i, re in enumerate(test_res)})
 
-            df = pd.concat([df, pd.Series(test_met)], ignore_index=True)
+            # TODO save test metrics
+            print(results)
             
-            file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_restult_{epoch}.csv'
+            file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_result_{epoch}.csv'
+            df = pd.DataFrame(results)
             df.to_csv(file_name, index=False, encoding='utf-8-sig')
             log.update(**{'test_' + k: v for k, v in test_met.items()})
 
