@@ -17,10 +17,12 @@ import torch
 #     return optimizer
 def build_optimizer(args, model):
     ve_params = list(map(id, model.visual_extractor.parameters()))
-    kmve = ve_params
+    cls_params = list(map(id, model.classfication_layers.parameters()))
+    kmve = ve_params + cls_params
     ed_params = filter(lambda x: id(x) not in kmve, model.parameters())
     optimizer = getattr(torch.optim, args.optim)(
         [{'params': model.visual_extractor.parameters(), 'lr': args.lr_ve},
+         {'params': model.classfication_layers.parameters(), 'lr': args.lr_ve},
          {'params': ed_params, 'lr': args.lr_ed}
          ],
         weight_decay=args.weight_decay,

@@ -4,25 +4,19 @@ from yacs.config import CfgNode as CN
 class Config(CN):
     def __init__(self, dataset_name, result):
         super().__init__()  # 调用父类构造函数
+        self.dataset_name = dataset_name
+        self.result = result
         self.data_prefix = '/home/chenzhw/ultrasound_report_gen/USData'
         self.Result_prefix = f'/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/{result}'
 
-        
-        
-        self.dataset_name = dataset_name
-        
-        
         self.organ_mapping = [
-            ('Liver', 1),
-            ('Mammary', 2),
-            ('Thyroid', 3)
+            ('Liver', 0),
+            ('Mammary', 1),
+            ('Thyroid', 2)
         ]
 
         # Optionally, you can still have the reverse mapping as a dictionary
         self.reverse_organ_mapping = [(v, k) for k, v in self.organ_mapping]
-
-        
-
 
         self.image_dir = f'{self.data_prefix}/{self.dataset_name}_report'
         self.ann_path = f'{self.data_prefix}/new_{self.dataset_name}2.json'
@@ -36,7 +30,7 @@ class Config(CN):
         self.max_seq_length = 150
         self.threshold = 3
         self.num_workers = 0
-        self.batch_size = 48
+        self.batch_size = 32
         self.evaluate_batch = 1
 
         # Model parameters

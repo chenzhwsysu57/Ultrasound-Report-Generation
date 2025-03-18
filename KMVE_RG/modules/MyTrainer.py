@@ -240,7 +240,7 @@ class Trainer(BaseTrainer):
             reports_select = reports_ids[indices]
 
             self.model.eval()
-
+            
             pred_output, _ = self.model(images_select, mode='sample')
             predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
             ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
@@ -256,6 +256,7 @@ class Trainer(BaseTrainer):
             CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
 
             output, kmve_output = self.model(images, reports_ids, mode='train')
+            print(f"in Trainer: kvme_output = {kmve_output}, mesh_label = {mesh_label}")
             KMVE_l = self.criterionBCE(kmve_output, mesh_label)
             RG_L = self.criterion(output, reports_ids, reports_masks)
             total_loss = self.lambada1 * RG_L + self.lambada2 * KMVE_l + self.lambada3*CS_L
@@ -325,7 +326,8 @@ class TFTrainer(BaseTrainer):
         self.val_dataloader = val_dataloader
         self.test_dataloader = test_dataloader
 
-        self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf自身的loss
+        self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf 交叉熵的loss
+        self.lambada2 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 器官分类的 loss
         self.lambada3 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 最终生成的报告之间对比loss
 
     
@@ -351,12 +353,14 @@ class TFTrainer(BaseTrainer):
 
             # break
             indices = torch.randperm(images.shape[0])[:5]
+            
             images_select = images[indices]
             reports_select = reports_ids[indices]
-
+            # print(f"in TFTrainer: mesh_label = {mesh_label}")
             self.model.eval()
-
-            pred_output  = self.model(images_select, mode='sample')
+            # print(images_select.shape)
+            
+            pred_output, pred_classified  = self.model(images_select, mode='sample')
             predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
             ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
 
@@ -370,19 +374,21 @@ class TFTrainer(BaseTrainer):
             similarity_loss = 1 - mean_similarity_score
             CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
 
-            output  = self.model(images, reports_ids, mode='train')
-            
+            output,pred_classified  = self.model(images, reports_ids, mode='train')
+            # print(f"in TFTrainer: pred_classified = {pred_classified}")
+            organ_l = self.criterionBCE(pred_classified, mesh_label)
+            ORGAN_L = torch.tensor(organ_l, requires_grad=True).to(self.device)
             RG_L = self.criterion(output, reports_ids, reports_masks)
-            total_loss = self.lambada1 * RG_L + self.lambada3 * CS_L
+            total_loss = self.lambada1 * RG_L + self.lambada3 * CS_L + self.lambada2 * ORGAN_L
             train_loss = train_loss + self.lambada1.item() * RG_L.item() + \
-                          + self.lambada3.item() * CS_L.item()
+                          + self.lambada3.item() * CS_L.item() + self.lambada2.item() * ORGAN_L.item()
 
             self.optimizer.zero_grad()
             total_loss.backward()
             torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
             self.optimizer.step()
         log = {'train_loss': train_loss / len(self.train_dataloader)}
-        print(log['train_loss'])
+        print(f"""train loss {log['train_loss']}""")
 
         self.model.eval()
         with torch.no_grad():
@@ -391,7 +397,7 @@ class TFTrainer(BaseTrainer):
                     self.val_dataloader), total=len(self.val_dataloader),desc=f'Validation with batch size {self.args.batch_size}'):
                 images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(
                     self.device), reports_masks.to(self.device), mesh_label.to(self.device)
-                output  = self.model(images, mode='sample')
+                output,_  = self.model(images, mode='sample')
 
                 reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
                 ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
@@ -412,7 +418,7 @@ class TFTrainer(BaseTrainer):
                 images, reports_ids, reports_masks, mesh_label = \
                     images.to(self.device), reports_ids.to(self.device), reports_masks.to(self.device), mesh_label.to(self.device)
                 
-                output = self.model(images, mode='sample')
+                output,_ = self.model(images, mode='sample')
 
                 reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
                 ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
@@ -449,7 +455,7 @@ class TFTrainer(BaseTrainer):
                                         {i: [re] for i, re in enumerate(test_res)})
 
             # TODO save test metrics
-            print(results)
+            # print(results)
             
             file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_result_{epoch}.csv'
             df = pd.DataFrame(results)

@@ -58,7 +58,12 @@ class MyDataLoader(DataLoader):
         for i, report_masks in enumerate(reports_masks):
             targets_masks[i, :len(report_masks)] = report_masks
         # print(mesh_label)
-        mesh_label =  [self.args.get_label_from_organ(label) for label in mesh_label]
+        
+        if self.args.dataset_name == "all":
+            # this code for all organ 
+            mesh_label =  tuple([self.args.get_label_from_organ(label) for label in mesh_label])
+
         # print(mesh_label)
+        
         mesh_label = torch.tensor(mesh_label)
         return images_id, images, seq_lengths, torch.LongTensor(targets), torch.FloatTensor(targets_masks), mesh_label

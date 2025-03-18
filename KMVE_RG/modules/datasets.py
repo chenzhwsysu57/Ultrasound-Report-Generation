@@ -16,7 +16,7 @@ class BaseDataset(Dataset):
         self.transform = transform
         self.ann = json.loads(open(self.ann_path, 'r', encoding="utf_8_sig").read())
 
-        self.examples = self.ann[self.split]
+        self.examples = self.ann[self.split] # [0:2] # used in debug mode
         for i in range(len(self.examples)):
             self.examples[i]['ids'] = tokenizer(self.examples[i]['finding'])[:self.max_seq_length]
             self.examples[i]['mask'] = [1] * len(self.examples[i]['ids'])
@@ -39,6 +39,7 @@ class MyDataset(BaseDataset):
         report_ids = example['ids']
         report_masks = example['mask']
         mesh_label = example['labels']
+        # print(f"mesh_label = {mesh_label}") # 是字符串 Mammary Liver Thyroid
         seq_length = len(report_ids)
         sample = (image_id, image, report_ids, report_masks, seq_length, mesh_label)
         return sample

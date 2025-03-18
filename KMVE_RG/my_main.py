@@ -2,8 +2,7 @@ import numpy as np
 import torch
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from KMVE_RG.models.AllOrgan import AllOrgan
-from modules.MyTrainer import TFTrainer as Trainer
+
 from modules.dataloaders import MyDataLoader
 from modules.loss import compute_loss
 from modules.metrics import compute_scores
@@ -24,7 +23,7 @@ def main(args):
     val_dataloader = MyDataLoader(args, tokenizer, split='val', shuffle=False)
     test_dataloader = MyDataLoader(args, tokenizer, split='test', shuffle=False)
 
-    model = AllOrgan(args, tokenizer)
+    model = MyModel(args, tokenizer)
     criterion = compute_loss
     metrics = compute_scores
 
@@ -48,6 +47,12 @@ if __name__ == '__main__':
     parser.add_argument('--result', type=str, default='TF_only', help='result path')
     cmd_line_args = parser.parse_args()
     from config_nassir_urg import Config
+    if cmd_line_args.dataset_name == "all":
+        from KMVE_RG.models.AllOrgan import AllOrgan as MyModel
+        from modules.MyTrainer import TFTrainer as Trainer 
+    else:
+        from KMVE_RG.models.SGF import SGF as MyModel
+        from modules.MyTrainer import Trainer
     config = Config(
         dataset_name = cmd_line_args.dataset_name, 
         result = cmd_line_args.result
