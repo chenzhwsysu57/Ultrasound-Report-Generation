@@ -43,7 +43,7 @@ def main(cmd_args, config_args):
                 tqdm(enumerate(test_dataloader), total=len(test_dataloader)):
             images, reports_ids, reports_masks, mesh_label = images.to(device), reports_ids.to(
                     device), reports_masks.to(device), mesh_label.to(device)
-            output  = model(images, mode='sample')
+            output,_  = model(images, mode='sample') # output, _ 增加的这个是为了兼容 organ 分类
             reports = model.tokenizer.decode_batch(output.cpu().numpy())
             ground_truths = model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
             test_res.extend(reports)
@@ -63,14 +63,6 @@ def main(cmd_args, config_args):
             
             print(result)
 
-        # test_met = metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},
-        #                                {i: [re] for i, re in enumerate(test_res)})
-        # print(test_met)
-    # 4. test result 
-
-    # 5. save the result
-
-    # 6. print the result
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process some parameters.')
