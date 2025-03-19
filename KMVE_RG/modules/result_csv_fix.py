@@ -144,23 +144,23 @@ if __name__ == "__main__":
     # main(args)
     import glob 
 
-    files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/*/*_restult_*.csv')
-    files = [file for file in files if '/tmp2' not in file and 'restult' in file]
-    for file in tqdm(files, desc='csv fix1'):
-        try:
-            fix_csv1(file)
-        except Exception as e:
-            print(f"Error in {file}: {e}")
+    # files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/TF_organ_classify/*_restult_*.csv')
+    # files = [file for file in files if '/tmp2' not in file and 'restult' in file]
+    # for file in tqdm(files, desc='csv fix1'):
+    #     try:
+    #         fix_csv1(file)
+    #     except Exception as e:
+    #         print(f"Error in {file}: {e}")
 
-    files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/*/*_result_*.csv')
-    for file in tqdm(files, desc='csv fix2'):
-        try:
-            fix_csv2(file)
-        except Exception as e:
-            print(f"Error in {file}: {e}")
+    # files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/*/*_result_*.csv')
+    # for file in tqdm(files, desc='csv fix2'):
+    #     try:
+    #         fix_csv2(file)
+    #     except Exception as e:
+    #         print(f"Error in {file}: {e}")
     
-    files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/*/*_result_*.csv')
-    files = [file for file in files if 'result_49.csv' in file or 'result_30.csv' in file or 'result_5.csv' in file or 'result_1.csv' in file]
+    files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/TF_organ_classify/*_result_*.csv')
+    files = [file for file in files if 'result_50.csv' in file or 'result_11.csv' in file or 'result_13.csv' in file]
     print(files)
     # files = ['/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/TF_SC/all_test_result_30 copy.csv']
     # raise NotImplemented

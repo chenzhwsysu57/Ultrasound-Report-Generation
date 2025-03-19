@@ -4,7 +4,7 @@ import json
 import torch
 from PIL import Image
 from torch.utils.data import Dataset
-
+import random
 
 class BaseDataset(Dataset):
     def __init__(self, args, tokenizer, split, transform=None):
@@ -16,7 +16,9 @@ class BaseDataset(Dataset):
         self.transform = transform
         self.ann = json.loads(open(self.ann_path, 'r', encoding="utf_8_sig").read())
 
-        self.examples = self.ann[self.split] # [0:2] # used in debug mode
+        self.examples = self.ann[self.split]
+        random.shuffle(self.examples) 
+        self.examples = self.examples # [0:50] # used in debug mode
         for i in range(len(self.examples)):
             self.examples[i]['ids'] = tokenizer(self.examples[i]['finding'])[:self.max_seq_length]
             self.examples[i]['mask'] = [1] * len(self.examples[i]['ids'])
