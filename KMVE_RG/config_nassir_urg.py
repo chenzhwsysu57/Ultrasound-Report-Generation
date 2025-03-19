@@ -4,6 +4,9 @@ from yacs.config import CfgNode as CN
 class Config(CN):
     def __init__(self, dataset_name, result):
         super().__init__()  # 调用父类构造函数
+
+        # added for sampler
+        self.custom_sampler = True 
         self.dataset_name = dataset_name
         self.result = result
         self.data_prefix = '/home/chenzhw/ultrasound_report_gen/USData'

@@ -4,6 +4,76 @@ from torchvision import transforms
 from torch.utils.data import DataLoader
 from .datasets import MyDataset
 
+from torch.utils.data import Sampler
+import random
+
+# class BalancedSampler(Sampler):
+#     def __init__(self, dataset):
+#         self.dataset = dataset
+#         self.organ_indices = self._organize_indices_by_label()
+#         self.organ_order = ["Liver", "Mammary", "Thyroid"]  # 预定义采样顺序
+#         self.organ_iters = {k: iter(v) for k, v in self.organ_indices.items()}  # 迭代器字典
+
+#     def _organize_indices_by_label(self):
+#         """
+#         预处理：按照器官类别将数据索引分组，并打乱顺序。
+#         """
+#         organ_indices = {"Liver": [], "Mammary": [], "Thyroid": []}
+#         for idx, example in enumerate(self.dataset.examples):
+#             organ = example["labels"]
+#             organ_indices[organ].append(idx)
+
+#         for organ in organ_indices:
+#             random.shuffle(organ_indices[organ])  # 打乱每个类别的样本顺序
+
+#         return organ_indices
+
+#     def __iter__(self):
+#         """
+#         轮流采样 Liver → Mammary → Thyroid，直到所有数据采样完毕。
+#         """
+#         while any(len(v) > 0 for v in self.organ_indices.values()):  # 确保还有数据可采样
+#             for organ in self.organ_order:  # 轮流采样 Liver → Mammary → Thyroid
+#                 if len(self.organ_indices[organ]) > 0:  # 该类别仍有数据
+#                     yield self.organ_indices[organ].pop(0)  # 取出索引
+
+#     def __len__(self):
+#         return sum(len(indices) for indices in self.organ_indices.values())
+class BalancedSampler:
+    def __init__(self, dataset):
+        self.dataset = dataset
+        self.organ_indices = self._organize_indices_by_label()
+        self.original_organ_indices = {k: v[:] for k, v in self.organ_indices.items()}  # 复制一份原始索引
+        self.organ_indices = {k: v[:] for k, v in self.organ_indices.items()}  # 复制一份用于迭代
+        self.num_samples = min(len(v) for v in self.organ_indices.values()) * len(self.organ_indices)
+
+    def _organize_indices_by_label(self):
+        """
+        预处理：按照器官类别将数据索引分组，并打乱顺序。
+        """
+        organ_indices = {"Liver": [], "Mammary": [], "Thyroid": []}
+        for idx, example in enumerate(self.dataset.examples):
+            organ = example["labels"]
+            organ_indices[organ].append(idx)
+
+        for organ in organ_indices:
+            random.shuffle(organ_indices[organ])  # 打乱每个类别的样本顺序
+
+        return organ_indices
+    def __iter__(self):
+        selected_indices = []
+        while len(selected_indices) < self.num_samples:
+            for organ, indices in self.organ_indices.items():
+                if not indices:  # 如果某个类别已经用完，重置为原始索引
+                    self.organ_indices[organ] = self.original_organ_indices[organ][:]
+                    random.shuffle(self.organ_indices[organ])  # 重新打乱
+
+                selected_indices.append(self.organ_indices[organ].pop(0))  # 取出一个样本
+            
+        return iter(selected_indices)
+
+    def __len__(self):
+        return self.num_samples
 
 class MyDataLoader(DataLoader):
     def __init__(self, args, tokenizer, split, shuffle, evaluate=False):
@@ -13,6 +83,7 @@ class MyDataLoader(DataLoader):
         self.num_workers = args.num_workers
         self.tokenizer = tokenizer
         self.split = split
+        
 
         if split == 'train':
             self.transform = transforms.Compose([
@@ -31,15 +102,23 @@ class MyDataLoader(DataLoader):
 
         self.dataset = MyDataset(self.args, self.tokenizer, self.split, transform=self.transform)
 
+        
+        
         if evaluate == True:
             self.batch_size = args.evaluate_batch
 
+        if self.args.custom_sampler:
+            self.sampler = BalancedSampler(self.dataset)
+            self.shuffle = None
+        else:
+            self.sampler = None
         self.init_kwargs = {
             'dataset': self.dataset,
             'batch_size': self.batch_size,
             'shuffle': self.shuffle,
             'collate_fn': self.collate_fn,
-            'num_workers': self.num_workers
+            'num_workers': self.num_workers,
+            'sampler': self.sampler  # 指定自定义的sampler
         }
         super().__init__(**self.init_kwargs)
 
