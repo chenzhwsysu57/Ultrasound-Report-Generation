@@ -352,7 +352,7 @@ class TFTrainer(BaseTrainer):
                                                              reports_masks.to(self.device), mesh_label.to(self.device)
 
             # break
-            indices = torch.randperm(images.shape[0])[:5]
+            indices = torch.randperm(images.shape[0]) # [:5]
             
             images_select = images[indices]
             reports_select = reports_ids[indices]

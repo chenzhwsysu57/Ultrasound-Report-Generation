@@ -1,13 +1,17 @@
 import os
 from yacs.config import CfgNode as CN
-
+HOME = '/scratch/esg8sdce/esg8sdeuser02/chenZW'
+REPO = 'Ultrasound-Report-Generation'
+# keep the following folder under HOME:
+# USData/
+# Ultrasound-Report-Generation/ # the repo name
 class Config(CN):
     def __init__(self, dataset_name, result):
         super().__init__()  # 调用父类构造函数
         self.dataset_name = dataset_name
         self.result = result
-        self.data_prefix = '/home/chenzhw/ultrasound_report_gen/USData'
-        self.Result_prefix = f'/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/{result}'
+        self.data_prefix = f'{HOME}/ultrasound_report_gen/USData'
+        self.Result_prefix = f'{HOME}/ultrasound_report_gen/{REPO}/Result/{result}'
 
         self.organ_mapping = [
             ('Liver', 0),
@@ -30,7 +34,7 @@ class Config(CN):
         self.max_seq_length = 150
         self.threshold = 3
         self.num_workers = 0
-        self.batch_size = 32
+        self.batch_size = 30
         self.evaluate_batch = 1
 
         # Model parameters
