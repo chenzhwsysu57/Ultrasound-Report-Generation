@@ -4,7 +4,7 @@ import os
 import yaml
 
 # 获取当前 config.py 所在目录
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.yaml")
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".config.yaml")
 
 # 读取 YAML 配置
 if os.path.exists(CONFIG_PATH):
@@ -20,16 +20,31 @@ REPO = config.get("REPO", "default-repo-name")
 # USData/
 # Ultrasound-Report-Generation/ # the repo name
 class Config(CN):
-    def __init__(self, dataset_name, result):
+    def __init__(self, **kwargs):
         super().__init__()  # 调用父类构造函数
+
+        # default pass keys:
+        # dataset_name = 'all'
+        # result = 'debug'
+        # batch_size = 5
+
 
         # added for sampler
         self.custom_sampler = True 
-        self.dataset_name = dataset_name
-        self.result = result
-        self.data_prefix = f'{HOME}/ultrasound_report_gen/USData'
-        self.Result_prefix = f'{HOME}/ultrasound_report_gen/{REPO}/Result/{result}'
+        
+        self.debug = -1
+        self.dataset_name = None 
+        self.result = 'debug'
+        self.batch_size = 30
 
+        for key, value in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+
+
+        self.data_prefix = f'{HOME}/ultrasound_report_gen/USData'
+        self.Result_prefix = f'{HOME}/ultrasound_report_gen/{REPO}/Result/{self.result}'
+            
         self.organ_mapping = [
             ('Liver', 0),
             ('Mammary', 1),
@@ -51,7 +66,7 @@ class Config(CN):
         self.max_seq_length = 150
         self.threshold = 3
         self.num_workers = 0
-        self.batch_size = 30
+        # self.batch_size = 30
         self.evaluate_batch = 1
 
         # Model parameters

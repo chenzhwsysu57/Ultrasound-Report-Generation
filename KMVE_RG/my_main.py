@@ -44,7 +44,9 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='Train the model')
     parser.add_argument('--dataset_name', type=str, default='all', help='dataset name')
-    parser.add_argument('--result', type=str, default='TF_only', help='result path')
+    parser.add_argument('--result', type=str, default='debug', help='result path')
+    parser.add_argument('--batch_size', type=int, default=5, help='result path')
+    parser.add_argument('--debug', type=int, default=-1, help='the index end of your dataloader, defaults to -1 means load all, 0:-1')
     cmd_line_args = parser.parse_args()
     from config_nassir_urg import Config
     if cmd_line_args.dataset_name == "all":
@@ -53,8 +55,7 @@ if __name__ == '__main__':
     else:
         from KMVE_RG.models.SGF import SGF as MyModel
         from modules.MyTrainer import Trainer
-    config = Config(
-        dataset_name = cmd_line_args.dataset_name, 
-        result = cmd_line_args.result
-                    )
+    config = Config(**vars(cmd_line_args))
+    
+    print(config)
     main(config)
