@@ -1,0 +1,14 @@
+write your new .config.yaml for the repo. content as followed:
+
+HOME: "/home/chenzhw"
+REPO: "Nassir-US-Report-Gen"
+
+organize your repo as followed:
+
+HOME/
+  ultrasound_report_gen/
+    USData/
+    code_repo/
+    
+then the data folder (data_prefix) would be f'{HOME}/ultrasound_report_gen/USData'
+the result folder would be f'{HOME}/ultrasound_report_gen/{REPO}/Result/{self.result}'

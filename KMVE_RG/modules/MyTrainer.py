@@ -1,5 +1,5 @@
-import sys
-sys.path.append('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG')
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 
@@ -27,7 +27,7 @@ class BaseTrainer(object):
     def __init__(self, model, criterion, metric_ftns, optimizer, args):
         self.args = args
 
-        self.device, device_ids = self._prepare_device(args.n_gpu)
+        self.device = 'cuda' if torch.cuda.is_available() else 'mps' if torch.mps.is_available() else 'cpu'
         self.device = 0
         self.model = model.to(self.device)
         self.criterion = criterion
@@ -141,19 +141,7 @@ class BaseTrainer(object):
         record_table = pd.concat([record_table, pd.Series(self.best_recorder['test'])], ignore_index=True)
         record_table.to_csv(record_path, index=False)
 
-    def _prepare_device(self, n_gpu_use):
-        n_gpu = torch.cuda.device_count()
-        if n_gpu_use > 0 and n_gpu == 0:
-            print("Warning: There\'s no GPU available on this machine," "training will be performed on CPU.")
-            n_gpu_use = 0
-        if n_gpu_use > n_gpu:
-            print(
-                "Warning: The number of GPU\'s configured to use is {}, but only {} are available " "on this machine.".
-                format(n_gpu_use, n_gpu))
-            n_gpu_use = n_gpu
-        device = torch.device('cuda:0' if n_gpu_use > 0 else 'cpu')
-        list_ids = list(range(n_gpu_use))
-        return device, list_ids
+    
 
     def _save_checkpoint(self, epoch, save_best=False):
         state = {

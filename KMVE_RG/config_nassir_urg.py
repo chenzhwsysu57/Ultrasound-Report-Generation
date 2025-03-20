@@ -55,7 +55,7 @@ class Config(CN):
         self.reverse_organ_mapping = [(v, k) for k, v in self.organ_mapping]
 
         self.image_dir = f'{self.data_prefix}/{self.dataset_name}_report'
-        self.ann_path = f'{self.data_prefix}/new_{self.dataset_name}2.json'
+        self.ann_path = f'{self.data_prefix}/{self.dataset_name}.json'
         # Static configurations
         self.jieba_dir = f'{self.data_prefix}/key_technical_words.txt'
         self.technical_word = f'{self.data_prefix}/key_technical_words.txt'

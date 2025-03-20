@@ -5,9 +5,9 @@ import umap
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn import cluster
-import sys
+import sys, os
 import json
-sys.path.append('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from KMVE_RG.config_nassir_urg import config as args
 
 
