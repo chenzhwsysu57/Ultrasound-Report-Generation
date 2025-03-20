@@ -10,3 +10,4 @@ Result/
 wandb/
 env.yaml
 Result*/
+.config.yaml

@@ -1,7 +1,21 @@
 import os
 from yacs.config import CfgNode as CN
-HOME = '/scratch/esg8sdce/esg8sdeuser02/chenZW'
-REPO = 'Ultrasound-Report-Generation'
+import os
+import yaml
+
+# 获取当前 config.py 所在目录
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.yaml")
+
+# 读取 YAML 配置
+if os.path.exists(CONFIG_PATH):
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        config = yaml.safe_load(f)
+else:
+    config = {}
+
+# 设置默认值（如果 YAML 文件缺失）
+HOME = config.get("HOME", "/default/path")
+REPO = config.get("REPO", "default-repo-name")
 # keep the following folder under HOME:
 # USData/
 # Ultrasound-Report-Generation/ # the repo name
