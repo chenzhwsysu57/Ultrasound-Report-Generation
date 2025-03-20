@@ -5,7 +5,9 @@ import time
 import pandas as pd
 import wandb
 import sys
-sys.path.append('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG')
+print(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(f'{os.path.dirname(os.path.abspath(__file__))}/KMVE_RG')
 
 from config_nassir_urg import Config 
 
