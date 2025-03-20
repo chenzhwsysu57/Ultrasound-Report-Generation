@@ -44,10 +44,11 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='Train the model')
     parser.add_argument('--dataset_name', type=str, default='all', help='dataset name')
-    parser.add_argument('--result', type=str, default='debug', help='result path')
-    parser.add_argument('--batch_size', type=int, default=5, help='result path')
+    parser.add_argument('--result', type=str, default='debug', help='folder save result. This would be a subfolder created under the folder Result/')
+    parser.add_argument('--batch_size', type=int, default=5, help='batch size to train. defaults to 5')
     parser.add_argument('--debug', type=int, default=-1, help='the index end of your dataloader, defaults to -1 means load all, 0:-1')
     cmd_line_args = parser.parse_args()
+    
     from config_nassir_urg import Config
     if cmd_line_args.dataset_name == "all":
         from KMVE_RG.models.AllOrgan import AllOrgan as MyModel
