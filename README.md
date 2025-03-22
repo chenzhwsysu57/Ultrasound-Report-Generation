@@ -1,5 +1,9 @@
 # Ultrasound-Report-Generation
 
+## TODO
+- [ ] accumulate gradient training
+- [ ] cross modality contrastive loss
+- [ ] multimodal inference (current inference only text used.)
 ## data and code preparation
 
 how to run:
@@ -39,3 +43,5 @@ python KMVE_RG/my_main.py --debug 10
 
 wandb support code is under 
 `Ultrasound-Report-Generation/wandb_urg.py`
+
+

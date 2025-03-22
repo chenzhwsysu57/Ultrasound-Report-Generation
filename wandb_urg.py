@@ -13,7 +13,7 @@ from config_urg import Config
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Run WandB logging for ultrasound report generation.')
-parser.add_argument('--dataset', type=str, required=True, help='Name of the dataset to log metrics for.')
+parser.add_argument('--dataset', type=str, default='all', help='Name of the dataset to log metrics for.')
 parser.add_argument('--project', type=str, default="Nassir-US-Report-Gen", help='Name of the dataset to log metrics for.')
 parser.add_argument('--comment', type=str, default='today', help='a very short comment without blankspace.')
 parser.add_argument('--result', type=str, default='TF_only', help='result path')

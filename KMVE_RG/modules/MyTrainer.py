@@ -333,7 +333,7 @@ class TFTrainer(BaseTrainer):
     def _train_epoch(self, epoch):
         train_loss = 0
         self.model.train()
-
+        accumulation_steps = self.args.accumulation_steps  # 从配置中获取累积步数
         for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(enumerate \
                     (self.train_dataloader), total=len(self.train_dataloader),desc=f'Training with batch size {self.args.batch_size}'):
             images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(self.device), \
@@ -347,10 +347,10 @@ class TFTrainer(BaseTrainer):
             # print(f"in TFTrainer: mesh_label = {mesh_label}")
             self.model.eval()
             # print(images_select.shape)
-            
-            pred_output, pred_classified  = self.model(images_select, mode='sample')
-            predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
-            ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
+            with torch.no_grad():
+                pred_output, pred_classified  = self.model(images_select, mode='sample')
+                predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
+                ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
 
             self.model.train()
             pred_embeddings = self.sentence_bert.encode(predcit_reports, convert_to_tensor=True)
@@ -360,21 +360,26 @@ class TFTrainer(BaseTrainer):
             similarity_scores = F.cosine_similarity(pred_embeddings, gt_embeddings)
             mean_similarity_score = torch.mean(similarity_scores)
             similarity_loss = 1 - mean_similarity_score
-            CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
-
+            # CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
+            CS_L = similarity_loss
             output,pred_classified  = self.model(images, reports_ids, mode='train')
-            # print(f"in TFTrainer: pred_classified = {pred_classified}")
             organ_l = self.criterionBCE(pred_classified, mesh_label)
-            ORGAN_L = torch.tensor(organ_l, requires_grad=True).to(self.device)
+            ORGAN_L = organ_l
+            # ORGAN_L = torch.tensor(organ_l, requires_grad=True).to(self.device)
             RG_L = self.criterion(output, reports_ids, reports_masks)
-            total_loss = self.lambada1 * RG_L + self.lambada3 * CS_L + self.lambada2 * ORGAN_L
+            batch_loss = self.lambada1 * RG_L + self.lambada3 * CS_L + self.lambada2 * ORGAN_L
+            batch_loss /= accumulation_steps
             train_loss = train_loss + self.lambada1.item() * RG_L.item() + \
-                          + self.lambada3.item() * CS_L.item() + self.lambada2.item() * ORGAN_L.item()
+                          self.lambada3.item() * CS_L.item() + self.lambada2.item() * ORGAN_L.item()
 
-            self.optimizer.zero_grad()
-            total_loss.backward()
-            torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
-            self.optimizer.step()
+            batch_loss.backward()
+            
+            if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(self.train_dataloader):
+                torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
+                self.optimizer.step()  # 更新参数
+                self.optimizer.zero_grad()  # 清空梯度
+
+            
         log = {'train_loss': train_loss / len(self.train_dataloader)}
         print(f"""train loss {log['train_loss']}""")
 
@@ -416,27 +421,6 @@ class TFTrainer(BaseTrainer):
                     [{'ID': ID, 'gt': gt, 'pred': pred, } for ID, gt, pred in zip(images_id, ground_truths, reports)]
                 )
 
-                # for ID, gt, pred in tqdm(zip(images_id, ground_truths, reports), desc='Computing metrics for single image-caption pair', total=len(images_id)):
-                #     single_metrics = self.metric_ftns({0: [gt]}, {0: [pred]})
-                #     results.append({'ID': ID, 'gt': gt, 'pred': pred, **single_metrics})
-                #     print(f"results: {results}")
-
-                # 利用多线程快速计算所有的metrics
-                # def compute_single_metric(ID, gt, pred, metric_ftns):
-                #     single_metrics = metric_ftns({0: [gt]}, {0: [pred]})
-                #     return {'ID': ID, 'gt': gt, 'pred': pred, **single_metrics}
-
-                # from concurrent.futures import  as_completed, ThreadPoolExecutor # ProcessPoolExecutor
-                # with ThreadPoolExecutor(max_workers=16) as executor:
-                #     futures = {
-                #         executor.submit(compute_single_metric, ID, gt, pred, self.metric_ftns): (ID, gt, pred)
-                #         for ID, gt, pred in zip(images_id, ground_truths, reports)
-                #     }
-                    
-                #     for future in tqdm(as_completed(futures), desc='Computing metrics for single image-caption pair', total=len(images_id)):
-                #         result = future.result()
-                #         results.append(result)
-                
                 test_res.extend(reports)
                 test_gts.extend(ground_truths)
             test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},

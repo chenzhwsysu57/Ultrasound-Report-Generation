@@ -38,8 +38,8 @@ class Config(CN):
         self.batch_size = 30
 
         for key, value in kwargs.items():
-            if hasattr(self, key):
-                setattr(self, key, value)
+            # if hasattr(self, key):
+            setattr(self, key, value)
 
 
         self.data_prefix = f'{HOME}/ultrasound_report_gen/USData'
