@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from modules.dataloaders import MyDataLoader
 from modules.tokenizers import Tokenizer
 from modules.metrics import compute_scores
-from config_nassir_urg import Config
+from config_urg import Config
 
 
 def main(cmd_args, config_args):

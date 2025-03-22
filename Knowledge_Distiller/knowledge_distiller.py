@@ -8,7 +8,7 @@ from sklearn import cluster
 import sys, os
 import json
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from KMVE_RG.config_nassir_urg import config as args
+from KMVE_RG.config_urg import config as args
 
 
 def _preprocess_text(documents):

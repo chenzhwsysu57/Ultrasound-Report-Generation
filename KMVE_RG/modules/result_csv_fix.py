@@ -115,55 +115,20 @@ def add_metrics(csv_path, batch_size=100):
     if os.path.exists(temp_path):
         os.remove(temp_path)
 
-# def add_metrics(csv_path):
-
-#     df = pd.read_csv(csv_path)
-    
-#     assert(df.columns.equals(pd.Index(['ID', 'gt', 'pred'], dtype='object')))
-#     metrics = []
-#     from concurrent.futures import  as_completed, ThreadPoolExecutor # ProcessPoolExecutor
-#     with ThreadPoolExecutor(max_workers=32) as executor:
-#         futures = {
-#             executor.submit(compute_single_metric, ID, gt, pred): (ID, gt, pred)
-#             for ID, gt, pred in zip(df['ID'], df['gt'], df['pred'])
-#         }
-#         for future in tqdm(as_completed(futures), desc=f'add metrics {csv_path}', total=len(df)):
-#             # print(future.result())
-#             metrics.append(future.result())
-#     metrics_df = pd.DataFrame(metrics)
-#     metrics_df.to_csv(csv_path, index=False)
 
 def main(args):
     fix_csv1(args.csv_path)
     pass 
 
 if __name__ == "__main__":
-    # parser = argparse.ArgumentParser(description='Process some parameters.')
-    # parser.add_argument('--csv_path', type=str, default='/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/Nassir/Thyroid_test_restult_48.csv', help='Path to csv')
-    # args = parser.parse_args()
-    # main(args)
+    
     import glob 
 
-    # files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/TF_organ_classify/*_restult_*.csv')
-    # files = [file for file in files if '/tmp2' not in file and 'restult' in file]
-    # for file in tqdm(files, desc='csv fix1'):
-    #     try:
-    #         fix_csv1(file)
-    #     except Exception as e:
-    #         print(f"Error in {file}: {e}")
-
-    # files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/*/*_result_*.csv')
-    # for file in tqdm(files, desc='csv fix2'):
-    #     try:
-    #         fix_csv2(file)
-    #     except Exception as e:
-    #         print(f"Error in {file}: {e}")
     
     files = glob.glob('/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/TF_organ_classify/*_result_*.csv')
     files = [file for file in files if 'result_50.csv' in file or 'result_11.csv' in file or 'result_13.csv' in file]
     print(files)
-    # files = ['/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/TF_SC/all_test_result_30 copy.csv']
-    # raise NotImplemented
+    
     for file in tqdm(files, desc='computing metrics'):
         try:
             add_metrics(file)

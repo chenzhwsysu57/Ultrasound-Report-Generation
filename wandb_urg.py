@@ -9,7 +9,7 @@ print(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(f'{os.path.dirname(os.path.abspath(__file__))}/KMVE_RG')
 
-from config_nassir_urg import Config 
+from config_urg import Config 
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Run WandB logging for ultrasound report generation.')

@@ -38,7 +38,7 @@ def main(args):
 if __name__ == '__main__':
     # for dataset in ['Liver', 'Thyroid', 'Mammary']:
     #     print(f"\033[1;35mtrain for {dataset}...\033[0m")
-    #     from config_nassir_urg import Config
+    #     from config_urg import Config
     #     config = Config(dataset_name = dataset)
     #     main(config)
     import argparse
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     parser.add_argument('--debug', type=int, default=-1, help='the index end of your dataloader, defaults to -1 means load all, 0:-1')
     cmd_line_args = parser.parse_args()
     
-    from config_nassir_urg import Config
+    from config_urg import Config
     if cmd_line_args.dataset_name == "all":
         from KMVE_RG.models.AllOrgan import AllOrgan as MyModel
         from modules.MyTrainer import TFTrainer as Trainer 

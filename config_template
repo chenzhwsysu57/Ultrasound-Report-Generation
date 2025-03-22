@@ -1,7 +1,7 @@
 write your new .config.yaml for the repo. content as followed:
 
 HOME: "/home/chenzhw"
-REPO: "Nassir-US-Report-Gen"
+REPO: "Ultrasound-Report-Generation"
 
 organize your repo as followed:
 

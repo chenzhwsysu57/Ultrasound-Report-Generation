@@ -11,7 +11,7 @@ from PIL import Image
 from modules.dataloaders import MyDataLoader
 from modules.tokenizers import Tokenizer
 from modules.metrics import compute_scores
-from config_nassir_urg import Config
+from config_urg import Config
 from modules.tokenizers import Tokenizer
 from KMVE_RG.models.SGF import SGF
 from KMVE_RG.models.AllOrgan import AllOrgan
