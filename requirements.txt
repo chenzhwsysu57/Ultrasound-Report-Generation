@@ -1,3 +1,4 @@
+torchviz
 wandb
 tqdm
 transformers
