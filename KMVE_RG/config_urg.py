@@ -92,7 +92,7 @@ class Config(CN):
 
         # Training configurations
         self.n_gpu = 1
-        self.epochs = 50
+        self.epochs = 100
         self.save_dir = f'{self.Result_prefix}/Models'
         self.record_dir = f'{self.Result_prefix}/Records'
         self.save_period = 1

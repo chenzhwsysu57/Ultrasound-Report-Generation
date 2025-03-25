@@ -1,0 +1,348 @@
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.299 seconds.
+Prefix dict has been built successfully.
+Result_prefix: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5
+accumulation_steps: 5
+amsgrad: True
+ann_path: /home/chenzhw/ultrasound_report_gen/USData/all.json
+attn_pth: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Attn_pth
+batch_size: 20
+bidirectional: True
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 512
+d_model: 512
+d_vf: 2048
+data_prefix: /home/chenzhw/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+embedding_vector: 300
+eos_idx: 0
+epochs: 50
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /home/chenzhw/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+nlayers: 1
+num_heads: 8
+num_layers: 3
+num_workers: 0
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Records
+result: accstep5
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+rnn_type: LSTM
+sample_n: 1
+save_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Models
+save_period: 1
+seed: 9233
+step_size: 28
+technical_word: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 58, in <module>
+    main(config)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 20, in main
+    tokenizer = Tokenizer(args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/tokenizers.py", line 19, in __init__
+    self.ann = json.loads(open(self.ann_path, 'r', encoding="utf_8_sig").read())
+FileNotFoundError: [Errno 2] No such file or directory: '/home/chenzhw/ultrasound_report_gen/USData/all.json'
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.264 seconds.
+Prefix dict has been built successfully.
+Result_prefix: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5
+accumulation_steps: 5
+amsgrad: True
+ann_path: /home/chenzhw/ultrasound_report_gen/USData/all.json
+attn_pth: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Attn_pth
+batch_size: 20
+bidirectional: True
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 512
+d_model: 512
+d_vf: 2048
+data_prefix: /home/chenzhw/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+embedding_vector: 300
+eos_idx: 0
+epochs: 50
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /home/chenzhw/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+nlayers: 1
+num_heads: 8
+num_layers: 3
+num_workers: 0
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Records
+result: accstep5
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+rnn_type: LSTM
+sample_n: 1
+save_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Models
+save_period: 1
+seed: 9233
+step_size: 28
+technical_word: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+tokenizer size: 1153
+first init the imagenet pretrained!
+vocabulary size: 1153
+Training with batch size 20:   0%|          | 0/147 [00:00<?, ?it/s]Training with batch size 20:   1%|          | 1/147 [00:02<06:16,  2.58s/it]Training with batch size 20:   1%|▏         | 2/147 [00:04<05:01,  2.08s/it]Training with batch size 20:   2%|▏         | 3/147 [00:05<04:31,  1.89s/it]Training with batch size 20:   3%|▎         | 4/147 [00:07<04:19,  1.81s/it]Training with batch size 20:   3%|▎         | 5/147 [00:09<04:17,  1.82s/it]Training with batch size 20:   4%|▍         | 6/147 [00:11<04:06,  1.75s/it]Training with batch size 20:   5%|▍         | 7/147 [00:12<04:04,  1.75s/it]Training with batch size 20:   5%|▌         | 8/147 [00:14<04:01,  1.73s/it]Training with batch size 20:   6%|▌         | 9/147 [00:16<03:54,  1.70s/it]Training with batch size 20:   7%|▋         | 10/147 [00:17<03:50,  1.68s/it]Training with batch size 20:   7%|▋         | 11/147 [00:19<03:57,  1.75s/it]Training with batch size 20:   8%|▊         | 12/147 [00:21<04:14,  1.89s/it]Training with batch size 20:   9%|▉         | 13/147 [00:24<04:22,  1.96s/it]Training with batch size 20:  10%|▉         | 14/147 [00:26<04:32,  2.05s/it]Training with batch size 20:  10%|█         | 15/147 [00:28<04:40,  2.12s/it]Training with batch size 20:  11%|█         | 16/147 [00:30<04:45,  2.18s/it]Training with batch size 20:  12%|█▏        | 17/147 [00:33<04:50,  2.23s/it]Training with batch size 20:  12%|█▏        | 18/147 [00:35<04:44,  2.21s/it]Training with batch size 20:  13%|█▎        | 19/147 [00:37<04:37,  2.17s/it]Training with batch size 20:  14%|█▎        | 20/147 [00:39<04:35,  2.17s/it]Training with batch size 20:  14%|█▍        | 21/147 [00:41<04:30,  2.15s/it]Training with batch size 20:  15%|█▍        | 22/147 [00:43<04:26,  2.13s/it]Training with batch size 20:  16%|█▌        | 23/147 [00:46<04:24,  2.14s/it]Training with batch size 20:  16%|█▋        | 24/147 [00:48<04:21,  2.13s/it]Training with batch size 20:  17%|█▋        | 25/147 [00:49<04:05,  2.01s/it]Training with batch size 20:  18%|█▊        | 26/147 [00:51<03:51,  1.91s/it]Training with batch size 20:  18%|█▊        | 27/147 [00:53<03:33,  1.78s/it]Training with batch size 20:  19%|█▉        | 28/147 [00:54<03:26,  1.74s/it]Training with batch size 20:  20%|█▉        | 29/147 [00:56<03:24,  1.73s/it]Training with batch size 20:  20%|██        | 30/147 [00:57<03:17,  1.69s/it]Training with batch size 20:  21%|██        | 31/147 [00:59<03:16,  1.69s/it]Training with batch size 20:  22%|██▏       | 32/147 [01:01<03:10,  1.66s/it]Training with batch size 20:  22%|██▏       | 33/147 [01:02<03:10,  1.67s/it]Training with batch size 20:  23%|██▎       | 34/147 [01:04<03:10,  1.68s/it]Training with batch size 20:  24%|██▍       | 35/147 [01:06<03:08,  1.68s/it]Training with batch size 20:  24%|██▍       | 36/147 [01:07<03:02,  1.65s/it]Training with batch size 20:  25%|██▌       | 37/147 [01:09<02:57,  1.62s/it]Training with batch size 20:  26%|██▌       | 38/147 [01:11<02:57,  1.63s/it]Training with batch size 20:  27%|██▋       | 39/147 [01:12<02:53,  1.61s/it]Training with batch size 20:  27%|██▋       | 40/147 [01:14<02:54,  1.63s/it]Training with batch size 20:  28%|██▊       | 41/147 [01:15<02:50,  1.61s/it]Training with batch size 20:  29%|██▊       | 42/147 [01:17<02:46,  1.59s/it]Training with batch size 20:  29%|██▉       | 43/147 [01:19<02:52,  1.66s/it]Training with batch size 20:  30%|██▉       | 44/147 [01:21<03:05,  1.80s/it]Training with batch size 20:  31%|███       | 45/147 [01:23<03:16,  1.92s/it]Training with batch size 20:  31%|███▏      | 46/147 [01:25<03:24,  2.02s/it]Training with batch size 20:  32%|███▏      | 47/147 [01:28<03:28,  2.09s/it]Training with batch size 20:  33%|███▎      | 48/147 [01:30<03:28,  2.11s/it]Training with batch size 20:  33%|███▎      | 49/147 [01:32<03:33,  2.18s/it]Training with batch size 20:  34%|███▍      | 50/147 [01:34<03:35,  2.23s/it]Training with batch size 20:  35%|███▍      | 51/147 [01:37<03:32,  2.22s/it]Training with batch size 20:  35%|███▌      | 52/147 [01:39<03:29,  2.21s/it]Training with batch size 20:  36%|███▌      | 53/147 [01:41<03:27,  2.21s/it]Training with batch size 20:  37%|███▋      | 54/147 [01:43<03:24,  2.20s/it]Training with batch size 20:  37%|███▋      | 55/147 [01:46<03:27,  2.25s/it]Training with batch size 20:  38%|███▊      | 56/147 [01:48<03:24,  2.25s/it]Training with batch size 20:  39%|███▉      | 57/147 [01:50<03:08,  2.10s/it]Training with batch size 20:  39%|███▉      | 58/147 [01:51<02:55,  1.97s/it]Training with batch size 20:  40%|████      | 59/147 [01:53<02:44,  1.87s/it]Training with batch size 20:  41%|████      | 60/147 [01:55<02:38,  1.82s/it]Training with batch size 20:  41%|████▏     | 61/147 [01:56<02:29,  1.74s/it]Training with batch size 20:  42%|████▏     | 62/147 [01:58<02:25,  1.71s/it]Training with batch size 20:  43%|████▎     | 63/147 [01:59<02:21,  1.68s/it]Training with batch size 20:  44%|████▎     | 64/147 [02:01<02:16,  1.64s/it]Training with batch size 20:  44%|████▍     | 65/147 [02:03<02:16,  1.66s/it]Training with batch size 20:  45%|████▍     | 66/147 [02:04<02:13,  1.65s/it]Training with batch size 20:  46%|████▌     | 67/147 [02:06<02:13,  1.67s/it]Training with batch size 20:  46%|████▋     | 68/147 [02:08<02:11,  1.66s/it]Training with batch size 20:  47%|████▋     | 69/147 [02:09<02:09,  1.66s/it]Training with batch size 20:  48%|████▊     | 70/147 [02:11<02:08,  1.67s/it]Training with batch size 20:  48%|████▊     | 71/147 [02:13<02:03,  1.63s/it]Training with batch size 20:  49%|████▉     | 72/147 [02:14<02:01,  1.63s/it]Training with batch size 20:  50%|████▉     | 73/147 [02:16<02:01,  1.64s/it]Training with batch size 20:  50%|█████     | 74/147 [02:17<01:56,  1.60s/it]Training with batch size 20:  51%|█████     | 75/147 [02:19<01:57,  1.63s/it]Training with batch size 20:  52%|█████▏    | 76/147 [02:21<01:53,  1.60s/it]Training with batch size 20:  52%|█████▏    | 77/147 [02:22<01:52,  1.61s/it]Training with batch size 20:  53%|█████▎    | 78/147 [02:24<01:52,  1.63s/it]Training with batch size 20:  54%|█████▎    | 79/147 [02:26<01:53,  1.67s/it]Training with batch size 20:  54%|█████▍    | 80/147 [02:27<01:53,  1.70s/it]Training with batch size 20:  55%|█████▌    | 81/147 [02:29<01:49,  1.66s/it]Training with batch size 20:  56%|█████▌    | 82/147 [02:31<01:47,  1.66s/it]Training with batch size 20:  56%|█████▌    | 82/147 [02:32<02:01,  1.86s/it]
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 58, in <module>
+    main(config)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 35, in main
+    trainer.train()
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 78, in train
+    result = self._train_epoch(epoch)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 375, in _train_epoch
+    batch_loss.backward()
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+    torch.autograd.backward(
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.265 seconds.
+Prefix dict has been built successfully.
+Result_prefix: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5
+accumulation_steps: 5
+amsgrad: True
+ann_path: /home/chenzhw/ultrasound_report_gen/USData/all.json
+attn_pth: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Attn_pth
+batch_size: 40
+bidirectional: True
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 512
+d_model: 512
+d_vf: 2048
+data_prefix: /home/chenzhw/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+embedding_vector: 300
+eos_idx: 0
+epochs: 50
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /home/chenzhw/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+nlayers: 1
+num_heads: 8
+num_layers: 3
+num_workers: 0
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Records
+result: accstep5
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+rnn_type: LSTM
+sample_n: 1
+save_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/accstep5/Models
+save_period: 1
+seed: 9233
+step_size: 28
+technical_word: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+tokenizer size: 1153
+first init the imagenet pretrained!
+vocabulary size: 1153
+Training with batch size 40:   0%|          | 0/74 [00:00<?, ?it/s]Training with batch size 40:   1%|▏         | 1/74 [00:02<03:14,  2.66s/it]Training with batch size 40:   3%|▎         | 2/74 [00:04<02:41,  2.25s/it]Training with batch size 40:   4%|▍         | 3/74 [00:06<02:29,  2.10s/it]Training with batch size 40:   5%|▌         | 4/74 [00:08<02:23,  2.05s/it]Training with batch size 40:   7%|▋         | 5/74 [00:10<02:21,  2.05s/it]Training with batch size 40:   8%|▊         | 6/74 [00:12<02:17,  2.02s/it]Training with batch size 40:   9%|▉         | 7/74 [00:14<02:14,  2.01s/it]Training with batch size 40:  11%|█         | 8/74 [00:16<02:15,  2.05s/it]Training with batch size 40:  12%|█▏        | 9/74 [00:18<02:11,  2.02s/it]Training with batch size 40:  14%|█▎        | 10/74 [00:20<02:09,  2.03s/it]Training with batch size 40:  15%|█▍        | 11/74 [00:22<02:07,  2.02s/it]Training with batch size 40:  16%|█▌        | 12/74 [00:24<02:04,  2.00s/it]Training with batch size 40:  18%|█▊        | 13/74 [00:26<02:00,  1.98s/it]Training with batch size 40:  19%|█▉        | 14/74 [00:28<01:57,  1.96s/it]Training with batch size 40:  20%|██        | 15/74 [00:30<01:55,  1.96s/it]Training with batch size 40:  22%|██▏       | 16/74 [00:32<01:55,  2.00s/it]Training with batch size 40:  23%|██▎       | 17/74 [00:34<02:01,  2.13s/it]Training with batch size 40:  24%|██▍       | 18/74 [00:37<02:00,  2.16s/it]Training with batch size 40:  26%|██▌       | 19/74 [00:39<01:57,  2.14s/it]Training with batch size 40:  27%|██▋       | 20/74 [00:41<01:59,  2.22s/it]Training with batch size 40:  28%|██▊       | 21/74 [00:43<01:57,  2.21s/it]Training with batch size 40:  30%|██▉       | 22/74 [00:46<01:57,  2.26s/it]Training with batch size 40:  31%|███       | 23/74 [00:48<01:59,  2.34s/it]Training with batch size 40:  32%|███▏      | 24/74 [00:51<01:56,  2.34s/it]Training with batch size 40:  34%|███▍      | 25/74 [00:53<01:54,  2.34s/it]Training with batch size 40:  35%|███▌      | 26/74 [00:55<01:51,  2.32s/it]Training with batch size 40:  36%|███▋      | 27/74 [00:57<01:47,  2.29s/it]Training with batch size 40:  38%|███▊      | 28/74 [01:00<01:45,  2.30s/it]Training with batch size 40:  39%|███▉      | 29/74 [01:02<01:40,  2.24s/it]Training with batch size 40:  41%|████      | 30/74 [01:04<01:38,  2.23s/it]Training with batch size 40:  42%|████▏     | 31/74 [01:06<01:32,  2.15s/it]Training with batch size 40:  43%|████▎     | 32/74 [01:08<01:30,  2.16s/it]Training with batch size 40:  45%|████▍     | 33/74 [01:10<01:27,  2.14s/it]Training with batch size 40:  46%|████▌     | 34/74 [01:12<01:24,  2.11s/it]Training with batch size 40:  47%|████▋     | 35/74 [01:15<01:22,  2.13s/it]Training with batch size 40:  49%|████▊     | 36/74 [01:17<01:19,  2.09s/it]Training with batch size 40:  50%|█████     | 37/74 [01:19<01:16,  2.06s/it]Training with batch size 40:  51%|█████▏    | 38/74 [01:21<01:15,  2.10s/it]Training with batch size 40:  53%|█████▎    | 39/74 [01:23<01:12,  2.07s/it]Training with batch size 40:  54%|█████▍    | 40/74 [01:25<01:10,  2.08s/it]Training with batch size 40:  55%|█████▌    | 41/74 [01:27<01:09,  2.11s/it]Training with batch size 40:  57%|█████▋    | 42/74 [01:29<01:06,  2.07s/it]Training with batch size 40:  58%|█████▊    | 43/74 [01:31<01:03,  2.04s/it]Training with batch size 40:  59%|█████▉    | 44/74 [01:33<01:02,  2.08s/it]Training with batch size 40:  61%|██████    | 45/74 [01:35<00:59,  2.04s/it]Training with batch size 40:  62%|██████▏   | 46/74 [01:37<00:56,  2.00s/it]Training with batch size 40:  64%|██████▎   | 47/74 [01:39<00:55,  2.05s/it]Training with batch size 40:  65%|██████▍   | 48/74 [01:41<00:53,  2.05s/it]Training with batch size 40:  66%|██████▌   | 49/74 [01:43<00:51,  2.05s/it]Training with batch size 40:  68%|██████▊   | 50/74 [01:45<00:49,  2.07s/it]Training with batch size 40:  69%|██████▉   | 51/74 [01:47<00:47,  2.07s/it]Training with batch size 40:  70%|███████   | 52/74 [01:50<00:45,  2.08s/it]Training with batch size 40:  72%|███████▏  | 53/74 [01:51<00:42,  2.03s/it]Training with batch size 40:  73%|███████▎  | 54/74 [01:53<00:40,  2.00s/it]Training with batch size 40:  74%|███████▍  | 55/74 [01:56<00:39,  2.06s/it]Training with batch size 40:  76%|███████▌  | 56/74 [01:57<00:36,  2.01s/it]Training with batch size 40:  77%|███████▋  | 57/74 [01:59<00:33,  1.99s/it]Training with batch size 40:  78%|███████▊  | 58/74 [02:01<00:31,  1.98s/it]Training with batch size 40:  80%|███████▉  | 59/74 [02:03<00:29,  1.97s/it]Training with batch size 40:  81%|████████  | 60/74 [02:05<00:27,  1.97s/it]Training with batch size 40:  82%|████████▏ | 61/74 [02:07<00:25,  1.96s/it]Training with batch size 40:  84%|████████▍ | 62/74 [02:09<00:23,  1.96s/it]Training with batch size 40:  85%|████████▌ | 63/74 [02:11<00:21,  1.96s/it]Training with batch size 40:  86%|████████▋ | 64/74 [02:13<00:19,  1.96s/it]Training with batch size 40:  88%|████████▊ | 65/74 [02:15<00:17,  1.97s/it]Training with batch size 40:  89%|████████▉ | 66/74 [02:17<00:15,  1.97s/it]Training with batch size 40:  91%|█████████ | 67/74 [02:19<00:13,  2.00s/it]Training with batch size 40:  92%|█████████▏| 68/74 [02:21<00:11,  1.99s/it]Training with batch size 40:  93%|█████████▎| 69/74 [02:23<00:09,  1.98s/it]Training with batch size 40:  95%|█████████▍| 70/74 [02:25<00:07,  1.98s/it]Training with batch size 40:  96%|█████████▌| 71/74 [02:27<00:05,  1.95s/it]Training with batch size 40:  97%|█████████▋| 72/74 [02:29<00:03,  1.95s/it]Training with batch size 40:  99%|█████████▊| 73/74 [02:31<00:01,  1.95s/it]Training with batch size 40: 100%|██████████| 74/74 [02:32<00:00,  1.85s/it]Training with batch size 40: 100%|██████████| 74/74 [02:32<00:00,  2.07s/it]
+train loss 3.8018110402569505
+Validation with batch size 40:   0%|          | 0/11 [00:00<?, ?it/s]Validation with batch size 40:   9%|▉         | 1/11 [00:02<00:21,  2.16s/it]Validation with batch size 40:  18%|█▊        | 2/11 [00:04<00:19,  2.17s/it]Validation with batch size 40:  27%|██▋       | 3/11 [00:06<00:16,  2.12s/it]Validation with batch size 40:  36%|███▋      | 4/11 [00:08<00:14,  2.07s/it]Validation with batch size 40:  45%|████▌     | 5/11 [00:10<00:12,  2.10s/it]Validation with batch size 40:  55%|█████▍    | 6/11 [00:12<00:10,  2.12s/it]Validation with batch size 40:  64%|██████▎   | 7/11 [00:14<00:08,  2.12s/it]Validation with batch size 40:  73%|███████▎  | 8/11 [00:16<00:06,  2.06s/it]Validation with batch size 40:  82%|████████▏ | 9/11 [00:18<00:04,  2.00s/it]Validation with batch size 40:  91%|█████████ | 10/11 [00:20<00:01,  1.96s/it]Validation with batch size 40: 100%|██████████| 11/11 [00:22<00:00,  1.90s/it]Validation with batch size 40: 100%|██████████| 11/11 [00:22<00:00,  2.02s/it]
+Test with batch size 40:   0%|          | 0/21 [00:00<?, ?it/s]Test with batch size 40:   0%|          | 0/21 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 58, in <module>
+    main(config)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 35, in main
+    trainer.train()
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 78, in train
+    result = self._train_epoch(epoch)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 414, in _train_epoch
+    output,_ = self.model(images, mode='sample')
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/models/AllOrgan.py", line 30, in forward
+    att_feats_0, fc_feats_0, _, dense_vec1 = self.visual_extractor(images[:, 0])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/visual_extractor.py", line 22, in forward
+    patch_feats = self.model(images)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/functional.py", line 2822, in batch_norm
+    return torch.batch_norm(
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap_external>", line 153, in _path_is_mode_type
+  File "<frozen importlib._bootstrap_external>", line 147, in _path_stat
+FileNotFoundError: [Errno 2] No such file or directory: '/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/scipy/special/__init__.cpython-310-x86_64-linux-gnu.so'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 51, in <module>
+    from modules.MyTrainer import TFTrainer as Trainer 
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 14, in <module>
+    from sentence_transformers import SentenceTransformer, util
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sentence_transformers/__init__.py", line 14, in <module>
+    from sentence_transformers.cross_encoder.CrossEncoder import CrossEncoder
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sentence_transformers/cross_encoder/__init__.py", line 3, in <module>
+    from .CrossEncoder import CrossEncoder
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sentence_transformers/cross_encoder/CrossEncoder.py", line 14, in <module>
+    from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTokenizer, is_torch_npu_available
+  File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1852, in __getattr__
+    value = getattr(module, name)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1851, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1863, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/models/auto/modeling_auto.py", line 21, in <module>
+    from .auto_factory import (
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 40, in <module>
+    from ...generation import GenerationMixin
+  File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1851, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1863, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/generation/utils.py", line 53, in <module>
+    from .candidate_generator import (
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/transformers/generation/candidate_generator.py", line 26, in <module>
+    from sklearn.metrics import roc_curve
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sklearn/__init__.py", line 73, in <module>
+    from .base import clone  # noqa: E402
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sklearn/base.py", line 19, in <module>
+    from .utils._estimator_html_repr import _HTMLDocumentationLinkMixin, estimator_html_repr
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sklearn/utils/__init__.py", line 15, in <module>
+    from ._chunking import gen_batches, gen_even_slices
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sklearn/utils/_chunking.py", line 11, in <module>
+    from ._param_validation import Interval, validate_params
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sklearn/utils/_param_validation.py", line 17, in <module>
+    from .validation import _is_arraylike_not_scalar
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sklearn/utils/validation.py", line 21, in <module>
+    from ..utils._array_api import _asarray_with_order, _is_numpy_namespace, get_namespace
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/sklearn/utils/_array_api.py", line 14, in <module>
+    import scipy.special as special
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1002, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 945, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1439, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1411, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1563, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 161, in _path_isfile
+  File "<frozen importlib._bootstrap_external>", line 153, in _path_is_mode_type
+KeyboardInterrupt
