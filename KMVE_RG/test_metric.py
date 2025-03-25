@@ -67,18 +67,17 @@ def main(cmd_args, config_args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process some parameters.')
     parser.add_argument('--model', type=str, default='AllOrgan', help='Path to the model')
-    parser.add_argument('--dataset', type=str, default='Liver', help='Path to the dataset')
+    parser.add_argument('--dataset_name', type=str, default='all', help='Path to the dataset')
     parser.add_argument('--save_path', type=str,  help='Path to save the results')
     parser.add_argument('--config', type=str, help='Path to the config file')
     parser.add_argument('--ckpt', type=str, help='Path to the checkpoint')
     parser.add_argument('--method', type=str, help='Method')
     parser.add_argument('--comment', type=str, help='Comment')
-    
+    parser.add_argument('--decoderonly', type=str, default='False', help='use decoder only model.')
     cmd_args = parser.parse_args()
     
 
     config_args = Config(
-        dataset_name = 'all', 
-        result = None
+        **vars(cmd_args)
                     )
     main(cmd_args,config_args)

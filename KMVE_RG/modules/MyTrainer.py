@@ -314,8 +314,8 @@ class TFTrainer(BaseTrainer):
         self.val_dataloader = val_dataloader
         self.test_dataloader = test_dataloader
 
-        self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf 交叉熵的loss
-        self.lambada2 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 器官分类的 loss
+        self.lambada1 = torch.nn.Parameter(torch.tensor(0.7), requires_grad=True) # tf 交叉熵的loss
+        self.lambada2 = torch.nn.Parameter(torch.tensor(0.3), requires_grad=True) # 器官分类的 loss
         self.lambada3 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 最终生成的报告之间对比loss
 
     
