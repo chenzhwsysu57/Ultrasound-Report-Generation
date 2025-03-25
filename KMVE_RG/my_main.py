@@ -44,16 +44,34 @@ if __name__ == '__main__':
     parser.add_argument('--debug', type=int, default=-1, help='the index end of your dataloader, defaults to -1 means load all, 0:-1')
     parser.add_argument('--accumulation_steps', type=int, default=1, help='accumulate step for grad.')
     parser.add_argument('--decoderonly', type=str, default='False', help='use decoder only model.')
-    cmd_line_args = parser.parse_args()
     
+    known_args, unknown_args = parser.parse_known_args()
+    extra_args = {}
+    i = 0
+    while i < len(unknown_args):
+        arg = unknown_args[i]
+        if arg.startswith("--"):
+            key = arg.lstrip("-")
+            if "=" in key:  # 处理 --key=value 形式
+                k, v = key.split("=", 1)
+                extra_args[k] = v
+            else:  # 处理 --key value 形式
+                if i + 1 < len(unknown_args) and not unknown_args[i + 1].startswith("--"):
+                    extra_args[key] = unknown_args[i + 1]  # 取下一个值
+                    i += 1  # 跳过 value
+                else:
+                    extra_args[key] = True  # 只有 key，没有 value
+        i += 1
+    cmd_line_args = {**vars(known_args), **extra_args}
+
     from config_urg import Config
-    if cmd_line_args.dataset_name == "all":
+    if cmd_line_args['dataset_name'] == "all":
         from KMVE_RG.models.AllOrgan import AllOrgan as MyModel
         from modules.MyTrainer import TFTrainer as Trainer 
     else:
         from KMVE_RG.models.SGF import SGF as MyModel
         from modules.MyTrainer import Trainer
-    config = Config(**vars(cmd_line_args))
+    config = Config(**cmd_line_args)
     
     print(config)
     main(config)

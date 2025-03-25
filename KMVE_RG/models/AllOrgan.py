@@ -7,7 +7,7 @@ import sys
 sys.path.append('../')
 from modules.visual_extractor import VisualExtractor
 from modules.encoder_decoder import EncoderDecoder, DecoderOnly
-
+from modules.encoder_decoder_rmsn import DecoderOnly as DecoderOnly_rmsn
 
 
 
@@ -17,11 +17,15 @@ class AllOrgan(nn.Module):
         self.args = args
         self.tokenizer = tokenizer
         self.visual_extractor = VisualExtractor(args)
-        if self.args.decoderonly=="True":
+        if self.args.decoderonly=="True" and self.args.norm == 'rmsnorm':
+            print("using decoderonly rmsn model.")
+            self.encoder_decoder = DecoderOnly_rmsn(args, tokenizer)
+        elif self.args.decoderonly=="True":
             print("using decoderonly model.")
             self.encoder_decoder = DecoderOnly(args, tokenizer)
         else:
             self.encoder_decoder = EncoderDecoder(args, tokenizer)
+        
         print('vocabulary size:', self.tokenizer.get_vocab_size())
         self.classfication_layers = classfication()
 
