@@ -1,0 +1,353 @@
+Building prefix dict from the default dictionary ...
+Loading model from cache /var/folders/mp/cnbfl9016b5fvvkftzz4xqfh0000gn/T/jieba.cache
+Loading model cost 0.186 seconds.
+Prefix dict has been built successfully.
+Result_prefix: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug
+accumulation_steps: 20
+amsgrad: True
+ann_path: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all.json
+attn_pth: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Attn_pth
+batch_size: 15
+bidirectional: True
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 512
+d_model: 512
+d_vf: 2048
+data_prefix: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+embedding_vector: 300
+eos_idx: 0
+epochs: 50
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+nlayers: 1
+num_heads: 8
+num_layers: 3
+num_workers: 0
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Records
+result: debug
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+rnn_type: LSTM
+sample_n: 1
+save_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Models
+save_period: 1
+seed: 9233
+step_size: 28
+technical_word: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+tokenizer size: 1153
+first init the imagenet pretrained!
+vocabulary size: 1153
+Training with batch size 15:   0%|          | 0/195 [00:00<?, ?it/s]Training with batch size 15:   1%|          | 1/195 [00:08<26:57,  8.34s/it]Training with batch size 15:   1%|          | 2/195 [00:11<16:45,  5.21s/it]Training with batch size 15:   2%|▏         | 3/195 [00:14<13:20,  4.17s/it]Training with batch size 15:   2%|▏         | 4/195 [00:17<11:35,  3.64s/it]Training with batch size 15:   3%|▎         | 5/195 [00:20<10:44,  3.39s/it]Training with batch size 15:   3%|▎         | 6/195 [00:22<10:05,  3.20s/it]Training with batch size 15:   4%|▎         | 7/195 [00:25<09:44,  3.11s/it]Training with batch size 15:   4%|▍         | 8/195 [00:28<09:31,  3.06s/it]Training with batch size 15:   5%|▍         | 9/195 [00:31<09:25,  3.04s/it]Training with batch size 15:   5%|▌         | 10/195 [00:34<09:17,  3.01s/it]Training with batch size 15:   6%|▌         | 11/195 [00:37<09:06,  2.97s/it]Training with batch size 15:   6%|▌         | 12/195 [00:40<08:59,  2.95s/it]Training with batch size 15:   7%|▋         | 13/195 [00:43<08:59,  2.97s/it]Training with batch size 15:   7%|▋         | 14/195 [00:46<08:56,  2.97s/it]Training with batch size 15:   8%|▊         | 15/195 [00:49<08:58,  2.99s/it]Training with batch size 15:   8%|▊         | 16/195 [00:52<08:58,  3.01s/it]Training with batch size 15:   9%|▊         | 17/195 [00:55<09:02,  3.05s/it]Training with batch size 15:   9%|▉         | 18/195 [00:58<08:56,  3.03s/it]Training with batch size 15:  10%|▉         | 19/195 [01:01<08:48,  3.00s/it]Training with batch size 15:  10%|█         | 20/195 [01:05<09:35,  3.29s/it]Training with batch size 15:  11%|█         | 21/195 [01:08<09:16,  3.20s/it]Training with batch size 15:  11%|█▏        | 22/195 [01:11<08:58,  3.11s/it]Training with batch size 15:  12%|█▏        | 23/195 [01:14<08:45,  3.06s/it]Training with batch size 15:  12%|█▏        | 24/195 [01:17<08:36,  3.02s/it]Training with batch size 15:  13%|█▎        | 25/195 [01:20<08:37,  3.04s/it]Training with batch size 15:  13%|█▎        | 26/195 [01:23<08:32,  3.03s/it]Training with batch size 15:  14%|█▍        | 27/195 [01:26<08:22,  2.99s/it]Training with batch size 15:  14%|█▍        | 27/195 [01:27<09:03,  3.24s/it]
+Traceback (most recent call last):
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 58, in <module>
+    main(config)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 35, in main
+    trainer.train()
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 78, in train
+    result = self._train_epoch(epoch)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 351, in _train_epoch
+    pred_output, pred_classified  = self.model(images_select, mode='sample')
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1740, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/models/AllOrgan.py", line 42, in forward
+    output, _ = self.encoder_decoder(fc_feats, att_feats, mode='sample')
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1740, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Caption.py", line 18, in forward
+    return getattr(self, '_' + mode)(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Generator.py", line 128, in _sample
+    logprobs = logprobs * unfinished.unsqueeze(1).float()
+KeyboardInterrupt
+Building prefix dict from the default dictionary ...
+Loading model from cache /var/folders/mp/cnbfl9016b5fvvkftzz4xqfh0000gn/T/jieba.cache
+Loading model cost 0.195 seconds.
+Prefix dict has been built successfully.
+Result_prefix: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug
+accumulation_steps: 10
+amsgrad: True
+ann_path: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all.json
+attn_pth: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Attn_pth
+batch_size: 20
+bidirectional: True
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 512
+d_model: 512
+d_vf: 2048
+data_prefix: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+embedding_vector: 300
+eos_idx: 0
+epochs: 50
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+nlayers: 1
+num_heads: 8
+num_layers: 3
+num_workers: 0
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Records
+result: debug
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+rnn_type: LSTM
+sample_n: 1
+save_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Models
+save_period: 1
+seed: 9233
+step_size: 28
+technical_word: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+tokenizer size: 1153
+first init the imagenet pretrained!
+vocabulary size: 1153
+Training with batch size 20:   0%|          | 0/147 [00:00<?, ?it/s]Training with batch size 20:   1%|          | 1/147 [00:08<21:14,  8.73s/it]Training with batch size 20:   1%|▏         | 2/147 [00:12<13:32,  5.60s/it]Training with batch size 20:   2%|▏         | 3/147 [00:15<11:10,  4.66s/it]Training with batch size 20:   3%|▎         | 4/147 [00:19<09:58,  4.19s/it]Training with batch size 20:   3%|▎         | 5/147 [00:22<09:10,  3.88s/it]Training with batch size 20:   4%|▍         | 6/147 [00:25<08:49,  3.76s/it]Training with batch size 20:   5%|▍         | 7/147 [00:29<08:32,  3.66s/it]Training with batch size 20:   5%|▌         | 8/147 [00:32<08:22,  3.62s/it]Training with batch size 20:   6%|▌         | 9/147 [00:36<08:13,  3.57s/it]Training with batch size 20:   7%|▋         | 10/147 [00:40<08:45,  3.84s/it]Training with batch size 20:   7%|▋         | 11/147 [00:44<08:25,  3.72s/it]Training with batch size 20:   8%|▊         | 12/147 [00:47<08:03,  3.58s/it]Training with batch size 20:   9%|▉         | 13/147 [00:50<07:50,  3.51s/it]Training with batch size 20:  10%|▉         | 14/147 [00:54<07:43,  3.48s/it]Training with batch size 20:  10%|█         | 15/147 [00:57<07:37,  3.47s/it]Training with batch size 20:  11%|█         | 16/147 [01:01<07:30,  3.44s/it]Training with batch size 20:  12%|█▏        | 17/147 [01:04<07:24,  3.42s/it]Training with batch size 20:  12%|█▏        | 18/147 [01:07<07:17,  3.39s/it]Training with batch size 20:  13%|█▎        | 19/147 [01:11<07:13,  3.39s/it]Training with batch size 20:  14%|█▎        | 20/147 [01:14<07:19,  3.46s/it]Training with batch size 20:  14%|█▍        | 21/147 [01:18<07:11,  3.42s/it]Training with batch size 20:  15%|█▍        | 22/147 [01:21<07:04,  3.40s/it]Training with batch size 20:  16%|█▌        | 23/147 [01:24<07:00,  3.39s/it]Training with batch size 20:  16%|█▋        | 24/147 [01:28<06:57,  3.39s/it]Training with batch size 20:  17%|█▋        | 25/147 [01:31<06:53,  3.39s/it]Training with batch size 20:  18%|█▊        | 26/147 [01:35<06:53,  3.42s/it]Training with batch size 20:  18%|█▊        | 27/147 [01:38<06:46,  3.39s/it]Training with batch size 20:  19%|█▉        | 28/147 [01:41<06:42,  3.38s/it]Training with batch size 20:  20%|█▉        | 29/147 [01:45<06:39,  3.39s/it]Training with batch size 20:  20%|██        | 30/147 [01:48<06:42,  3.44s/it]Training with batch size 20:  21%|██        | 31/147 [01:52<06:34,  3.40s/it]Training with batch size 20:  22%|██▏       | 32/147 [01:55<06:29,  3.38s/it]Training with batch size 20:  22%|██▏       | 33/147 [01:58<06:27,  3.40s/it]Training with batch size 20:  23%|██▎       | 34/147 [02:02<06:25,  3.41s/it]Training with batch size 20:  24%|██▍       | 35/147 [02:05<06:21,  3.41s/it]Training with batch size 20:  24%|██▍       | 36/147 [02:09<06:15,  3.38s/it]Training with batch size 20:  25%|██▌       | 37/147 [02:12<06:14,  3.40s/it]Training with batch size 20:  26%|██▌       | 38/147 [02:15<06:10,  3.40s/it]Training with batch size 20:  27%|██▋       | 39/147 [02:19<06:10,  3.43s/it]Training with batch size 20:  27%|██▋       | 40/147 [02:22<06:11,  3.47s/it]Training with batch size 20:  28%|██▊       | 41/147 [02:26<06:05,  3.45s/it]Training with batch size 20:  29%|██▊       | 42/147 [02:29<06:02,  3.46s/it]Training with batch size 20:  29%|██▉       | 43/147 [02:33<05:59,  3.45s/it]Training with batch size 20:  30%|██▉       | 44/147 [02:36<05:55,  3.45s/it]Training with batch size 20:  31%|███       | 45/147 [02:40<05:49,  3.42s/it]Training with batch size 20:  31%|███▏      | 46/147 [02:43<05:43,  3.40s/it]Training with batch size 20:  32%|███▏      | 47/147 [02:46<05:39,  3.40s/it]Training with batch size 20:  33%|███▎      | 48/147 [02:50<05:35,  3.38s/it]Training with batch size 20:  33%|███▎      | 49/147 [02:53<05:31,  3.39s/it]Training with batch size 20:  34%|███▍      | 50/147 [02:57<05:35,  3.46s/it]Training with batch size 20:  35%|███▍      | 51/147 [03:00<05:29,  3.43s/it]Training with batch size 20:  35%|███▌      | 52/147 [03:04<05:25,  3.43s/it]Training with batch size 20:  36%|███▌      | 53/147 [03:07<05:22,  3.43s/it]Training with batch size 20:  37%|███▋      | 54/147 [03:10<05:18,  3.43s/it]Training with batch size 20:  37%|███▋      | 55/147 [03:14<05:17,  3.45s/it]Training with batch size 20:  38%|███▊      | 56/147 [03:17<05:11,  3.42s/it]Training with batch size 20:  39%|███▉      | 57/147 [03:21<05:06,  3.41s/it]Training with batch size 20:  39%|███▉      | 58/147 [03:24<05:01,  3.39s/it]Training with batch size 20:  40%|████      | 59/147 [03:27<04:57,  3.38s/it]Training with batch size 20:  41%|████      | 60/147 [03:31<04:58,  3.43s/it]Training with batch size 20:  41%|████▏     | 61/147 [03:34<04:52,  3.40s/it]Training with batch size 20:  42%|████▏     | 62/147 [03:38<04:48,  3.40s/it]Training with batch size 20:  43%|████▎     | 63/147 [03:41<04:44,  3.38s/it]Training with batch size 20:  44%|████▎     | 64/147 [03:44<04:41,  3.40s/it]Training with batch size 20:  44%|████▍     | 65/147 [03:48<04:38,  3.39s/it]Training with batch size 20:  45%|████▍     | 66/147 [03:51<04:35,  3.40s/it]Training with batch size 20:  46%|████▌     | 67/147 [03:55<04:31,  3.39s/it]Training with batch size 20:  46%|████▋     | 68/147 [03:58<04:29,  3.41s/it]Training with batch size 20:  47%|████▋     | 69/147 [04:01<04:26,  3.42s/it]Training with batch size 20:  48%|████▊     | 70/147 [04:05<04:28,  3.49s/it]Training with batch size 20:  48%|████▊     | 71/147 [04:08<04:23,  3.46s/it]Training with batch size 20:  49%|████▉     | 72/147 [04:12<04:16,  3.42s/it]Training with batch size 20:  50%|████▉     | 73/147 [04:15<04:13,  3.42s/it]Training with batch size 20:  50%|█████     | 74/147 [04:19<04:08,  3.40s/it]Training with batch size 20:  51%|█████     | 75/147 [04:22<04:04,  3.39s/it]Training with batch size 20:  52%|█████▏    | 76/147 [04:25<04:00,  3.39s/it]Training with batch size 20:  52%|█████▏    | 77/147 [04:29<03:57,  3.39s/it]Training with batch size 20:  53%|█████▎    | 78/147 [04:32<03:55,  3.42s/it]Training with batch size 20:  54%|█████▎    | 79/147 [04:36<03:52,  3.42s/it]Training with batch size 20:  54%|█████▍    | 80/147 [04:39<03:53,  3.49s/it]Training with batch size 20:  55%|█████▌    | 81/147 [04:43<03:48,  3.46s/it]Training with batch size 20:  56%|█████▌    | 82/147 [04:46<03:42,  3.42s/it]Training with batch size 20:  56%|█████▋    | 83/147 [04:49<03:35,  3.37s/it]Training with batch size 20:  57%|█████▋    | 84/147 [04:53<03:31,  3.36s/it]Training with batch size 20:  58%|█████▊    | 85/147 [04:56<03:26,  3.34s/it]Training with batch size 20:  59%|█████▊    | 86/147 [04:59<03:23,  3.34s/it]Training with batch size 20:  59%|█████▉    | 87/147 [05:03<03:20,  3.35s/it]Training with batch size 20:  60%|█████▉    | 88/147 [05:06<03:17,  3.34s/it]Training with batch size 20:  61%|██████    | 89/147 [05:09<03:14,  3.35s/it]Training with batch size 20:  61%|██████    | 90/147 [05:13<03:15,  3.43s/it]Training with batch size 20:  62%|██████▏   | 91/147 [05:16<03:10,  3.41s/it]Training with batch size 20:  63%|██████▎   | 92/147 [05:20<03:06,  3.40s/it]Training with batch size 20:  63%|██████▎   | 93/147 [05:23<03:03,  3.39s/it]Training with batch size 20:  64%|██████▍   | 94/147 [05:26<02:57,  3.36s/it]Training with batch size 20:  65%|██████▍   | 95/147 [05:30<02:53,  3.34s/it]Training with batch size 20:  65%|██████▌   | 96/147 [05:33<02:49,  3.33s/it]Training with batch size 20:  66%|██████▌   | 97/147 [05:36<02:46,  3.32s/it]Training with batch size 20:  67%|██████▋   | 98/147 [05:40<02:43,  3.33s/it]Training with batch size 20:  67%|██████▋   | 99/147 [05:43<02:39,  3.32s/it]Training with batch size 20:  68%|██████▊   | 100/147 [05:46<02:39,  3.39s/it]Training with batch size 20:  69%|██████▊   | 101/147 [05:50<02:34,  3.36s/it]Training with batch size 20:  69%|██████▉   | 102/147 [05:53<02:31,  3.36s/it]Training with batch size 20:  70%|███████   | 103/147 [05:56<02:27,  3.36s/it]Training with batch size 20:  71%|███████   | 104/147 [06:00<02:23,  3.35s/it]Training with batch size 20:  71%|███████▏  | 105/147 [06:03<02:21,  3.36s/it]Training with batch size 20:  72%|███████▏  | 106/147 [06:06<02:17,  3.36s/it]Training with batch size 20:  73%|███████▎  | 107/147 [06:10<02:15,  3.39s/it]Training with batch size 20:  73%|███████▎  | 108/147 [06:13<02:10,  3.36s/it]Training with batch size 20:  74%|███████▍  | 109/147 [06:16<02:06,  3.33s/it]Training with batch size 20:  75%|███████▍  | 110/147 [06:20<02:06,  3.41s/it]Training with batch size 20:  76%|███████▌  | 111/147 [06:23<02:01,  3.37s/it]Training with batch size 20:  76%|███████▌  | 112/147 [06:27<01:57,  3.36s/it]Training with batch size 20:  77%|███████▋  | 113/147 [06:30<01:54,  3.36s/it]Training with batch size 20:  78%|███████▊  | 114/147 [06:33<01:50,  3.34s/it]Training with batch size 20:  78%|███████▊  | 115/147 [06:37<01:46,  3.33s/it]Training with batch size 20:  79%|███████▉  | 116/147 [06:40<01:43,  3.34s/it]Training with batch size 20:  80%|███████▉  | 117/147 [06:43<01:40,  3.36s/it]Training with batch size 20:  80%|████████  | 118/147 [06:47<01:38,  3.38s/it]Training with batch size 20:  81%|████████  | 119/147 [06:50<01:35,  3.40s/it]Training with batch size 20:  82%|████████▏ | 120/147 [06:55<01:41,  3.77s/it]Training with batch size 20:  82%|████████▏ | 121/147 [06:58<01:34,  3.65s/it]Training with batch size 20:  83%|████████▎ | 122/147 [07:02<01:29,  3.56s/it]Training with batch size 20:  84%|████████▎ | 123/147 [13:40<48:47, 121.99s/it]Training with batch size 20:  84%|████████▍ | 124/147 [13:43<33:07, 86.40s/it] Training with batch size 20:  85%|████████▌ | 125/147 [13:47<22:32, 61.48s/it]Training with batch size 20:  86%|████████▌ | 126/147 [13:50<15:24, 44.02s/it]Training with batch size 20:  86%|████████▋ | 127/147 [13:53<10:35, 31.78s/it]Training with batch size 20:  87%|████████▋ | 128/147 [13:57<07:21, 23.25s/it]Training with batch size 20:  88%|████████▊ | 129/147 [14:00<05:10, 17.27s/it]Training with batch size 20:  88%|████████▊ | 130/147 [14:03<03:43, 13.16s/it]Training with batch size 20:  89%|████████▉ | 131/147 [14:07<02:43, 10.21s/it]Training with batch size 20:  90%|████████▉ | 132/147 [14:10<02:02,  8.14s/it]Training with batch size 20:  90%|█████████ | 133/147 [14:13<01:33,  6.69s/it]Training with batch size 20:  91%|█████████ | 134/147 [14:17<01:13,  5.68s/it]Training with batch size 20:  92%|█████████▏| 135/147 [14:20<00:59,  4.98s/it]Training with batch size 20:  93%|█████████▎| 136/147 [14:23<00:49,  4.48s/it]Training with batch size 20:  93%|█████████▎| 137/147 [14:27<00:41,  4.13s/it]Training with batch size 20:  93%|█████████▎| 137/147 [14:29<01:03,  6.34s/it]
+Traceback (most recent call last):
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 58, in <module>
+    main(config)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 35, in main
+    trainer.train()
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 78, in train
+    result = self._train_epoch(epoch)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 351, in _train_epoch
+    pred_output, pred_classified  = self.model(images_select, mode='sample')
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1740, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/models/AllOrgan.py", line 42, in forward
+    output, _ = self.encoder_decoder(fc_feats, att_feats, mode='sample')
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1740, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Caption.py", line 18, in forward
+    return getattr(self, '_' + mode)(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Generator.py", line 128, in _sample
+    logprobs = logprobs * unfinished.unsqueeze(1).float()
+KeyboardInterrupt
+Building prefix dict from the default dictionary ...
+Loading model from cache /var/folders/mp/cnbfl9016b5fvvkftzz4xqfh0000gn/T/jieba.cache
+Loading model cost 0.196 seconds.
+Prefix dict has been built successfully.
+Result_prefix: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug
+accumulation_steps: 5
+amsgrad: True
+ann_path: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all.json
+attn_pth: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Attn_pth
+batch_size: 20
+bidirectional: True
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 512
+d_model: 512
+d_vf: 2048
+data_prefix: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+embedding_vector: 300
+eos_idx: 0
+epochs: 50
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+nlayers: 1
+num_heads: 8
+num_layers: 3
+num_workers: 0
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Records
+result: debug
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+rnn_type: LSTM
+sample_n: 1
+save_dir: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Models
+save_period: 1
+seed: 9233
+step_size: 28
+technical_word: /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /Users/chenzhiwei/Downloads/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+tokenizer size: 1153
+first init the imagenet pretrained!
+vocabulary size: 1153
+Training with batch size 20:   0%|          | 0/147 [00:00<?, ?it/s]Training with batch size 20:   1%|          | 1/147 [00:08<21:35,  8.87s/it]Training with batch size 20:   1%|▏         | 2/147 [00:12<13:46,  5.70s/it]Training with batch size 20:   2%|▏         | 3/147 [00:15<11:19,  4.72s/it]Training with batch size 20:   3%|▎         | 4/147 [00:19<10:02,  4.21s/it]Training with batch size 20:   3%|▎         | 5/147 [00:23<10:10,  4.30s/it]Training with batch size 20:   4%|▍         | 6/147 [00:27<09:19,  3.97s/it]Training with batch size 20:   5%|▍         | 7/147 [00:30<08:45,  3.75s/it]Training with batch size 20:   5%|▌         | 8/147 [00:33<08:28,  3.66s/it]Training with batch size 20:   6%|▌         | 9/147 [00:37<08:15,  3.59s/it]Training with batch size 20:   7%|▋         | 10/147 [00:40<08:10,  3.58s/it]Training with batch size 20:   7%|▋         | 11/147 [00:44<07:59,  3.52s/it]Training with batch size 20:   8%|▊         | 12/147 [00:47<07:49,  3.48s/it]Training with batch size 20:   9%|▉         | 13/147 [00:51<07:43,  3.46s/it]Training with batch size 20:  10%|▉         | 14/147 [00:54<07:35,  3.42s/it]Training with batch size 20:  10%|█         | 15/147 [00:57<07:37,  3.46s/it]Training with batch size 20:  11%|█         | 16/147 [01:01<07:27,  3.42s/it]Training with batch size 20:  12%|█▏        | 17/147 [01:04<07:23,  3.41s/it]Training with batch size 20:  12%|█▏        | 18/147 [01:08<07:24,  3.44s/it]Training with batch size 20:  13%|█▎        | 19/147 [01:11<07:17,  3.42s/it]Training with batch size 20:  14%|█▎        | 20/147 [01:15<07:18,  3.45s/it]Training with batch size 20:  14%|█▍        | 21/147 [01:18<07:08,  3.40s/it]Training with batch size 20:  15%|█▍        | 22/147 [01:21<07:03,  3.39s/it]Training with batch size 20:  16%|█▌        | 23/147 [01:25<06:58,  3.37s/it]Training with batch size 20:  16%|█▋        | 24/147 [01:28<06:56,  3.39s/it]Training with batch size 20:  17%|█▋        | 25/147 [01:32<07:00,  3.45s/it]Training with batch size 20:  18%|█▊        | 26/147 [01:35<06:55,  3.43s/it]Training with batch size 20:  18%|█▊        | 27/147 [01:38<06:53,  3.45s/it]Training with batch size 20:  19%|█▉        | 28/147 [01:42<06:50,  3.45s/it]Training with batch size 20:  20%|█▉        | 29/147 [01:45<06:41,  3.40s/it]Training with batch size 20:  20%|██        | 30/147 [01:49<06:45,  3.47s/it]Training with batch size 20:  21%|██        | 31/147 [01:52<06:36,  3.42s/it]Training with batch size 20:  22%|██▏       | 32/147 [01:56<06:33,  3.43s/it]Training with batch size 20:  22%|██▏       | 33/147 [01:59<06:29,  3.41s/it]Training with batch size 20:  23%|██▎       | 34/147 [02:02<06:28,  3.43s/it]Training with batch size 20:  24%|██▍       | 35/147 [02:06<06:30,  3.48s/it]Training with batch size 20:  24%|██▍       | 36/147 [02:09<06:22,  3.44s/it]Training with batch size 20:  25%|██▌       | 37/147 [02:13<06:13,  3.40s/it]Training with batch size 20:  26%|██▌       | 38/147 [02:16<06:08,  3.38s/it]Training with batch size 20:  27%|██▋       | 39/147 [02:19<06:06,  3.39s/it]Training with batch size 20:  27%|██▋       | 40/147 [02:23<06:10,  3.46s/it]Training with batch size 20:  28%|██▊       | 41/147 [02:26<06:05,  3.45s/it]Training with batch size 20:  29%|██▊       | 42/147 [02:30<06:00,  3.43s/it]Training with batch size 20:  29%|██▉       | 43/147 [02:33<06:00,  3.47s/it]Training with batch size 20:  30%|██▉       | 44/147 [02:37<05:56,  3.46s/it]Training with batch size 20:  31%|███       | 45/147 [02:40<05:54,  3.47s/it]Training with batch size 20:  31%|███▏      | 46/147 [02:44<05:49,  3.46s/it]Training with batch size 20:  32%|███▏      | 47/147 [02:47<05:40,  3.41s/it]Training with batch size 20:  33%|███▎      | 48/147 [02:50<05:37,  3.41s/it]Training with batch size 20:  33%|███▎      | 49/147 [02:54<05:33,  3.40s/it]Training with batch size 20:  34%|███▍      | 50/147 [02:58<05:36,  3.47s/it]Training with batch size 20:  35%|███▍      | 51/147 [03:01<05:31,  3.45s/it]Training with batch size 20:  35%|███▌      | 52/147 [03:04<05:26,  3.44s/it]Training with batch size 20:  36%|███▌      | 53/147 [03:11<06:45,  4.31s/it]Training with batch size 20:  37%|███▋      | 54/147 [03:31<14:20,  9.25s/it]Training with batch size 20:  37%|███▋      | 55/147 [03:35<11:45,  7.66s/it]Training with batch size 20:  38%|███▊      | 56/147 [03:39<09:38,  6.36s/it]Training with batch size 20:  39%|███▉      | 57/147 [03:46<09:48,  6.54s/it]Training with batch size 20:  39%|███▉      | 58/147 [03:56<11:17,  7.62s/it]Training with batch size 20:  40%|████      | 59/147 [04:06<12:05,  8.24s/it]Training with batch size 20:  41%|████      | 60/147 [04:14<12:11,  8.41s/it]Training with batch size 20:  41%|████▏     | 61/147 [04:22<11:34,  8.08s/it]Training with batch size 20:  42%|████▏     | 62/147 [04:29<11:16,  7.96s/it]Training with batch size 20:  43%|████▎     | 63/147 [04:36<10:25,  7.45s/it]Training with batch size 20:  44%|████▎     | 64/147 [04:42<10:03,  7.27s/it]Training with batch size 20:  44%|████▍     | 65/147 [04:49<09:48,  7.17s/it]Training with batch size 20:  45%|████▍     | 66/147 [04:55<09:13,  6.83s/it]Training with batch size 20:  46%|████▌     | 67/147 [05:01<08:48,  6.61s/it]Training with batch size 20:  46%|████▋     | 68/147 [05:07<08:13,  6.25s/it]Training with batch size 20:  47%|████▋     | 69/147 [05:12<07:44,  5.96s/it]Training with batch size 20:  48%|████▊     | 70/147 [05:18<07:26,  5.80s/it]Training with batch size 20:  48%|████▊     | 71/147 [05:22<06:53,  5.44s/it]Training with batch size 20:  49%|████▉     | 72/147 [05:27<06:33,  5.24s/it]Training with batch size 20:  50%|████▉     | 73/147 [05:31<06:11,  5.02s/it]Training with batch size 20:  50%|█████     | 74/147 [05:36<05:56,  4.89s/it]Training with batch size 20:  51%|█████     | 75/147 [05:40<05:39,  4.71s/it]Training with batch size 20:  52%|█████▏    | 76/147 [05:44<05:07,  4.32s/it]Training with batch size 20:  52%|█████▏    | 77/147 [05:47<04:43,  4.05s/it]Training with batch size 20:  53%|█████▎    | 78/147 [05:51<04:26,  3.86s/it]Training with batch size 20:  54%|█████▎    | 79/147 [05:54<04:13,  3.72s/it]Training with batch size 20:  54%|█████▍    | 80/147 [05:58<04:05,  3.66s/it]Training with batch size 20:  55%|█████▌    | 81/147 [06:01<03:53,  3.54s/it]Training with batch size 20:  56%|█████▌    | 82/147 [06:04<03:44,  3.46s/it]Training with batch size 20:  56%|█████▋    | 83/147 [06:07<03:39,  3.43s/it]Training with batch size 20:  57%|█████▋    | 84/147 [06:11<03:33,  3.38s/it]Training with batch size 20:  58%|█████▊    | 85/147 [06:14<03:34,  3.46s/it]Training with batch size 20:  59%|█████▊    | 86/147 [06:18<03:27,  3.40s/it]Training with batch size 20:  59%|█████▉    | 87/147 [06:21<03:25,  3.42s/it]Training with batch size 20:  60%|█████▉    | 88/147 [06:25<03:22,  3.43s/it]Training with batch size 20:  61%|██████    | 89/147 [06:28<03:19,  3.44s/it]Training with batch size 20:  61%|██████    | 90/147 [06:32<03:21,  3.53s/it]Training with batch size 20:  62%|██████▏   | 91/147 [06:35<03:17,  3.52s/it]Training with batch size 20:  63%|██████▎   | 92/147 [06:39<03:13,  3.51s/it]Training with batch size 20:  63%|██████▎   | 93/147 [06:42<03:09,  3.51s/it]Training with batch size 20:  64%|██████▍   | 94/147 [06:46<03:06,  3.52s/it]Training with batch size 20:  65%|██████▍   | 95/147 [06:50<03:07,  3.61s/it]Training with batch size 20:  65%|██████▌   | 96/147 [06:53<03:02,  3.57s/it]Training with batch size 20:  66%|██████▌   | 97/147 [06:57<03:00,  3.60s/it]Training with batch size 20:  67%|██████▋   | 98/147 [07:00<02:57,  3.62s/it]Training with batch size 20:  67%|██████▋   | 99/147 [07:04<02:55,  3.65s/it]Training with batch size 20:  68%|██████▊   | 100/147 [07:08<02:56,  3.76s/it]Training with batch size 20:  69%|██████▊   | 101/147 [07:12<02:51,  3.73s/it]Training with batch size 20:  69%|██████▉   | 102/147 [07:16<02:49,  3.77s/it]Training with batch size 20:  70%|███████   | 103/147 [07:20<02:47,  3.80s/it]Training with batch size 20:  71%|███████   | 104/147 [07:23<02:45,  3.84s/it]Training with batch size 20:  71%|███████▏  | 105/147 [07:28<02:46,  3.96s/it]Training with batch size 20:  72%|███████▏  | 106/147 [07:32<02:41,  3.93s/it]Training with batch size 20:  73%|███████▎  | 107/147 [07:36<02:38,  3.96s/it]Training with batch size 20:  73%|███████▎  | 108/147 [07:40<02:36,  4.00s/it]Training with batch size 20:  74%|███████▍  | 109/147 [07:44<02:35,  4.09s/it]Training with batch size 20:  75%|███████▍  | 110/147 [07:49<02:37,  4.26s/it]Training with batch size 20:  76%|███████▌  | 111/147 [07:53<02:32,  4.23s/it]Training with batch size 20:  76%|███████▌  | 112/147 [07:57<02:30,  4.31s/it]Training with batch size 20:  77%|███████▋  | 113/147 [08:02<02:27,  4.33s/it]Training with batch size 20:  78%|███████▊  | 114/147 [08:06<02:24,  4.37s/it]Training with batch size 20:  78%|███████▊  | 115/147 [08:11<02:23,  4.48s/it]Training with batch size 20:  79%|███████▉  | 116/147 [08:15<02:16,  4.41s/it]Training with batch size 20:  80%|███████▉  | 117/147 [08:20<02:12,  4.41s/it]Training with batch size 20:  80%|████████  | 118/147 [08:24<02:07,  4.40s/it]Training with batch size 20:  81%|████████  | 119/147 [08:28<02:02,  4.37s/it]Training with batch size 20:  82%|████████▏ | 120/147 [08:33<01:58,  4.39s/it]Training with batch size 20:  82%|████████▏ | 121/147 [08:37<01:51,  4.27s/it]Training with batch size 20:  83%|████████▎ | 122/147 [08:41<01:46,  4.24s/it]Training with batch size 20:  84%|████████▎ | 123/147 [08:45<01:40,  4.21s/it]Training with batch size 20:  84%|████████▍ | 124/147 [08:49<01:35,  4.17s/it]Training with batch size 20:  85%|████████▌ | 125/147 [08:53<01:32,  4.22s/it]Training with batch size 20:  86%|████████▌ | 126/147 [08:57<01:26,  4.13s/it]Training with batch size 20:  86%|████████▋ | 127/147 [09:01<01:22,  4.11s/it]Training with batch size 20:  87%|████████▋ | 128/147 [09:05<01:17,  4.08s/it]Training with batch size 20:  88%|████████▊ | 129/147 [09:09<01:13,  4.06s/it]Training with batch size 20:  88%|████████▊ | 130/147 [09:14<01:09,  4.09s/it]Training with batch size 20:  89%|████████▉ | 131/147 [09:17<01:04,  4.03s/it]Training with batch size 20:  90%|████████▉ | 132/147 [09:21<00:59,  3.99s/it]Training with batch size 20:  90%|█████████ | 133/147 [09:25<00:55,  3.98s/it]Training with batch size 20:  91%|█████████ | 134/147 [09:29<00:51,  3.93s/it]Training with batch size 20:  92%|█████████▏| 135/147 [09:33<00:47,  3.98s/it]Training with batch size 20:  93%|█████████▎| 136/147 [09:37<00:42,  3.88s/it]Training with batch size 20:  93%|█████████▎| 137/147 [09:41<00:38,  3.85s/it]Training with batch size 20:  94%|█████████▍| 138/147 [09:44<00:34,  3.82s/it]Training with batch size 20:  95%|█████████▍| 139/147 [09:48<00:30,  3.82s/it]Training with batch size 20:  95%|█████████▌| 140/147 [09:52<00:27,  3.90s/it]Training with batch size 20:  96%|█████████▌| 141/147 [09:56<00:23,  3.84s/it]Training with batch size 20:  97%|█████████▋| 142/147 [10:00<00:19,  3.82s/it]Training with batch size 20:  97%|█████████▋| 143/147 [10:03<00:15,  3.80s/it]Training with batch size 20:  98%|█████████▊| 144/147 [10:07<00:11,  3.79s/it]Training with batch size 20:  99%|█████████▊| 145/147 [10:11<00:07,  3.83s/it]Training with batch size 20:  99%|█████████▉| 146/147 [10:15<00:03,  3.74s/it]Training with batch size 20: 100%|██████████| 147/147 [10:28<00:00,  6.60s/it]Training with batch size 20: 100%|██████████| 147/147 [10:28<00:00,  4.28s/it]
+train loss 3.178114722560372
+Validation with batch size 20:   0%|          | 0/21 [00:00<?, ?it/s]Validation with batch size 20:   5%|▍         | 1/21 [00:02<00:55,  2.75s/it]Validation with batch size 20:  10%|▉         | 2/21 [00:05<00:51,  2.72s/it]Validation with batch size 20:  14%|█▍        | 3/21 [00:08<00:48,  2.70s/it]Validation with batch size 20:  19%|█▉        | 4/21 [00:10<00:46,  2.72s/it]Validation with batch size 20:  24%|██▍       | 5/21 [00:13<00:43,  2.70s/it]Validation with batch size 20:  29%|██▊       | 6/21 [00:16<00:40,  2.69s/it]Validation with batch size 20:  33%|███▎      | 7/21 [00:18<00:38,  2.72s/it]Validation with batch size 20:  38%|███▊      | 8/21 [00:21<00:35,  2.71s/it]Validation with batch size 20:  43%|████▎     | 9/21 [00:24<00:32,  2.70s/it]Validation with batch size 20:  48%|████▊     | 10/21 [00:27<00:30,  2.73s/it]Validation with batch size 20:  52%|█████▏    | 11/21 [00:29<00:27,  2.72s/it]Validation with batch size 20:  57%|█████▋    | 12/21 [00:32<00:24,  2.72s/it]Validation with batch size 20:  62%|██████▏   | 13/21 [00:35<00:21,  2.74s/it]Validation with batch size 20:  67%|██████▋   | 14/21 [00:38<00:19,  2.74s/it]Validation with batch size 20:  71%|███████▏  | 15/21 [00:40<00:16,  2.74s/it]Validation with batch size 20:  76%|███████▌  | 16/21 [00:43<00:13,  2.75s/it]Validation with batch size 20:  81%|████████  | 17/21 [00:46<00:11,  2.77s/it]Validation with batch size 20:  86%|████████▌ | 18/21 [00:49<00:08,  2.76s/it]Validation with batch size 20:  90%|█████████ | 19/21 [00:51<00:05,  2.77s/it]Validation with batch size 20:  95%|█████████▌| 20/21 [00:54<00:02,  2.75s/it]Validation with batch size 20: 100%|██████████| 21/21 [00:57<00:00,  2.73s/it]Validation with batch size 20: 100%|██████████| 21/21 [00:57<00:00,  2.73s/it]
+{'testlen': 13462, 'reflen': 28293, 'guess': [13462, 13042, 12622, 12202], 'correct': [6347, 3569, 2688, 2087]}
+ratio: 0.47580673664862416
+Test with batch size 20:   0%|          | 0/42 [00:00<?, ?it/s]Test with batch size 20:   2%|▏         | 1/42 [00:02<01:53,  2.77s/it]Test with batch size 20:   5%|▍         | 2/42 [00:05<01:52,  2.82s/it]Test with batch size 20:   7%|▋         | 3/42 [00:08<01:49,  2.81s/it]Test with batch size 20:  10%|▉         | 4/42 [00:11<01:45,  2.79s/it]Test with batch size 20:  12%|█▏        | 5/42 [00:13<01:43,  2.79s/it]Test with batch size 20:  14%|█▍        | 6/42 [00:16<01:40,  2.79s/it]Test with batch size 20:  17%|█▋        | 7/42 [00:19<01:37,  2.78s/it]Test with batch size 20:  19%|█▉        | 8/42 [00:22<01:34,  2.78s/it]Test with batch size 20:  21%|██▏       | 9/42 [00:25<01:32,  2.79s/it]Test with batch size 20:  24%|██▍       | 10/42 [00:27<01:28,  2.78s/it]Test with batch size 20:  26%|██▌       | 11/42 [00:30<01:26,  2.79s/it]Test with batch size 20:  29%|██▊       | 12/42 [00:33<01:24,  2.81s/it]Test with batch size 20:  31%|███       | 13/42 [00:36<01:20,  2.79s/it]Test with batch size 20:  33%|███▎      | 14/42 [00:39<01:17,  2.78s/it]Test with batch size 20:  36%|███▌      | 15/42 [00:41<01:14,  2.76s/it]Test with batch size 20:  38%|███▊      | 16/42 [00:44<01:10,  2.73s/it]Test with batch size 20:  40%|████      | 17/42 [00:47<01:08,  2.74s/it]Test with batch size 20:  43%|████▎     | 18/42 [00:50<01:06,  2.77s/it]Test with batch size 20:  45%|████▌     | 19/42 [00:52<01:03,  2.75s/it]Test with batch size 20:  48%|████▊     | 20/42 [00:55<01:00,  2.76s/it]Test with batch size 20:  50%|█████     | 21/42 [00:58<00:58,  2.76s/it]Test with batch size 20:  52%|█████▏    | 22/42 [01:00<00:55,  2.75s/it]Test with batch size 20:  55%|█████▍    | 23/42 [01:03<00:52,  2.77s/it]Test with batch size 20:  57%|█████▋    | 24/42 [01:06<00:50,  2.78s/it]Test with batch size 20:  60%|█████▉    | 25/42 [01:09<00:47,  2.78s/it]Test with batch size 20:  62%|██████▏   | 26/42 [01:12<00:44,  2.77s/it]Test with batch size 20:  64%|██████▍   | 27/42 [01:14<00:41,  2.77s/it]Test with batch size 20:  67%|██████▋   | 28/42 [01:17<00:39,  2.79s/it]Test with batch size 20:  69%|██████▉   | 29/42 [01:20<00:36,  2.80s/it]Test with batch size 20:  71%|███████▏  | 30/42 [01:23<00:33,  2.76s/it]Test with batch size 20:  74%|███████▍  | 31/42 [01:25<00:30,  2.75s/it]Test with batch size 20:  76%|███████▌  | 32/42 [01:28<00:27,  2.76s/it]Test with batch size 20:  79%|███████▊  | 33/42 [01:31<00:24,  2.74s/it]Test with batch size 20:  81%|████████  | 34/42 [01:34<00:21,  2.75s/it]Test with batch size 20:  83%|████████▎ | 35/42 [01:36<00:19,  2.75s/it]Test with batch size 20:  86%|████████▌ | 36/42 [01:39<00:16,  2.75s/it]Test with batch size 20:  88%|████████▊ | 37/42 [01:42<00:13,  2.76s/it]Test with batch size 20:  90%|█████████ | 38/42 [01:45<00:11,  2.77s/it]Test with batch size 20:  93%|█████████▎| 39/42 [01:48<00:08,  2.76s/it]Test with batch size 20:  95%|█████████▌| 40/42 [01:50<00:05,  2.78s/it]Test with batch size 20:  98%|█████████▊| 41/42 [01:53<00:02,  2.78s/it]Test with batch size 20: 100%|██████████| 42/42 [02:08<00:00,  6.52s/it]Test with batch size 20: 100%|██████████| 42/42 [02:08<00:00,  3.07s/it]
+{'testlen': 27018, 'reflen': 55822, 'guess': [27018, 26181, 25344, 24507], 'correct': [12571, 7095, 5331, 4128]}
+ratio: 0.4840027229407674
+	epoch          : 1
+	train_loss     : 3.178114722560372
+	val_BLEU_1     : 0.1566749037059389
+	val_BLEU_2     : 0.11936339326748106
+	val_BLEU_3     : 0.10027545515249302
+	val_BLEU_4     : 0.08700695496177513
+	val_METEOR     : 0.12258681198642851
+	val_ROUGE_L    : 0.24784945059661218
+	val_CIDER      : 0.03882371279345471
+	test_BLEU_1    : 0.1602188132256937
+	test_BLEU_2    : 0.1222751714747039
+	test_BLEU_3    : 0.10269177369018272
+	test_BLEU_4    : 0.08902527955522177
+	test_METEOR    : 0.1235479629834462
+	test_ROUGE_L   : 0.2454745819624194
+	test_CIDER     : 0.03734203806202629
+Saving checkpoint: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Models/all_epoch_1_checkpoint.pth ...
+Saving current best: all_best.pth ...
+Training with batch size 20:   0%|          | 0/147 [00:00<?, ?it/s]Training with batch size 20:   1%|          | 1/147 [00:03<08:29,  3.49s/it]Training with batch size 20:   1%|▏         | 2/147 [00:07<09:00,  3.72s/it]Training with batch size 20:   2%|▏         | 3/147 [00:10<08:45,  3.65s/it]Training with batch size 20:   3%|▎         | 4/147 [00:14<08:27,  3.55s/it]Training with batch size 20:   3%|▎         | 5/147 [00:17<08:25,  3.56s/it]Training with batch size 20:   4%|▍         | 6/147 [00:21<08:12,  3.49s/it]Training with batch size 20:   5%|▍         | 7/147 [00:24<08:12,  3.52s/it]Training with batch size 20:   5%|▌         | 8/147 [00:28<08:03,  3.48s/it]Training with batch size 20:   6%|▌         | 9/147 [00:31<07:59,  3.47s/it]Training with batch size 20:   7%|▋         | 10/147 [00:35<08:06,  3.55s/it]Training with batch size 20:   7%|▋         | 11/147 [00:38<07:56,  3.51s/it]Training with batch size 20:   8%|▊         | 12/147 [00:42<07:53,  3.51s/it]Training with batch size 20:   9%|▉         | 13/147 [00:45<07:47,  3.49s/it]Training with batch size 20:  10%|▉         | 14/147 [00:49<07:42,  3.48s/it]Training with batch size 20:  10%|█         | 15/147 [00:52<07:47,  3.54s/it]Training with batch size 20:  11%|█         | 16/147 [00:56<07:34,  3.47s/it]Training with batch size 20:  12%|█▏        | 17/147 [00:59<07:27,  3.44s/it]Training with batch size 20:  12%|█▏        | 18/147 [01:02<07:21,  3.42s/it]Training with batch size 20:  13%|█▎        | 19/147 [01:06<07:20,  3.44s/it]Training with batch size 20:  14%|█▎        | 20/147 [01:10<07:21,  3.48s/it]Training with batch size 20:  14%|█▍        | 21/147 [01:13<07:13,  3.44s/it]Training with batch size 20:  15%|█▍        | 22/147 [01:16<07:11,  3.45s/it]Training with batch size 20:  16%|█▌        | 23/147 [01:20<07:07,  3.45s/it]Training with batch size 20:  16%|█▋        | 24/147 [01:23<07:03,  3.44s/it]Training with batch size 20:  17%|█▋        | 25/147 [01:27<07:09,  3.52s/it]Training with batch size 20:  18%|█▊        | 26/147 [01:30<07:02,  3.49s/it]Training with batch size 20:  18%|█▊        | 27/147 [01:34<07:10,  3.59s/it]Training with batch size 20:  19%|█▉        | 28/147 [01:38<07:06,  3.58s/it]Training with batch size 20:  20%|█▉        | 29/147 [01:41<06:59,  3.55s/it]Training with batch size 20:  20%|██        | 30/147 [01:45<06:59,  3.58s/it]Training with batch size 20:  21%|██        | 31/147 [01:48<06:47,  3.52s/it]Training with batch size 20:  22%|██▏       | 32/147 [01:52<06:39,  3.48s/it]Training with batch size 20:  22%|██▏       | 33/147 [01:55<06:33,  3.45s/it]Training with batch size 20:  23%|██▎       | 34/147 [01:58<06:29,  3.45s/it]Training with batch size 20:  24%|██▍       | 35/147 [02:02<06:31,  3.50s/it]Training with batch size 20:  24%|██▍       | 36/147 [02:05<06:24,  3.46s/it]Training with batch size 20:  25%|██▌       | 37/147 [02:09<06:20,  3.46s/it]Training with batch size 20:  26%|██▌       | 38/147 [02:12<06:16,  3.46s/it]Training with batch size 20:  27%|██▋       | 39/147 [02:16<06:12,  3.45s/it]Training with batch size 20:  27%|██▋       | 40/147 [02:20<06:19,  3.55s/it]Training with batch size 20:  28%|██▊       | 41/147 [02:23<06:12,  3.51s/it]Training with batch size 20:  29%|██▊       | 42/147 [02:27<06:09,  3.52s/it]Training with batch size 20:  29%|██▉       | 43/147 [02:30<06:04,  3.50s/it]Training with batch size 20:  30%|██▉       | 44/147 [02:34<06:02,  3.52s/it]Training with batch size 20:  31%|███       | 45/147 [02:37<05:59,  3.53s/it]Training with batch size 20:  31%|███▏      | 46/147 [02:40<05:50,  3.47s/it]Training with batch size 20:  32%|███▏      | 47/147 [02:44<05:52,  3.52s/it]Training with batch size 20:  33%|███▎      | 48/147 [02:48<05:46,  3.50s/it]Training with batch size 20:  33%|███▎      | 49/147 [02:51<05:39,  3.47s/it]Training with batch size 20:  34%|███▍      | 50/147 [02:55<05:41,  3.52s/it]Training with batch size 20:  35%|███▍      | 51/147 [02:58<05:31,  3.45s/it]Training with batch size 20:  35%|███▌      | 52/147 [03:01<05:26,  3.44s/it]Training with batch size 20:  36%|███▌      | 53/147 [03:05<05:23,  3.45s/it]Training with batch size 20:  37%|███▋      | 54/147 [03:08<05:19,  3.44s/it]Training with batch size 20:  37%|███▋      | 55/147 [03:12<05:22,  3.50s/it]Training with batch size 20:  38%|███▊      | 56/147 [03:15<05:15,  3.47s/it]Training with batch size 20:  39%|███▉      | 57/147 [03:19<05:12,  3.48s/it]Training with batch size 20:  39%|███▉      | 58/147 [03:22<05:08,  3.46s/it]Training with batch size 20:  40%|████      | 59/147 [03:26<05:04,  3.46s/it]Training with batch size 20:  41%|████      | 60/147 [03:29<05:06,  3.52s/it]Training with batch size 20:  41%|████▏     | 61/147 [03:33<04:56,  3.45s/it]Training with batch size 20:  42%|████▏     | 62/147 [03:36<04:52,  3.44s/it]Training with batch size 20:  43%|████▎     | 63/147 [03:39<04:47,  3.42s/it]Training with batch size 20:  44%|████▎     | 64/147 [03:43<04:41,  3.39s/it]Training with batch size 20:  44%|████▍     | 65/147 [03:46<04:42,  3.45s/it]Training with batch size 20:  45%|████▍     | 66/147 [03:50<04:37,  3.43s/it]Training with batch size 20:  46%|████▌     | 67/147 [03:53<04:33,  3.42s/it]Training with batch size 20:  46%|████▋     | 68/147 [03:56<04:28,  3.40s/it]Training with batch size 20:  47%|████▋     | 69/147 [04:00<04:25,  3.41s/it]Training with batch size 20:  48%|████▊     | 70/147 [04:03<04:27,  3.47s/it]Training with batch size 20:  48%|████▊     | 71/147 [04:07<04:21,  3.44s/it]Training with batch size 20:  49%|████▉     | 72/147 [04:10<04:18,  3.45s/it]Training with batch size 20:  50%|████▉     | 73/147 [04:14<04:16,  3.47s/it]Training with batch size 20:  50%|█████     | 74/147 [04:17<04:12,  3.46s/it]Training with batch size 20:  51%|█████     | 75/147 [04:21<04:11,  3.49s/it]Training with batch size 20:  52%|█████▏    | 76/147 [04:24<04:06,  3.47s/it]Training with batch size 20:  52%|█████▏    | 77/147 [04:28<04:00,  3.44s/it]Training with batch size 20:  53%|█████▎    | 78/147 [04:31<03:55,  3.42s/it]Training with batch size 20:  54%|█████▎    | 79/147 [04:34<03:53,  3.44s/it]Training with batch size 20:  54%|█████▍    | 80/147 [04:38<03:53,  3.48s/it]Training with batch size 20:  55%|█████▌    | 81/147 [04:41<03:47,  3.45s/it]Training with batch size 20:  56%|█████▌    | 82/147 [21:58<5:39:36, 313.48s/it]Training with batch size 20:  56%|█████▋    | 83/147 [22:02<3:55:07, 220.43s/it]Training with batch size 20:  57%|█████▋    | 84/147 [24:09<3:22:14, 192.61s/it]Training with batch size 20:  58%|█████▊    | 85/147 [24:14<2:20:44, 136.21s/it]Training with batch size 20:  59%|█████▊    | 86/147 [24:17<1:38:00, 96.41s/it] Training with batch size 20:  59%|█████▉    | 87/147 [24:21<1:08:37, 68.62s/it]Training with batch size 20:  60%|█████▉    | 88/147 [24:25<48:18, 49.13s/it]  Training with batch size 20:  61%|██████    | 89/147 [24:28<34:15, 35.44s/it]Training with batch size 20:  61%|██████    | 90/147 [24:32<24:36, 25.90s/it]Training with batch size 20:  62%|██████▏   | 91/147 [24:35<17:51, 19.13s/it]Training with batch size 20:  63%|██████▎   | 92/147 [24:39<13:13, 14.43s/it]Training with batch size 20:  63%|██████▎   | 93/147 [24:42<10:00, 11.12s/it]Training with batch size 20:  64%|██████▍   | 94/147 [24:46<07:47,  8.82s/it]Training with batch size 20:  65%|██████▍   | 95/147 [24:49<06:19,  7.31s/it]Training with batch size 20:  65%|██████▌   | 96/147 [24:53<05:13,  6.14s/it]Training with batch size 20:  66%|██████▌   | 97/147 [24:56<04:26,  5.34s/it]Training with batch size 20:  67%|██████▋   | 98/147 [25:00<04:02,  4.95s/it]Training with batch size 20:  67%|██████▋   | 99/147 [25:04<03:38,  4.54s/it]Training with batch size 20:  68%|██████▊   | 100/147 [25:08<03:22,  4.31s/it]Training with batch size 20:  69%|██████▊   | 101/147 [25:11<03:07,  4.09s/it]Training with batch size 20:  69%|██████▉   | 102/147 [25:15<02:55,  3.90s/it]Training with batch size 20:  70%|███████   | 103/147 [25:18<02:45,  3.77s/it]Training with batch size 20:  71%|███████   | 104/147 [25:22<02:37,  3.67s/it]Training with batch size 20:  71%|███████▏  | 105/147 [25:25<02:32,  3.64s/it]Training with batch size 20:  72%|███████▏  | 106/147 [25:29<02:25,  3.55s/it]Training with batch size 20:  73%|███████▎  | 107/147 [25:32<02:21,  3.53s/it]Training with batch size 20:  73%|███████▎  | 108/147 [25:35<02:15,  3.49s/it]Training with batch size 20:  74%|███████▍  | 109/147 [25:39<02:11,  3.47s/it]Training with batch size 20:  75%|███████▍  | 110/147 [25:43<02:11,  3.55s/it]Training with batch size 20:  76%|███████▌  | 111/147 [25:46<02:06,  3.50s/it]Training with batch size 20:  76%|███████▌  | 112/147 [25:49<02:02,  3.49s/it]Training with batch size 20:  77%|███████▋  | 113/147 [25:53<01:58,  3.49s/it]Training with batch size 20:  78%|███████▊  | 114/147 [25:56<01:54,  3.47s/it]Training with batch size 20:  78%|███████▊  | 115/147 [26:00<01:54,  3.59s/it]Training with batch size 20:  79%|███████▉  | 116/147 [26:04<01:49,  3.54s/it]Training with batch size 20:  80%|███████▉  | 117/147 [26:07<01:44,  3.47s/it]Training with batch size 20:  80%|████████  | 118/147 [26:10<01:39,  3.45s/it]Training with batch size 20:  81%|████████  | 119/147 [26:14<01:35,  3.42s/it]Training with batch size 20:  82%|████████▏ | 120/147 [26:17<01:33,  3.47s/it]Training with batch size 20:  82%|████████▏ | 121/147 [26:21<01:29,  3.43s/it]Training with batch size 20:  83%|████████▎ | 122/147 [26:24<01:25,  3.42s/it]Training with batch size 20:  84%|████████▎ | 123/147 [26:28<01:23,  3.48s/it]Training with batch size 20:  84%|████████▍ | 124/147 [26:31<01:19,  3.47s/it]Training with batch size 20:  85%|████████▌ | 125/147 [26:35<01:17,  3.53s/it]Training with batch size 20:  86%|████████▌ | 126/147 [26:38<01:13,  3.49s/it]Training with batch size 20:  86%|████████▋ | 127/147 [26:42<01:09,  3.47s/it]Training with batch size 20:  87%|████████▋ | 128/147 [26:45<01:06,  3.49s/it]Training with batch size 20:  88%|████████▊ | 129/147 [26:49<01:02,  3.49s/it]Training with batch size 20:  88%|████████▊ | 130/147 [26:52<00:59,  3.53s/it]Training with batch size 20:  89%|████████▉ | 131/147 [26:56<00:55,  3.46s/it]Training with batch size 20:  90%|████████▉ | 132/147 [26:59<00:51,  3.45s/it]Training with batch size 20:  90%|█████████ | 133/147 [27:02<00:48,  3.44s/it]Training with batch size 20:  91%|█████████ | 134/147 [27:06<00:44,  3.44s/it]Training with batch size 20:  92%|█████████▏| 135/147 [27:09<00:42,  3.50s/it]Training with batch size 20:  93%|█████████▎| 136/147 [27:13<00:38,  3.47s/it]Training with batch size 20:  93%|█████████▎| 137/147 [27:16<00:34,  3.46s/it]Training with batch size 20:  94%|█████████▍| 138/147 [27:20<00:31,  3.47s/it]Training with batch size 20:  95%|█████████▍| 139/147 [35:19<19:29, 146.23s/it]Training with batch size 20:  95%|█████████▌| 140/147 [35:23<12:05, 103.66s/it]Training with batch size 20:  96%|█████████▌| 141/147 [35:27<07:21, 73.60s/it] Training with batch size 20:  97%|█████████▋| 142/147 [35:30<04:22, 52.56s/it]Training with batch size 20:  97%|█████████▋| 143/147 [35:34<02:31, 37.80s/it]Training with batch size 20:  98%|█████████▊| 144/147 [35:37<01:22, 27.48s/it]Training with batch size 20:  99%|█████████▊| 145/147 [35:41<00:40, 20.28s/it]Training with batch size 20:  99%|█████████▉| 146/147 [35:44<00:15, 15.18s/it]Training with batch size 20: 100%|██████████| 147/147 [35:47<00:00, 11.51s/it]Training with batch size 20: 100%|██████████| 147/147 [35:47<00:00, 14.61s/it]
+train loss 1.3524830824738028
+Validation with batch size 20:   0%|          | 0/21 [00:00<?, ?it/s]Validation with batch size 20:   5%|▍         | 1/21 [00:02<00:54,  2.75s/it]Validation with batch size 20:  10%|▉         | 2/21 [00:05<00:53,  2.81s/it]Validation with batch size 20:  14%|█▍        | 3/21 [00:08<00:50,  2.82s/it]Validation with batch size 20:  19%|█▉        | 4/21 [00:11<00:47,  2.80s/it]Validation with batch size 20:  24%|██▍       | 5/21 [00:13<00:44,  2.77s/it]Validation with batch size 20:  29%|██▊       | 6/21 [00:16<00:42,  2.80s/it]Validation with batch size 20:  33%|███▎      | 7/21 [00:19<00:39,  2.83s/it]Validation with batch size 20:  38%|███▊      | 8/21 [00:22<00:36,  2.82s/it]Validation with batch size 20:  43%|████▎     | 9/21 [00:25<00:33,  2.81s/it]Validation with batch size 20:  48%|████▊     | 10/21 [00:28<00:30,  2.82s/it]Validation with batch size 20:  52%|█████▏    | 11/21 [00:30<00:28,  2.80s/it]Validation with batch size 20:  57%|█████▋    | 12/21 [00:33<00:25,  2.79s/it]Validation with batch size 20:  62%|██████▏   | 13/21 [00:36<00:22,  2.79s/it]Validation with batch size 20:  67%|██████▋   | 14/21 [00:39<00:19,  2.76s/it]Validation with batch size 20:  71%|███████▏  | 15/21 [00:41<00:16,  2.77s/it]Validation with batch size 20:  76%|███████▌  | 16/21 [00:44<00:13,  2.79s/it]Validation with batch size 20:  81%|████████  | 17/21 [00:47<00:11,  2.76s/it]Validation with batch size 20:  86%|████████▌ | 18/21 [00:50<00:08,  2.77s/it]Validation with batch size 20:  90%|█████████ | 19/21 [00:53<00:05,  2.80s/it]Validation with batch size 20:  95%|█████████▌| 20/21 [00:55<00:02,  2.79s/it]Validation with batch size 20: 100%|██████████| 21/21 [00:58<00:00,  2.79s/it]Validation with batch size 20: 100%|██████████| 21/21 [00:58<00:00,  2.79s/it]
+{'testlen': 19461, 'reflen': 28657, 'guess': [19461, 19041, 18621, 18201], 'correct': [16410, 13788, 12117, 10851]}
+ratio: 0.6791010922287511
+Test with batch size 20:   0%|          | 0/42 [00:00<?, ?it/s]Test with batch size 20:   2%|▏         | 1/42 [00:02<01:58,  2.90s/it]Test with batch size 20:   5%|▍         | 2/42 [00:05<01:56,  2.90s/it]Test with batch size 20:   7%|▋         | 3/42 [00:08<01:52,  2.88s/it]Test with batch size 20:  10%|▉         | 4/42 [00:11<01:49,  2.87s/it]Test with batch size 20:  12%|█▏        | 5/42 [00:14<01:46,  2.88s/it]Test with batch size 20:  14%|█▍        | 6/42 [00:17<01:41,  2.83s/it]Test with batch size 20:  17%|█▋        | 7/42 [00:19<01:38,  2.81s/it]Test with batch size 20:  19%|█▉        | 8/42 [00:22<01:35,  2.80s/it]Test with batch size 20:  21%|██▏       | 9/42 [00:25<01:31,  2.77s/it]Test with batch size 20:  24%|██▍       | 10/42 [00:28<01:28,  2.77s/it]Test with batch size 20:  26%|██▌       | 11/42 [00:30<01:26,  2.78s/it]Test with batch size 20:  29%|██▊       | 12/42 [00:33<01:22,  2.76s/it]Test with batch size 20:  31%|███       | 13/42 [00:36<01:19,  2.74s/it]Test with batch size 20:  33%|███▎      | 14/42 [00:39<01:17,  2.78s/it]Test with batch size 20:  36%|███▌      | 15/42 [00:42<01:14,  2.77s/it]Test with batch size 20:  38%|███▊      | 16/42 [00:44<01:12,  2.78s/it]Test with batch size 20:  40%|████      | 17/42 [00:47<01:09,  2.78s/it]Test with batch size 20:  43%|████▎     | 18/42 [00:50<01:07,  2.81s/it]Test with batch size 20:  45%|████▌     | 19/42 [00:53<01:04,  2.81s/it]Test with batch size 20:  48%|████▊     | 20/42 [00:56<01:01,  2.80s/it]Test with batch size 20:  50%|█████     | 21/42 [00:58<00:59,  2.81s/it]Test with batch size 20:  52%|█████▏    | 22/42 [01:01<00:55,  2.78s/it]Test with batch size 20:  55%|█████▍    | 23/42 [01:04<00:52,  2.75s/it]Test with batch size 20:  57%|█████▋    | 24/42 [01:07<00:49,  2.77s/it]Test with batch size 20:  60%|█████▉    | 25/42 [01:09<00:46,  2.76s/it]Test with batch size 20:  62%|██████▏   | 26/42 [01:12<00:43,  2.75s/it]Test with batch size 20:  64%|██████▍   | 27/42 [01:15<00:43,  2.88s/it]Test with batch size 20:  67%|██████▋   | 28/42 [01:18<00:40,  2.87s/it]Test with batch size 20:  69%|██████▉   | 29/42 [01:21<00:37,  2.87s/it]Test with batch size 20:  71%|███████▏  | 30/42 [01:24<00:34,  2.89s/it]Test with batch size 20:  74%|███████▍  | 31/42 [01:27<00:31,  2.88s/it]Test with batch size 20:  76%|███████▌  | 32/42 [01:30<00:28,  2.87s/it]Test with batch size 20:  79%|███████▊  | 33/42 [01:33<00:26,  2.89s/it]Test with batch size 20:  81%|████████  | 34/42 [01:35<00:23,  2.88s/it]Test with batch size 20:  83%|████████▎ | 35/42 [01:38<00:19,  2.85s/it]Test with batch size 20:  86%|████████▌ | 36/42 [01:41<00:17,  2.90s/it]Test with batch size 20:  88%|████████▊ | 37/42 [01:44<00:14,  2.90s/it]Test with batch size 20:  90%|█████████ | 38/42 [01:47<00:11,  2.94s/it]Test with batch size 20:  93%|█████████▎| 39/42 [01:50<00:08,  2.89s/it]Test with batch size 20:  95%|█████████▌| 40/42 [01:53<00:05,  2.92s/it]Test with batch size 20:  98%|█████████▊| 41/42 [01:56<00:02,  2.86s/it]Test with batch size 20: 100%|██████████| 42/42 [01:58<00:00,  2.86s/it]Test with batch size 20: 100%|██████████| 42/42 [01:58<00:00,  2.83s/it]
+{'testlen': 38660, 'reflen': 57642, 'guess': [38660, 37823, 36986, 36149], 'correct': [32828, 27694, 24403, 21875]}
+ratio: 0.6706915096630813
+	epoch          : 2
+	train_loss     : 1.3524830824738028
+	val_BLEU_1     : 0.525683283081199
+	val_BLEU_2     : 0.4871449594007907
+	val_BLEU_3     : 0.4583139651892767
+	val_BLEU_4     : 0.4349217542065972
+	val_METEOR     : 0.34802816704554834
+	val_ROUGE_L    : 0.6163759533072966
+	val_CIDER      : 2.047742582971829
+	test_BLEU_1    : 0.5196903570282593
+	test_BLEU_2    : 0.4825787881672528
+	test_BLEU_3    : 0.45474520842317107
+	test_BLEU_4    : 0.4319958383892844
+	test_METEOR    : 0.347846998688034
+	test_ROUGE_L   : 0.6243135992217838
+	test_CIDER     : 2.180007255922001
+Saving checkpoint: /Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/Result/debug/Models/all_epoch_2_checkpoint.pth ...
+Saving current best: all_best.pth ...
+Training with batch size 20:   0%|          | 0/147 [00:00<?, ?it/s]Training with batch size 20:   1%|          | 1/147 [00:03<09:34,  3.93s/it]Training with batch size 20:   1%|▏         | 2/147 [00:07<08:46,  3.63s/it]Training with batch size 20:   2%|▏         | 3/147 [00:10<08:27,  3.53s/it]Training with batch size 20:   3%|▎         | 4/147 [00:14<08:23,  3.52s/it]Training with batch size 20:   3%|▎         | 5/147 [00:17<08:30,  3.60s/it]Training with batch size 20:   4%|▍         | 6/147 [00:21<08:18,  3.54s/it]Training with batch size 20:   5%|▍         | 7/147 [00:24<08:11,  3.51s/it]Training with batch size 20:   5%|▌         | 8/147 [00:28<08:07,  3.51s/it]Training with batch size 20:   6%|▌         | 9/147 [00:31<08:01,  3.49s/it]Training with batch size 20:   7%|▋         | 10/147 [00:35<08:07,  3.56s/it]Training with batch size 20:   7%|▋         | 11/147 [00:38<07:57,  3.51s/it]Training with batch size 20:   8%|▊         | 12/147 [00:42<07:50,  3.49s/it]Training with batch size 20:   9%|▉         | 13/147 [00:45<07:42,  3.45s/it]Training with batch size 20:  10%|▉         | 14/147 [00:49<07:37,  3.44s/it]Training with batch size 20:  10%|█         | 15/147 [00:52<07:41,  3.49s/it]Training with batch size 20:  11%|█         | 16/147 [00:56<07:34,  3.47s/it]Training with batch size 20:  12%|█▏        | 17/147 [00:59<07:30,  3.46s/it]Training with batch size 20:  12%|█▏        | 18/147 [01:03<07:25,  3.45s/it]Training with batch size 20:  13%|█▎        | 19/147 [01:06<07:20,  3.44s/it]Training with batch size 20:  14%|█▎        | 20/147 [01:10<07:27,  3.53s/it]Training with batch size 20:  14%|█▍        | 21/147 [01:13<07:18,  3.48s/it]Training with batch size 20:  15%|█▍        | 22/147 [01:17<07:16,  3.49s/it]Training with batch size 20:  16%|█▌        | 23/147 [01:20<07:11,  3.48s/it]Training with batch size 20:  16%|█▋        | 24/147 [01:24<07:08,  3.49s/it]Training with batch size 20:  17%|█▋        | 25/147 [01:27<07:11,  3.54s/it]Training with batch size 20:  18%|█▊        | 26/147 [01:31<07:00,  3.48s/it]Training with batch size 20:  18%|█▊        | 27/147 [01:34<06:56,  3.47s/it]Training with batch size 20:  19%|█▉        | 28/147 [01:37<06:49,  3.44s/it]Training with batch size 20:  20%|█▉        | 29/147 [01:41<06:43,  3.42s/it]Training with batch size 20:  20%|██        | 30/147 [01:44<06:48,  3.49s/it]Training with batch size 20:  21%|██        | 31/147 [01:48<06:41,  3.46s/it]Training with batch size 20:  22%|██▏       | 32/147 [01:51<06:37,  3.46s/it]Training with batch size 20:  22%|██▏       | 33/147 [01:55<06:35,  3.47s/it]Training with batch size 20:  23%|██▎       | 34/147 [01:58<06:29,  3.45s/it]Training with batch size 20:  24%|██▍       | 35/147 [02:02<06:32,  3.50s/it]Training with batch size 20:  24%|██▍       | 36/147 [02:05<06:32,  3.54s/it]Training with batch size 20:  25%|██▌       | 37/147 [02:09<06:40,  3.64s/it]Training with batch size 20:  26%|██▌       | 38/147 [02:13<06:41,  3.69s/it]Training with batch size 20:  27%|██▋       | 39/147 [02:17<06:41,  3.72s/it]Training with batch size 20:  27%|██▋       | 40/147 [02:21<06:42,  3.77s/it]Training with batch size 20:  28%|██▊       | 41/147 [02:24<06:28,  3.66s/it]Training with batch size 20:  29%|██▊       | 42/147 [02:28<06:36,  3.78s/it]Training with batch size 20:  29%|██▉       | 43/147 [02:32<06:25,  3.71s/it]Training with batch size 20:  30%|██▉       | 44/147 [02:35<06:12,  3.62s/it]Training with batch size 20:  31%|███       | 45/147 [02:39<06:13,  3.66s/it]Training with batch size 20:  31%|███▏      | 46/147 [02:42<06:07,  3.64s/it]Training with batch size 20:  32%|███▏      | 47/147 [02:46<05:58,  3.59s/it]Training with batch size 20:  33%|███▎      | 48/147 [02:50<05:58,  3.63s/it]Training with batch size 20:  33%|███▎      | 49/147 [02:53<05:58,  3.66s/it]Training with batch size 20:  34%|███▍      | 50/147 [02:57<06:03,  3.74s/it]Training with batch size 20:  35%|███▍      | 51/147 [03:01<05:52,  3.67s/it]Training with batch size 20:  35%|███▌      | 52/147 [03:05<05:49,  3.68s/it]Training with batch size 20:  36%|███▌      | 53/147 [03:08<05:40,  3.62s/it]Training with batch size 20:  37%|███▋      | 54/147 [03:12<05:36,  3.62s/it]Training with batch size 20:  37%|███▋      | 55/147 [03:15<05:36,  3.65s/it]Training with batch size 20:  38%|███▊      | 56/147 [03:19<05:28,  3.61s/it]Training with batch size 20:  39%|███▉      | 57/147 [03:23<05:33,  3.71s/it]Training with batch size 20:  39%|███▉      | 58/147 [03:26<05:26,  3.66s/it]Training with batch size 20:  40%|████      | 59/147 [03:30<05:22,  3.67s/it]Training with batch size 20:  41%|████      | 60/147 [03:34<05:19,  3.67s/it]Training with batch size 20:  41%|████▏     | 61/147 [03:37<05:12,  3.63s/it]Training with batch size 20:  42%|████▏     | 62/147 [03:41<05:03,  3.58s/it]Training with batch size 20:  43%|████▎     | 63/147 [03:44<04:56,  3.53s/it]Training with batch size 20:  44%|████▎     | 64/147 [03:48<04:53,  3.54s/it]Training with batch size 20:  44%|████▍     | 65/147 [03:51<04:55,  3.60s/it]Training with batch size 20:  45%|████▍     | 66/147 [03:55<04:47,  3.55s/it]Training with batch size 20:  46%|████▌     | 67/147 [03:58<04:41,  3.52s/it]Training with batch size 20:  46%|████▋     | 68/147 [04:02<04:38,  3.52s/it]Training with batch size 20:  47%|████▋     | 69/147 [04:05<04:31,  3.49s/it]Training with batch size 20:  48%|████▊     | 70/147 [04:09<04:30,  3.52s/it]Training with batch size 20:  48%|████▊     | 71/147 [04:12<04:24,  3.48s/it]Training with batch size 20:  49%|████▉     | 72/147 [04:16<04:19,  3.46s/it]Training with batch size 20:  50%|████▉     | 73/147 [04:19<04:14,  3.44s/it]Training with batch size 20:  50%|█████     | 74/147 [04:23<04:11,  3.45s/it]Training with batch size 20:  51%|█████     | 75/147 [04:26<04:12,  3.51s/it]Training with batch size 20:  52%|█████▏    | 76/147 [04:30<04:06,  3.47s/it]Training with batch size 20:  52%|█████▏    | 77/147 [04:33<04:04,  3.50s/it]Training with batch size 20:  53%|█████▎    | 78/147 [04:37<03:59,  3.47s/it]Training with batch size 20:  53%|█████▎    | 78/147 [04:38<04:06,  3.58s/it]
+Traceback (most recent call last):
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 58, in <module>
+    main(config)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 35, in main
+    trainer.train()
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 78, in train
+    result = self._train_epoch(epoch)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 351, in _train_epoch
+    pred_output, pred_classified  = self.model(images_select, mode='sample')
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1740, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/models/AllOrgan.py", line 42, in forward
+    output, _ = self.encoder_decoder(fc_feats, att_feats, mode='sample')
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1740, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/chenzhiwei/miniconda3/envs/urg/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Caption.py", line 18, in forward
+    return getattr(self, '_' + mode)(*args, **kwargs)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Generator.py", line 113, in _sample
+    logprobs, state, attn_map = self.get_logprobs_state(it, p_fc_feats, p_att_feats, pp_att_feats, p_att_masks, state,
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Generator.py", line 83, in get_logprobs_state
+    output, state = self.core(xt, p_att_feats, state, att_masks)
+  File "/Users/chenzhiwei/Downloads/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/encoder_decoder.py", line 257, in core
+    ys = torch.cat([state[0][0], it.unsqueeze(1)], dim=1)
+KeyboardInterrupt

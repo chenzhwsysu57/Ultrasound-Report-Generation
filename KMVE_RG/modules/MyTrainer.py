@@ -59,7 +59,7 @@ class BaseTrainer(object):
         self.best_recorder = {'val': {self.mnt_metric: self.mnt_best},
 
                               'test': {self.mnt_metric_test: self.mnt_best}}
-        self.sentence_bert = SentenceTransformer('distiluse-base-multilingual-cased')
+        self.sentence_bert = SentenceTransformer('distiluse-base-multilingual-cased',local_files_only=True)
 
         self.lambada1 = torch.nn.Parameter(torch.tensor(0.7), requires_grad=True)
         self.lambada2 = torch.nn.Parameter(torch.tensor(0.3), requires_grad=True)
@@ -349,8 +349,8 @@ class TFTrainer(BaseTrainer):
             # print(images_select.shape)
             with torch.no_grad():
                 pred_output, pred_classified  = self.model(images_select, mode='sample')
-                predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
-                ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
+            predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
+            ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
 
             self.model.train()
             pred_embeddings = self.sentence_bert.encode(predcit_reports, convert_to_tensor=True)
@@ -360,8 +360,8 @@ class TFTrainer(BaseTrainer):
             similarity_scores = F.cosine_similarity(pred_embeddings, gt_embeddings)
             mean_similarity_score = torch.mean(similarity_scores)
             similarity_loss = 1 - mean_similarity_score
-            # CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
-            CS_L = similarity_loss
+            CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
+            # CS_L = similarity_loss
             output,pred_classified  = self.model(images, reports_ids, mode='train')
             organ_l = self.criterionBCE(pred_classified, mesh_label)
             ORGAN_L = organ_l
