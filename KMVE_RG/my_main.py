@@ -43,6 +43,7 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int, default=5, help='batch size to train. defaults to 5')
     parser.add_argument('--debug', type=int, default=-1, help='the index end of your dataloader, defaults to -1 means load all, 0:-1')
     parser.add_argument('--accumulation_steps', type=int, default=1, help='accumulate step for grad.')
+    parser.add_argument('--decoderonly', type=str, default='False', help='use decoder only model.')
     cmd_line_args = parser.parse_args()
     
     from config_urg import Config

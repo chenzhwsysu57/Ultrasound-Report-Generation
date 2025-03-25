@@ -190,6 +190,20 @@ class PositionalEncoding(nn.Module):
         x = x + self.pe[:, :x.size(1)]
         return self.dropout(x)
 
+class IdentityEncoderLayer(nn.Module):
+    def __init__(self, d_model, self_attn, feed_forward, dropout):
+        super(IdentityEncoderLayer, self).__init__()
+
+    def forward(self, x, mask):
+        return x
+    
+class IdentityEncoder(nn.Module):
+    def __init__(self, layer, N):
+        super(IdentityEncoder, self).__init__()
+
+    def forward(self, x, mask):
+        return x
+    
 
 class EncoderDecoder(GenModel):
 
@@ -212,6 +226,73 @@ class EncoderDecoder(GenModel):
 
     def __init__(self, args, tokenizer):
         super(EncoderDecoder, self).__init__(args, tokenizer)
+        self.args = args
+        self.num_layers = args.num_layers
+        self.d_model = args.d_model
+        self.d_ff = args.d_ff
+        self.num_heads = args.num_heads
+        self.dropout = args.dropout
+        tgt_vocab = self.vocab_size + 1
+        self.model = self.make_model(tgt_vocab)
+        self.logit = nn.Linear(args.d_model, tgt_vocab)
+
+    def _prepare_feature(self, fc_feats, att_feats, att_masks):
+        att_feats, seq, att_masks, seq_mask = self._prepare_feature_forward(att_feats, att_masks)
+        memory = self.model.encode(att_feats, att_masks)
+        return fc_feats[..., :1], att_feats[..., :1], memory, att_masks
+
+    def _prepare_feature_forward(self, att_feats, att_masks=None, seq=None):
+        att_feats, att_masks = self.clip_att(att_feats, att_masks)
+        att_feats = pack_wrapper(self.att_embed, att_feats, att_masks)
+
+        if att_masks is None:
+            att_masks = att_feats.new_ones(att_feats.shape[:2], dtype=torch.long)
+        att_masks = att_masks.unsqueeze(-2)
+        if seq is not None:
+            seq = seq[:, :-1]
+            seq_mask = (seq.data > 0)
+            seq_mask[:, 0] += True
+            seq_mask = seq_mask.unsqueeze(-2)
+            seq_mask = seq_mask & subsequent_mask(seq.size(-1)).to(seq_mask)
+        else:
+            seq_mask = None
+        return att_feats, seq, att_masks, seq_mask
+
+    def _forward(self, fc_feats, att_feats, seq, att_masks=None):
+        att_feats, seq, att_masks, seq_mask = self._prepare_feature_forward(att_feats, att_masks, seq)
+        out = self.model(att_feats, seq, att_masks, seq_mask)
+        outputs = F.log_softmax(self.logit(out), dim=-1)
+        return outputs, out
+
+    def core(self, it, memory, state, mask):
+        if len(state) == 0:
+            ys = it.unsqueeze(1)
+        else:
+            ys = torch.cat([state[0][0], it.unsqueeze(1)], dim=1)
+        out = self.model.decode(memory, mask, ys, subsequent_mask(ys.size(1)).to(memory.device))
+        return out[:, -1], [ys.unsqueeze(0)]
+
+class DecoderOnly(GenModel):
+
+    def make_model(self, tgt_vocab):
+        c = copy.deepcopy
+        attn = MultiHeadedAttention(self.num_heads, self.d_model)
+        ff = PositionwiseFeedForward(self.d_model, self.d_ff, self.dropout)
+        position = PositionalEncoding(self.d_model, self.dropout)
+        model = Transformer(
+            IdentityEncoder(IdentityEncoderLayer(self.d_model, c(attn), c(ff), self.dropout), self.num_layers),
+            Decoder(
+                DecoderLayer(self.d_model, c(attn), c(attn), c(ff), self.dropout),
+                self.num_layers),
+            lambda x: x,
+            nn.Sequential(Embeddings(self.d_model, tgt_vocab), c(position)))
+        for p in model.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+        return model
+
+    def __init__(self, args, tokenizer):
+        super(DecoderOnly, self).__init__(args, tokenizer)
         self.args = args
         self.num_layers = args.num_layers
         self.d_model = args.d_model

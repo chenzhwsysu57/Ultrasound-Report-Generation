@@ -33,29 +33,34 @@ wandb.init(
 def read_all_metrics(log_file):
     return pd.read_csv(log_file)
 
-if os.path.exists(log_file_path):
-    df = read_all_metrics(log_file_path)
-    for _, row in df.iterrows():
-        wandb.log({
-            "train_loss": row['train_loss'],
-            "val_BLEU_1": row['val_BLEU_1'],
-            "val_BLEU_2": row['val_BLEU_2'],
-            "val_BLEU_3": row['val_BLEU_3'],
-            "val_BLEU_4": row['val_BLEU_4'],
-            "val_METEOR": row['val_METEOR'],
-            "val_ROUGE_L": row['val_ROUGE_L'],
-            "val_CIDER": row['val_CIDER'],
-            "test_BLEU_1": row['test_BLEU_1'],
-            "test_BLEU_2": row['test_BLEU_2'],
-            "test_BLEU_3": row['test_BLEU_3'],
-            "test_BLEU_4": row['test_BLEU_4'],
-            "test_METEOR": row['test_METEOR'],
-            "test_ROUGE_L": row['test_ROUGE_L'],
-            "test_CIDER": row['test_CIDER'],
-            # "epoch": row['epoch'],  # Record the current epoch
-        })
-else:
-    raise FileNotFoundError(f"{log_file_path}")
+while True:
+    if os.path.exists(log_file_path):
+        df = read_all_metrics(log_file_path)
+        for _, row in df.iterrows():
+            wandb.log({
+                "train_loss": row['train_loss'],
+                "val_BLEU_1": row['val_BLEU_1'],
+                "val_BLEU_2": row['val_BLEU_2'],
+                "val_BLEU_3": row['val_BLEU_3'],
+                "val_BLEU_4": row['val_BLEU_4'],
+                "val_METEOR": row['val_METEOR'],
+                "val_ROUGE_L": row['val_ROUGE_L'],
+                "val_CIDER": row['val_CIDER'],
+                "test_BLEU_1": row['test_BLEU_1'],
+                "test_BLEU_2": row['test_BLEU_2'],
+                "test_BLEU_3": row['test_BLEU_3'],
+                "test_BLEU_4": row['test_BLEU_4'],
+                "test_METEOR": row['test_METEOR'],
+                "test_ROUGE_L": row['test_ROUGE_L'],
+                "test_CIDER": row['test_CIDER'],
+                # "epoch": row['epoch'],  # Record the current epoch
+            })
+        break
+    else:
+        # raise FileNotFoundError(f"{log_file_path}")
+        print("waiting log file")
+        time.sleep(5)
+    
 print("Previous log done.")
 # Keep track of the last logged epoch
 last_epoch = df['epoch'].max() if not df.empty else 0
@@ -88,6 +93,7 @@ while True:
                     "test_ROUGE_L": row['test_ROUGE_L'],
                     "test_CIDER": row['test_CIDER'],
                 })
-
+    else:
+        print(f"File {log_file_path} does not exist. Waiting.")
     # Sleep for a while before checking again
     time.sleep(10)
