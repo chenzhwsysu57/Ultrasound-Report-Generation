@@ -189,7 +189,7 @@ class MixtureOfExpertsFFN(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x, routes):
-        routing_weights = F.softmax(routes)
+        routing_weights = routes
         """
         x: 输入特征，形状 [batch_size, seq_len, d_model]
         routing_weights: 路由权重，形状 [batch_size, 3]
