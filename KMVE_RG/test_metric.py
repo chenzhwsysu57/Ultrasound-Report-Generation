@@ -22,8 +22,8 @@ def main(cmd_args, config_args):
     # 仅仅适用all.json数据集
     device = 'cuda' if torch.cuda.is_available() else 'mps' if torch.mps.is_available() else 'cpu'
     print(f'Using {device} device')
-    model_module = importlib.import_module(f'KMVE_RG.models.{cmd_args.model}', )
-    model_class = getattr(model_module, cmd_args.model)
+    model_module = importlib.import_module(f'KMVE_RG.models.{cmd_args["model"]}', )
+    model_class = getattr(model_module, cmd_args["model"])
 
     tokenizer = Tokenizer(config_args)
     test_dataloader = MyDataLoader(config_args, tokenizer, split='test', shuffle=True)
@@ -32,9 +32,9 @@ def main(cmd_args, config_args):
     model.eval()
 
     # load weight
-    checkpoint = torch.load(cmd_args.ckpt)
+    checkpoint = torch.load(cmd_args["ckpt"])
     model.load_state_dict(checkpoint['state_dict'])
-    print(f"checkpoint loaded from {cmd_args.ckpt}")
+    print(f"checkpoint loaded from {cmd_args['ckpt']}")
     metric_ftns = compute_scores
     with torch.no_grad():
         test_gts, test_res, test_organ = [], [], []
@@ -56,10 +56,10 @@ def main(cmd_args, config_args):
             organ_res = {i: [re] for i, (re, org) in enumerate(zip(test_res, test_organ)) if org == organ}
             organ_metrics[organ] = metric_ftns(organ_gts, organ_res)
             
-        print(f"\033[1;35mtest result on {cmd_args.comment}\033[0m")
+        print(f"\033[1;35mtest result on {cmd_args['comment']}\033[0m")
         for organ in set(test_organ):
             # 输出结果，只保留三位小数
-            result = f"{organ},{cmd_args.method},{organ_metrics[organ]['BLEU_1']:.3f},{organ_metrics[organ]['BLEU_2']:.3f},{organ_metrics[organ]['BLEU_3']:.3f},{organ_metrics[organ]['BLEU_4']:.3f},{organ_metrics[organ]['METEOR']:.3f},{organ_metrics[organ]['ROUGE_L']:.3f},0,0,0,0"
+            result = f"{organ},{cmd_args['method']},{organ_metrics[organ]['BLEU_1']:.3f},{organ_metrics[organ]['BLEU_2']:.3f},{organ_metrics[organ]['BLEU_3']:.3f},{organ_metrics[organ]['BLEU_4']:.3f},{organ_metrics[organ]['METEOR']:.3f},{organ_metrics[organ]['ROUGE_L']:.3f},0,0,0,0"
             
             print(result)
 
