@@ -7,6 +7,7 @@ import sys
 sys.path.append('../')
 from modules.visual_extractor import VisualExtractor
 from modules.moe_decoder import MoEDecoderOnly
+from modules.moe_decoder_rmsn import MoEDecoderOnly as MoEDecoderOnly_rmsn
 
 import torch.nn.functional as F
 
@@ -17,8 +18,12 @@ class MoEModel(nn.Module):
         self.tokenizer = tokenizer
         self.visual_extractor = VisualExtractor(args)
         
-        self.encoder_decoder = MoEDecoderOnly(args, tokenizer)
-        
+        if self.args.decoderonly=="True" and self.args.norm == 'rmsnorm':
+            print("using moe with layern.")
+            self.encoder_decoder = MoEDecoderOnly(args, tokenizer)
+        else:
+            print("using moe with rmsn.")
+            self.encoder_decoder = MoEDecoderOnly_rmsn(args, tokenizer)
         print('vocabulary size:', self.tokenizer.get_vocab_size())
         self.classfication_layers = classfication()
         self.routes = None
