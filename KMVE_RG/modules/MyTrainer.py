@@ -439,3 +439,110 @@ class TFTrainer(BaseTrainer):
         self.lr_scheduler.step()
 
         return log
+
+class MoETrainer(BaseTrainer):
+    def __init__(self, model, criterion, metric_ftns, optimizer, args, lr_scheduler, train_dataloader, val_dataloader, test_dataloader):
+        super(MoETrainer, self).__init__(model, criterion, metric_ftns, optimizer, args)
+        self.lr_scheduler = lr_scheduler
+        self.train_dataloader = train_dataloader
+        self.val_dataloader = val_dataloader
+        self.test_dataloader = test_dataloader
+
+        self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf 交叉熵的loss
+        self.lambada2 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # MoE 的 loss
+        
+    
+
+    def logloss(self, y_true, y_pred, eps=1e-15):
+        y_true = np.array(y_true)
+        y_pred = np.array(y_pred)
+        assert (len(y_true) and len(y_true) == len(y_pred))
+
+        p = np.clip(y_pred, eps, 1 - eps)
+        loss = np.sum(- y_true * np.log(p) - (1 - y_true) * np.log(1 - p))
+
+        return loss / len(y_true)
+
+    def _train_epoch(self, epoch):
+        train_loss = 0
+        self.model.train()
+        accumulation_steps = self.args.accumulation_steps  # 从配置中获取累积步数
+        for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(
+                enumerate(self.train_dataloader), 
+                total=len(self.train_dataloader),
+                desc=f'Training with batch size {self.args.batch_size}'
+        ):
+            images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(self.device), reports_masks.to(self.device), mesh_label.to(self.device)
+
+
+            output, pred_classified = self.model(images, reports_ids, mode='train')
+            organ_l = self.criterionBCE(pred_classified, mesh_label)
+            ORGAN_L = organ_l
+            RG_L = self.criterion(output, reports_ids, reports_masks)
+            batch_loss = self.lambada1 * RG_L + self.lambada2 * ORGAN_L
+            batch_loss /= accumulation_steps
+            train_loss = train_loss + self.lambada1.item() * RG_L.item() + self.lambada2.item() * ORGAN_L.item() 
+
+            batch_loss.backward()
+            
+            if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(self.train_dataloader):
+                torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
+                self.optimizer.step()  # 更新参数
+                self.optimizer.zero_grad()  # 清空梯度
+
+            
+        log = {'train_loss': train_loss / len(self.train_dataloader)}
+        print(f"""train loss {log['train_loss']}""")
+
+        self.model.eval()
+        with torch.no_grad():
+            val_gts, val_res = [], []
+            for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(enumerate(
+                    self.val_dataloader), total=len(self.val_dataloader),desc=f'Validation with batch size {self.args.batch_size}'):
+                images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(
+                    self.device), reports_masks.to(self.device), mesh_label.to(self.device)
+                output,_  = self.model(images, mode='sample')
+
+                reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
+                ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
+                val_res.extend(reports)
+                val_gts.extend(ground_truths)
+            val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)}, {i: [re] for i, re in enumerate(val_res)})
+
+            log.update(**{'val_' + k: v for k, v in val_met.items()})
+
+        results = []
+        self.model.eval()
+        with torch.no_grad():
+            test_gts, test_res = [], []
+            for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in \
+                tqdm(enumerate(self.test_dataloader), total=len(self.test_dataloader),desc=f'Test with batch size {self.args.batch_size}'):
+                
+                images, reports_ids, reports_masks, mesh_label = \
+                    images.to(self.device), reports_ids.to(self.device), reports_masks.to(self.device), mesh_label.to(self.device)
+                
+                output,_ = self.model(images, mode='sample')
+
+                reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
+                ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
+                
+                # 不计算 metrics，改为patch函数计算
+                results.extend(
+                    [{'ID': ID, 'gt': gt, 'pred': pred, } for ID, gt, pred in zip(images_id, ground_truths, reports)]
+                )
+
+                test_res.extend(reports)
+                test_gts.extend(ground_truths)
+            test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)}, {i: [re] for i, re in enumerate(test_res)})
+
+            # TODO save test metrics
+            # print(results)
+            
+            file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_result_{epoch}.csv'
+            df = pd.DataFrame(results)
+            df.to_csv(file_name, index=False, encoding='utf-8-sig')
+            log.update(**{'test_' + k: v for k, v in test_met.items()})
+
+        self.lr_scheduler.step()
+
+        return log

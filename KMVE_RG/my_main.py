@@ -44,7 +44,8 @@ if __name__ == '__main__':
     parser.add_argument('--debug', type=int, default=-1, help='the index end of your dataloader, defaults to -1 means load all, 0:-1')
     parser.add_argument('--accumulation_steps', type=int, default=1, help='accumulate step for grad.')
     parser.add_argument('--decoderonly', type=str, default='False', help='use decoder only model.')
-    
+    parser.add_argument('--norm', type=str, default='layernorm', help='can also use rmsnorm')
+    parser.add_argument('--model', type=str, default='none', help='only moe works for moe model. others would be decided by dataset_name')
     known_args, unknown_args = parser.parse_known_args()
     extra_args = {}
     i = 0
@@ -65,10 +66,16 @@ if __name__ == '__main__':
     cmd_line_args = {**vars(known_args), **extra_args}
 
     from config_urg import Config
-    if cmd_line_args['dataset_name'] == "all":
+    if cmd_line_args['model'] == 'moe':
+        print("using moe.")
+        from KMVE_RG.models.MoEModel import MoEModel as MyModel
+        from modules.MyTrainer import MoETrainer as Trainer
+    elif cmd_line_args['dataset_name'] == "all":
+        print("using allorgan")
         from KMVE_RG.models.AllOrgan import AllOrgan as MyModel
         from modules.MyTrainer import TFTrainer as Trainer 
     else:
+        print("using sgf")
         from KMVE_RG.models.SGF import SGF as MyModel
         from modules.MyTrainer import Trainer
     config = Config(**cmd_line_args)
