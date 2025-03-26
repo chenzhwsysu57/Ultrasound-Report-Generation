@@ -18,12 +18,12 @@ class MoEModel(nn.Module):
         self.tokenizer = tokenizer
         self.visual_extractor = VisualExtractor(args)
         
-        if self.args.decoderonly=="True" and self.args.norm == 'rmsnorm':
-            print("using moe with layern.")
-            self.encoder_decoder = MoEDecoderOnly(args, tokenizer)
-        else:
+        if self.args.norm == 'rmsnorm':
             print("using moe with rmsn.")
             self.encoder_decoder = MoEDecoderOnly_rmsn(args, tokenizer)
+        else:
+            print("using moe with layern.")
+            self.encoder_decoder = MoEDecoderOnly(args, tokenizer)
         print('vocabulary size:', self.tokenizer.get_vocab_size())
         self.classfication_layers = classfication()
         self.routes = None
