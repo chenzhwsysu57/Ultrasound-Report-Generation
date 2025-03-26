@@ -74,10 +74,27 @@ if __name__ == '__main__':
     parser.add_argument('--method', type=str, help='Method')
     parser.add_argument('--comment', type=str, help='Comment')
     parser.add_argument('--decoderonly', type=str, default='False', help='use decoder only model.')
-    cmd_args = parser.parse_args()
+
+    known_args, unknown_args = parser.parse_known_args()
+    extra_args = {}
+    i = 0
+    while i < len(unknown_args):
+        arg = unknown_args[i]
+        if arg.startswith("--"):
+            key = arg.lstrip("-")
+            if "=" in key:  # 处理 --key=value 形式
+                k, v = key.split("=", 1)
+                extra_args[k] = v
+            else:  # 处理 --key value 形式
+                if i + 1 < len(unknown_args) and not unknown_args[i + 1].startswith("--"):
+                    extra_args[key] = unknown_args[i + 1]  # 取下一个值
+                    i += 1  # 跳过 value
+                else:
+                    extra_args[key] = True  # 只有 key，没有 value
+        i += 1
+    cmd_line_args = {**vars(known_args), **extra_args}
+    # cmd_args = parser.parse_args()
     
 
-    config_args = Config(
-        **vars(cmd_args)
-                    )
-    main(cmd_args,config_args)
+    config_args = Config(**cmd_line_args)
+    main(cmd_line_args,config_args)
