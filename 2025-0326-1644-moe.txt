@@ -1,0 +1,98 @@
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.298 seconds.
+Prefix dict has been built successfully.
+using moe.
+Result_prefix: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-layernorm
+accumulation_steps: 1
+amsgrad: True
+ann_path: /home/chenzhw/ultrasound_report_gen/USData/all.json
+attn_pth: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-layernorm/Attn_pth
+batch_size: 64
+bidirectional: True
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 512
+d_model: 512
+d_vf: 2048
+data_prefix: /home/chenzhw/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoderonly: True
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+embedding_vector: 300
+eos_idx: 0
+epochs: 100
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /home/chenzhw/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+model: moe
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+nlayers: 1
+norm: layernorm
+num_heads: 8
+num_layers: 3
+num_workers: 0
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-layernorm/Records
+result: moe-layernorm
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+rnn_type: LSTM
+sample_n: 1
+save_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-layernorm/Models
+save_period: 1
+seed: 9233
+step_size: 60
+technical_word: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+tokenizer size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 84, in <module>
+    main(config)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 26, in main
+    model = MyModel(args, tokenizer)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/models/MoEModel.py", line 18, in __init__
+    self.visual_extractor = VisualExtractor(args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/visual_extractor.py", line 13, in __init__
+    model = getattr(models, self.visual_extractor)(pretrained=self.pretrained)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py", line 142, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py", line 228, in inner_wrapper
+    return builder(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/resnet.py", line 795, in resnet101
+    return _resnet(Bottleneck, [3, 4, 23, 3], weights, progress, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/resnet.py", line 298, in _resnet
+    model = ResNet(block, layers, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/resnet.py", line 210, in __init__
+    nn.init.kaiming_normal_(m.weight, mode="fan_out", nonlinearity="relu")
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/init.py", line 571, in kaiming_normal_
+    return tensor.normal_(0, std, generator=generator)
+KeyboardInterrupt

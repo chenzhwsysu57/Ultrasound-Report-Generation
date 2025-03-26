@@ -110,7 +110,7 @@ class Config(CN):
 
         # Learning rate scheduler
         self.lr_scheduler = 'StepLR'
-        self.step_size = 15
+        self.step_size = 60
         self.gamma = 0.1
 
         # Seed and checkpointing
