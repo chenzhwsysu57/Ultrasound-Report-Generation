@@ -352,15 +352,15 @@ class TFTrainer(BaseTrainer):
                                                              reports_masks.to(self.device), mesh_label.to(self.device)
 
             # break
-            indices = torch.randperm(images.shape[0]) # [:5]
+            indices = torch.randperm(images.shape[0])
             
             images_select = images[indices]
             reports_select = reports_ids[indices]
             # print(f"in TFTrainer: mesh_label = {mesh_label}")
             self.model.eval()
             # print(images_select.shape)
-            
-            pred_output, pred_classified  = self.model(images_select, mode='sample')
+            with torch.no_grad():
+                pred_output, pred_classified  = self.model(images_select, mode='sample')
             predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
             ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
 
