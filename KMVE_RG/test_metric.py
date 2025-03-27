@@ -66,7 +66,7 @@ def main(cmd_args, config_args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process some parameters.')
-    parser.add_argument('--model', type=str, default='AllOrgan', help='Path to the model')
+    parser.add_argument('--model', type=str, default='AllOrgan', help='Path to the model. you can also use MoEModel, SGF.')
     parser.add_argument('--dataset_name', type=str, default='all', help='Path to the dataset')
     parser.add_argument('--save_path', type=str,  help='Path to save the results')
     parser.add_argument('--config', type=str, help='Path to the config file')
@@ -74,7 +74,8 @@ if __name__ == '__main__':
     parser.add_argument('--method', type=str, help='Method')
     parser.add_argument('--comment', type=str, help='Comment')
     parser.add_argument('--decoderonly', type=str, default='False', help='use decoder only model.')
-
+    parser.add_argument('--norm', type=str, default='layernorm', help='can also use rmsnorm')
+    
     known_args, unknown_args = parser.parse_known_args()
     extra_args = {}
     i = 0
