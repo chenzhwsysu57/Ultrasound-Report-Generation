@@ -448,8 +448,8 @@ class MoETrainer(BaseTrainer):
         self.val_dataloader = val_dataloader
         self.test_dataloader = test_dataloader
 
-        self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf 交叉熵的loss
-        self.lambada2 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # MoE 的 loss
+        self.lambda1 = 0.6 # tf 交叉熵的loss
+        self.lambda2 = 0.4 # MoE 的 loss
         
     
 
@@ -479,9 +479,9 @@ class MoETrainer(BaseTrainer):
             organ_l = self.criterionBCE(pred_classified, mesh_label)
             ORGAN_L = organ_l
             RG_L = self.criterion(output, reports_ids, reports_masks)
-            batch_loss = self.lambada1 * RG_L + self.lambada2 * ORGAN_L
+            batch_loss = self.lambda1 * RG_L + self.lambda2 * ORGAN_L
             batch_loss /= accumulation_steps
-            train_loss = train_loss + self.lambada1.item() * RG_L.item() + self.lambada2.item() * ORGAN_L.item() 
+            train_loss = train_loss + self.lambda1 * RG_L.item() + self.lambda2 * ORGAN_L.item() 
 
             batch_loss.backward()
             
