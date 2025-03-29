@@ -1,0 +1,10 @@
+Dataset,Method,BLEU1,BLEU2,BLEU3,BLEU4,Rougel
+Mammary,baseline,0.748,0.694,0.653,0.621,0.742
+Mammary,baseline,0.766,0.716,0.678,0.650,0.769
+Mammary,baseline,0.766,0.713,0.675,0.645,0.764
+Thyroid,baseline,0.722,0.659,0.606,0.560,0.733
+Thyroid,baseline,0.723,0.661,0.609,0.565,0.737
+Thyroid,baseline,0.733,0.672,0.620,0.575,0.746
+Liver,baseline,0.893,0.866,0.845,0.828,0.881
+Liver,baseline,0.893,0.866,0.845,0.828,0.881
+Liver,baseline,0.893,0.866,0.845,0.828,0.881

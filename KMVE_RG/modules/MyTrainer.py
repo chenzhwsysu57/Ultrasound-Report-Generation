@@ -326,9 +326,12 @@ class TFTrainer(BaseTrainer):
         self.val_dataloader = val_dataloader
         self.test_dataloader = test_dataloader
 
-        self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf 交叉熵的loss
-        self.lambada2 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 器官分类的 loss
-        self.lambada3 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 最终生成的报告之间对比loss
+        # self.lambada1 = torch.nn.Parameter(torch.tensor(0.6), requires_grad=True) # tf 交叉熵的loss
+        # self.lambada2 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 器官分类的 loss
+        # self.lambada3 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 最终生成的报告之间对比loss
+        self.lambada1 = 0.6
+        self.lambada2 = 0.4
+        self.lambada3 = 0.4
 
     
 
@@ -357,31 +360,31 @@ class TFTrainer(BaseTrainer):
             images_select = images[indices]
             reports_select = reports_ids[indices]
             # print(f"in TFTrainer: mesh_label = {mesh_label}")
-            self.model.eval()
+            # self.model.eval()
             # print(images_select.shape)
-            with torch.no_grad():
-                pred_output, pred_classified  = self.model(images_select, mode='sample')
-            predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
-            ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
+            # with torch.no_grad():
+            #     pred_output, pred_classified  = self.model(images_select, mode='sample')
+            # predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
+            # ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
 
+            
+            # pred_embeddings = self.sentence_bert.encode(predcit_reports, convert_to_tensor=True)
+            # gt_embeddings = self.sentence_bert.encode(ground_truths, convert_to_tensor=True)
+            # pred_embeddings = pred_embeddings.unsqueeze(0)
+            # gt_embeddings = gt_embeddings.unsqueeze(1)
+            # similarity_scores = F.cosine_similarity(pred_embeddings, gt_embeddings)
+            # mean_similarity_score = torch.mean(similarity_scores)
+            # similarity_loss = 1 - mean_similarity_score
+            # CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
             self.model.train()
-            pred_embeddings = self.sentence_bert.encode(predcit_reports, convert_to_tensor=True)
-            gt_embeddings = self.sentence_bert.encode(ground_truths, convert_to_tensor=True)
-            pred_embeddings = pred_embeddings.unsqueeze(0)
-            gt_embeddings = gt_embeddings.unsqueeze(1)
-            similarity_scores = F.cosine_similarity(pred_embeddings, gt_embeddings)
-            mean_similarity_score = torch.mean(similarity_scores)
-            similarity_loss = 1 - mean_similarity_score
-            CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
-
             output,pred_classified  = self.model(images, reports_ids, mode='train')
             # print(f"in TFTrainer: pred_classified = {pred_classified}")
-            organ_l = self.criterionBCE(pred_classified, mesh_label)
-            ORGAN_L = torch.tensor(organ_l, requires_grad=True).to(self.device)
+            # organ_l = self.criterionBCE(pred_classified, mesh_label)
+            # ORGAN_L = torch.tensor(organ_l, requires_grad=True).to(self.device)
             RG_L = self.criterion(output, reports_ids, reports_masks)
-            total_loss = self.lambada1 * RG_L + self.lambada3 * CS_L + self.lambada2 * ORGAN_L
-            train_loss = train_loss + self.lambada1.item() * RG_L.item() + \
-                          + self.lambada3.item() * CS_L.item() + self.lambada2.item() * ORGAN_L.item()
+            total_loss = self.lambada1 * RG_L # + self.lambada3 * CS_L + self.lambada2 * ORGAN_L
+            train_loss = train_loss + self.lambada1 * RG_L.item() # + \
+                         # + self.lambada3.item() * CS_L.item() + self.lambada2.item() * ORGAN_L.item()
 
             self.optimizer.zero_grad()
             total_loss.backward()
