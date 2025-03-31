@@ -321,10 +321,8 @@ class TFTrainer(BaseTrainer):
         self.val_dataloader = val_dataloader
         self.test_dataloader = test_dataloader
 
-        self.lambada1 = torch.nn.Parameter(torch.tensor(0.7), requires_grad=True) # tf 交叉熵的loss
-        self.lambada2 = torch.nn.Parameter(torch.tensor(0.3), requires_grad=True) # 器官分类的 loss
-        self.lambada3 = torch.nn.Parameter(torch.tensor(0.4), requires_grad=True) # 最终生成的报告之间对比loss
-
+        self.lambda1 = 0.7 # tf 交叉熵的loss
+        self.lambda2 = 0.3 # 器官分类的 loss
     
 
     def logloss(self, y_true, y_pred, eps=1e-15):
@@ -346,40 +344,14 @@ class TFTrainer(BaseTrainer):
             images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(self.device), \
                                                              reports_masks.to(self.device), mesh_label.to(self.device)
 
-            # break
-            indices = torch.randperm(images.shape[0]) # [:5]
-            
-            images_select = images[indices]
-            reports_select = reports_ids[indices]
-            # print(f"in TFTrainer: mesh_label = {mesh_label}")
-            # self.model.eval()
-            # # print(images_select.shape)
-            # with torch.no_grad():
-            #     pred_output, pred_classified  = self.model(images_select, mode='sample')
-            #     predcit_reports = '.'.join(self.model.tokenizer.decode_batch(pred_output.cpu().numpy()))
-            #     ground_truths = '.'.join(self.model.tokenizer.decode_batch(reports_select[:, 1:].cpu().numpy()))
 
-            # self.model.train()
-            # pred_embeddings = self.sentence_bert.encode(predcit_reports, convert_to_tensor=True)
-            # gt_embeddings = self.sentence_bert.encode(ground_truths, convert_to_tensor=True)
-            # pred_embeddings = pred_embeddings.unsqueeze(0)
-            # gt_embeddings = gt_embeddings.unsqueeze(1)
-            # similarity_scores = F.cosine_similarity(pred_embeddings, gt_embeddings)
-            # mean_similarity_score = torch.mean(similarity_scores)
-            # similarity_loss = 1 - mean_similarity_score
-            # # CS_L = torch.tensor(similarity_loss, requires_grad=True).to(self.device)
-            # CS_L = similarity_loss
-            # CS_L = 65535 * CS_L
             output,pred_classified  = self.model(images, reports_ids, mode='train')
-            organ_l = self.criterionBCE(pred_classified, mesh_label)
-            ORGAN_L = organ_l
-            # ORGAN_L = torch.tensor(organ_l, requires_grad=True).to(self.device)
+            ORGAN_L = self.criterionBCE(pred_classified, mesh_label)
+            
             RG_L = self.criterion(output, reports_ids, reports_masks)
-            batch_loss = self.lambada1 * RG_L + \
-                self.lambada2 * ORGAN_L # self.lambada3 * CS_L + \
+            batch_loss = self.lambda1 * RG_L
             batch_loss /= accumulation_steps
-            train_loss = train_loss + self.lambada1.item() * RG_L.item() + \
-                        self.lambada2.item() * ORGAN_L.item() # self.lambada3.item() * CS_L.item() 
+            train_loss = train_loss + self.lambda1 * RG_L.item() 
 
             batch_loss.backward()
             
@@ -450,17 +422,14 @@ class TFTrainer(BaseTrainer):
                     f'test_{organ}_ROUGE_L': organ_metric['ROUGE_L']
                 })
 
-            # test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},
-            #                             {i: [re] for i, re in enumerate(test_res)})
-
-            # TODO save test metrics
-            # print(results)
             
-            file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_result_{epoch}.csv'
+            directory = f'{self.args.Result_prefix}/generated'
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            file_name = f'{self.args.Result_prefix}/generated/{self.args.dataset_name}_test_result_{epoch}.csv'
             df = pd.DataFrame(results)
             df.to_csv(file_name, index=False, encoding='utf-8-sig')
-            # log.update(**{'test_' + k: v for k, v in test_met.items()})
-
+            
         self.lr_scheduler.step()
 
         return log
