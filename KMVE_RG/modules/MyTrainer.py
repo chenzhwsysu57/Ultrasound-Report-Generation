@@ -178,12 +178,19 @@ class BaseTrainer(object):
         if improved_val:
             self.best_recorder['val'].update(log)
 
-        improved_test = (self.mnt_mode == 'min' and log[self.mnt_metric_test] <= self.best_recorder['test'][
-            self.mnt_metric_test]) or \
-                        (self.mnt_mode == 'max' and log[self.mnt_metric_test] >= self.best_recorder['test'][
-                            self.mnt_metric_test])
-        if improved_test:
-            self.best_recorder['test'].update(log)
+        # improved_test = (self.mnt_mode == 'min' and log[self.mnt_metric_test] <= self.best_recorder['test'][
+        #     self.mnt_metric_test]) or \
+        #                 (self.mnt_mode == 'max' and log[self.mnt_metric_test] >= self.best_recorder['test'][
+        #                     self.mnt_metric_test])
+        # if improved_test:
+        #     self.best_recorder['test'].update(log)
+        for organ in set(['Liver', 'Mammary', 'Thyroid']):
+            organ_metric_key = f'{organ}_{self.mnt_metric_test}'
+            if organ_metric_key in log:
+                improved_organ = (self.mnt_mode == 'min' and log[organ_metric_key] <= self.best_recorder['test'].get(organ_metric_key, float('inf'))) or \
+                                (self.mnt_mode == 'max' and log[organ_metric_key] >= self.best_recorder['test'].get(organ_metric_key, float('-inf')))
+                if improved_organ:
+                    self.best_recorder['test'][organ_metric_key] = log[organ_metric_key]
 
     def _print_best(self):
         print('Best results (w.r.t {}) in validation set:'.format(self.args.monitor_metric))
@@ -407,6 +414,7 @@ class TFTrainer(BaseTrainer):
         self.model.eval()
         with torch.no_grad():
             test_gts, test_res = [], []
+            test_organ = []
             for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in \
                 tqdm(enumerate(self.test_dataloader), total=len(self.test_dataloader),desc=f'Test with batch size {self.args.batch_size}'):
                 
@@ -425,8 +433,25 @@ class TFTrainer(BaseTrainer):
 
                 test_res.extend(reports)
                 test_gts.extend(ground_truths)
-            test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},
-                                        {i: [re] for i, re in enumerate(test_res)})
+                test_organ.extend([self.args.get_organs_from_label(one_label) for one_label in mesh_label])
+            organ_metrics = {}
+            for organ in set(test_organ):
+                organ_gts = {i: [gt] for i, (gt, org) in enumerate(zip(test_gts, test_organ)) if org == organ}
+                organ_res = {i: [re] for i, (re, org) in enumerate(zip(test_res, test_organ)) if org == organ}
+                organ_metrics[organ] = self.metric_ftns(organ_gts, organ_res)
+            for organ in set(test_organ):
+                organ_metric = organ_metrics[organ]
+                log.update({
+                    f'test_{organ}_BLEU_1': organ_metric['BLEU_1'],
+                    f'test_{organ}_BLEU_2': organ_metric['BLEU_2'],
+                    f'test_{organ}_BLEU_3': organ_metric['BLEU_3'],
+                    f'test_{organ}_BLEU_4': organ_metric['BLEU_4'],
+                    f'test_{organ}_METEOR': organ_metric['METEOR'],
+                    f'test_{organ}_ROUGE_L': organ_metric['ROUGE_L']
+                })
+
+            # test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},
+            #                             {i: [re] for i, re in enumerate(test_res)})
 
             # TODO save test metrics
             # print(results)
@@ -434,7 +459,7 @@ class TFTrainer(BaseTrainer):
             file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_result_{epoch}.csv'
             df = pd.DataFrame(results)
             df.to_csv(file_name, index=False, encoding='utf-8-sig')
-            log.update(**{'test_' + k: v for k, v in test_met.items()})
+            # log.update(**{'test_' + k: v for k, v in test_met.items()})
 
         self.lr_scheduler.step()
 
