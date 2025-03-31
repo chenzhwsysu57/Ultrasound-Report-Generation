@@ -117,13 +117,11 @@ class Config(CN):
         self.seed = 9233
        
 
-        # RNN parameters
-        self.embedding_vector = 300
+        
+        
         self.nhidden = 512
-        self.nlayers = 1
-        self.bidirectional = True
-        self.rnn_type = 'LSTM'
-
+        
+        
         # Training settings
         self.cuda = True
         self.train_smooth_gamma3 = 10.0
