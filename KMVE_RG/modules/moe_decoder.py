@@ -194,15 +194,21 @@ class MixtureOfExpertsFFN(nn.Module):
         super(MixtureOfExpertsFFN, self).__init__()
         # 是否 d_ff = d_ff / num_experts ?
         # self.shared_expert = nn.Linear(d_model, d_ff) 
-        self.shared_experts = nn.ModuleList([nn.Linear(d_model, d_ff) for _ in range(num_shared_experts)])
+        self.shared_experts = nn.ModuleList([
+            PositionwiseFeedForward(d_model, d_ff) for _ in range(num_shared_experts)
+        ])
         # 三个独立的专家
-        self.experts = nn.ModuleList([nn.Linear(d_model, d_ff) for _ in range(num_experts)])
+        self.experts = nn.ModuleList([
+            PositionwiseFeedForward(d_model, d_ff) for _ in range(num_experts)
+            ])
         
-        self.w_2 = nn.Linear(d_ff, d_model)  # 输出层
-        self.dropout = nn.Dropout(dropout)
 
     def forward(self, x, routes):
         # routing_weights = routes
+        max_indices = routes.argmax(dim=1)
+        binary_routes = torch.zeros_like(routes)
+        binary_routes[torch.arange(routes.size(0)), max_indices] = 1
+        binary_routes
         """
         x: 输入特征，形状 [batch_size, seq_len, d_model]
         routing_weights: 路由权重，形状 [batch_size, 3]
@@ -215,10 +221,10 @@ class MixtureOfExpertsFFN(nn.Module):
 
         # 调整 routing_weights 形状以匹配 expert_outputs
         # routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
-        batch_size = routes.size(0)
+        batch_size = binary_routes.size(0)
         num_experts = len(self.experts)
         repeat_factor = num_experts // 3
-        routing_weights = routes.repeat_interleave(repeat_factor, dim=1) 
+        routing_weights = binary_routes.repeat_interleave(repeat_factor, dim=1) 
         routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
 
         # 按照 routing_weights 计算专家输出的加权和
@@ -228,7 +234,7 @@ class MixtureOfExpertsFFN(nn.Module):
         # shared_out = self.shared_expert(x)  # [batch, seq_len, d_ff]
         shared_out = sum(expert(x) for expert in self.shared_experts)
         # 组合输出（共享专家 + MoE 输出）
-        output = self.w_2(self.dropout(F.relu(shared_out + routed_out)))  # [batch, seq_len, d_model]
+        output = shared_out + routed_out  # [batch, seq_len, d_model]
 
         return output
 
