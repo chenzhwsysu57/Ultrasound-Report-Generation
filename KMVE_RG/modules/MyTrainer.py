@@ -118,6 +118,7 @@ class BaseTrainer(object):
 
             if epoch % self.save_period == 0:
                 self._save_checkpoint(epoch, save_best=best)
+            self._save_checkpoint(epoch, save_last=True)
         self._print_best()
         self._print_best_to_file()
 
@@ -143,7 +144,7 @@ class BaseTrainer(object):
 
     
 
-    def _save_checkpoint(self, epoch, save_best=False):
+    def _save_checkpoint(self, epoch, save_best=False,save_last=False):
         state = {
             'epoch': epoch,
             'state_dict': self.model.state_dict(),
@@ -157,11 +158,15 @@ class BaseTrainer(object):
             best_path = os.path.join(self.checkpoint_dir, f'{self.args.dataset_name}_best.pth')
             torch.save(state, best_path)
             print(f"Saving current best: {self.args.dataset_name}_best.pth ...")
-
+        if save_last:
+            last_path = os.path.join(self.checkpoint_dir, f'{self.args.dataset_name}_last.pth')
+            torch.save(state, last_path)
+            print(f"Saving last checkpoint: {self.args.dataset_name}_last.pth ...")
     def _resume_checkpoint(self, resume_path):
         resume_path = str(resume_path)
-        print("Loading checkpoint: {} ...".format(resume_path))
-        checkpoint = torch.load(resume_path)
+        last_path = os.path.join(self.checkpoint_dir, f'{self.args.dataset_name}_last.pth')
+        print("Loading checkpoint: {} ...".format(last_path))
+        checkpoint = torch.load(last_path)
         self.start_epoch = checkpoint['epoch'] + 1
         self.mnt_best = checkpoint['monitor_best']
         self.model.load_state_dict(checkpoint['state_dict'])
