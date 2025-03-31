@@ -31,7 +31,8 @@ class Config(CN):
 
         # added for sampler
         self.custom_sampler = True 
-        
+        # Seed and checkpointing
+        self.seed = 9233
         self.debug = -1
         self.dataset_name = None 
         self.result = 'debug'
@@ -113,8 +114,7 @@ class Config(CN):
         self.step_size = 60
         self.gamma = 0.1
 
-        # Seed and checkpointing
-        self.seed = 9233
+        
        
 
         

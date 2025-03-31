@@ -11,6 +11,8 @@ from modules.optimizers import build_optimizer, build_lr_scheduler
 from modules.tokenizers import Tokenizer
 
 def seed_everything(seed: int):
+    if isinstance(seed, str):
+        seed = int(seed)
     import random, os
     import numpy as np
     import torch

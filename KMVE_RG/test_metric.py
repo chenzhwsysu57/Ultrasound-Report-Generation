@@ -95,7 +95,25 @@ if __name__ == '__main__':
         i += 1
     cmd_line_args = {**vars(known_args), **extra_args}
     # cmd_args = parser.parse_args()
-    
+
 
     config_args = Config(**cmd_line_args)
+    def seed_everything(seed: int):
+        if isinstance(seed, str):
+            seed = int(seed)
+        import random, os
+        import numpy as np
+        import torch
+
+        random.seed(seed)
+        os.environ['PYTHONHASHSEED'] = str(seed)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
+        if torch.backends.mps.is_available():
+            torch.mps.manual_seed(seed)
+        torch.cuda.manual_seed(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+
+    seed_everything(config_args.seed)
     main(cmd_line_args,config_args)
