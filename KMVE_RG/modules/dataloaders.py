@@ -117,8 +117,9 @@ class MyDataLoader(DataLoader):
             'batch_size': self.batch_size,
             'shuffle': self.shuffle,
             'collate_fn': self.collate_fn,
-            'num_workers': self.num_workers,
-            'sampler': self.sampler  # 指定自定义的sampler
+            'num_workers': int(self.num_workers),
+            'sampler': self.sampler,  # 指定自定义的sampler
+            'pin_memory': True,
         }
         super().__init__(**self.init_kwargs)
 

@@ -38,7 +38,8 @@ class Config(CN):
         self.result = 'debug'
         self.batch_size = 30
         self.d_ff = 512
-
+        self.num_workers = 0
+        
         for key, value in kwargs.items():
             # if hasattr(self, key):
             setattr(self, key, value)
@@ -67,7 +68,7 @@ class Config(CN):
         self.max_seq_length_train = 150
         self.max_seq_length = 150
         self.threshold = 3
-        self.num_workers = 0
+        
         # self.batch_size = 30
         self.evaluate_batch = 1
 
