@@ -96,7 +96,7 @@ class Config(CN):
         self.epochs = 100
         self.save_dir = f'{self.Result_prefix}/Models'
         self.record_dir = f'{self.Result_prefix}/Records'
-        self.save_period = 1
+        self.save_period = 5
         self.monitor_mode = 'max'
         self.monitor_metric = 'BLEU_4'
         self.early_stop = 100
