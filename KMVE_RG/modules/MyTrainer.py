@@ -470,8 +470,7 @@ class MoETrainer(BaseTrainer):
 
 
             output, pred_classified = self.model(images, reports_ids, mode='train')
-            organ_l = self.criterionBCE(pred_classified, mesh_label)
-            ORGAN_L = organ_l
+            ORGAN_L = self.criterionBCE(pred_classified, mesh_label)
             RG_L = self.criterion(output, reports_ids, reports_masks)
             batch_loss = self.lambda1 * RG_L + self.lambda2 * ORGAN_L
             batch_loss /= accumulation_steps
@@ -509,6 +508,7 @@ class MoETrainer(BaseTrainer):
         self.model.eval()
         with torch.no_grad():
             test_gts, test_res = [], []
+            test_organ = []
             for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in \
                 tqdm(enumerate(self.test_dataloader), total=len(self.test_dataloader),desc=f'Test with batch size {self.args.batch_size}'):
                 
@@ -527,15 +527,30 @@ class MoETrainer(BaseTrainer):
 
                 test_res.extend(reports)
                 test_gts.extend(ground_truths)
-            test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)}, {i: [re] for i, re in enumerate(test_res)})
+                test_organ.extend([self.args.get_organs_from_label(one_label) for one_label in mesh_label])
+            organ_metrics = {}
+            for organ in set(test_organ):
+                organ_gts = {i: [gt] for i, (gt, org) in enumerate(zip(test_gts, test_organ)) if org == organ}
+                organ_res = {i: [re] for i, (re, org) in enumerate(zip(test_res, test_organ)) if org == organ}
+                organ_metrics[organ] = self.metric_ftns(organ_gts, organ_res)
+            for organ in set(test_organ):
+                organ_metric = organ_metrics[organ]
+                log.update({
+                    f'test_{organ}_BLEU_1': organ_metric['BLEU_1'],
+                    f'test_{organ}_BLEU_2': organ_metric['BLEU_2'],
+                    f'test_{organ}_BLEU_3': organ_metric['BLEU_3'],
+                    f'test_{organ}_BLEU_4': organ_metric['BLEU_4'],
+                    f'test_{organ}_METEOR': organ_metric['METEOR'],
+                    f'test_{organ}_ROUGE_L': organ_metric['ROUGE_L']
+                })
 
-            # TODO save test metrics
-            # print(results)
             
-            file_name = f'{self.args.Result_prefix}/{self.args.dataset_name}_test_result_{epoch}.csv'
+            directory = f'{self.args.Result_prefix}/generated'
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            file_name = f'{self.args.Result_prefix}/generated/{self.args.dataset_name}_test_result_{epoch}.csv'
             df = pd.DataFrame(results)
             df.to_csv(file_name, index=False, encoding='utf-8-sig')
-            log.update(**{'test_' + k: v for k, v in test_met.items()})
 
         self.lr_scheduler.step()
 

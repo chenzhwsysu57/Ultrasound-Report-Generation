@@ -190,10 +190,11 @@ class IdentityEncoder(nn.Module):
         return x
     
 class MixtureOfExpertsFFN(nn.Module):
-    def __init__(self, d_model, d_ff, dropout=0.1, num_experts=3):
+    def __init__(self, d_model, d_ff, dropout=0.1, num_experts=6, num_shared_experts=2):
         super(MixtureOfExpertsFFN, self).__init__()
         # 是否 d_ff = d_ff / num_experts ?
-        self.shared_expert = nn.Linear(d_model, d_ff) 
+        # self.shared_expert = nn.Linear(d_model, d_ff) 
+        self.shared_experts = nn.ModuleList([nn.Linear(d_model, d_ff) for _ in range(num_shared_experts)])
         # 三个独立的专家
         self.experts = nn.ModuleList([nn.Linear(d_model, d_ff) for _ in range(num_experts)])
         
@@ -201,7 +202,7 @@ class MixtureOfExpertsFFN(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x, routes):
-        routing_weights = routes
+        # routing_weights = routes
         """
         x: 输入特征，形状 [batch_size, seq_len, d_model]
         routing_weights: 路由权重，形状 [batch_size, 3]
@@ -213,14 +214,19 @@ class MixtureOfExpertsFFN(nn.Module):
         expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=-1)  # [batch, seq_len, d_ff, num_experts]
 
         # 调整 routing_weights 形状以匹配 expert_outputs
+        # routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
+        batch_size = routes.size(0)
+        num_experts = len(self.experts)
+        repeat_factor = num_experts // 3
+        routing_weights = routes.repeat_interleave(repeat_factor, dim=1) 
         routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
 
         # 按照 routing_weights 计算专家输出的加权和
         routed_out = torch.sum(expert_outputs * routing_weights, dim=-1)  # [batch, seq_len, d_ff]
 
         # 共享专家计算
-        shared_out = self.shared_expert(x)  # [batch, seq_len, d_ff]
-
+        # shared_out = self.shared_expert(x)  # [batch, seq_len, d_ff]
+        shared_out = sum(expert(x) for expert in self.shared_experts)
         # 组合输出（共享专家 + MoE 输出）
         output = self.w_2(self.dropout(F.relu(shared_out + routed_out)))  # [batch, seq_len, d_model]
 
@@ -233,7 +239,7 @@ class MoEDecoderOnly(GenModel):
         c = copy.deepcopy
         attn = MultiHeadedAttention(self.num_heads, self.d_model)
         # ff = PositionwiseFeedForward(self.d_model, self.d_ff, self.dropout)
-        ff = MixtureOfExpertsFFN(self.d_model, self.d_ff, self.dropout, num_experts=3)
+        ff = MixtureOfExpertsFFN(self.d_model, self.d_ff, self.dropout, num_experts=self.num_experts, num_shared_experts=self.num_shared_experts)
         position = PositionalEncoding(self.d_model, self.dropout)
         model = Transformer(
             IdentityEncoder(IdentityEncoderLayer(self.d_model, c(attn), c(ff), self.dropout), self.num_layers),
@@ -250,9 +256,11 @@ class MoEDecoderOnly(GenModel):
     def __init__(self, args, tokenizer):
         super(MoEDecoderOnly, self).__init__(args, tokenizer)
         self.args = args
+        self.num_experts = int(args.num_experts)
+        self.num_shared_experts = int(args.num_shared_experts)
         self.num_layers = args.num_layers
         self.d_model = args.d_model
-        self.d_ff = args.d_ff
+        self.d_ff = int(args.d_ff)
         self.num_heads = args.num_heads
         self.dropout = args.dropout
         tgt_vocab = self.vocab_size + 1

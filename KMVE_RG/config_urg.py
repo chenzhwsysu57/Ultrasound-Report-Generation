@@ -37,6 +37,7 @@ class Config(CN):
         self.dataset_name = None 
         self.result = 'debug'
         self.batch_size = 30
+        self.d_ff = 512
 
         for key, value in kwargs.items():
             # if hasattr(self, key):
@@ -74,7 +75,7 @@ class Config(CN):
         self.visual_extractor = 'resnet101'
         self.visual_extractor_pretrained = True
         self.d_model = 512
-        self.d_ff = 512
+        
         self.d_vf = 2048
         self.num_heads = 8
         self.num_layers = 3
