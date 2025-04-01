@@ -95,10 +95,10 @@ class Config(CN):
 
         # Training configurations
         self.n_gpu = 1
-        self.epochs = 63
+        self.epochs = 100
         self.save_dir = f'{self.Result_prefix}/Models'
         self.record_dir = f'{self.Result_prefix}/Records'
-        self.save_period = 5
+        self.save_period = 1
         self.monitor_mode = 'max'
         self.monitor_metric = 'BLEU_4'
         self.early_stop = 100

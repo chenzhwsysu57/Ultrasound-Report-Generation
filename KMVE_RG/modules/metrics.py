@@ -6,6 +6,20 @@ from pycocoevalcap.rouge.rouge  import Rouge
 from pycocoevalcap.cider.cider import Cider
 
 
+import time
+from functools import wraps
+
+def timing_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()  # 记录开始时间
+        result = func(*args, **kwargs)
+        end_time = time.time()  # 记录结束时间
+        print(f"Function {func.__name__} took {end_time - start_time:.4f} seconds")
+        return result
+    return wrapper
+
+@timing_decorator
 def compute_scores(gts, res):
     """
     Performs the MS COCO evaluation using the Python 3 implementation (https://github.com/salaniz/pycocoevalcap)

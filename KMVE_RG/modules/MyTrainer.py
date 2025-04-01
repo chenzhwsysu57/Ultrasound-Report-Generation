@@ -15,7 +15,31 @@ from sentence_transformers import SentenceTransformer, util
 from torch.nn import functional as F
 from tqdm import tqdm
 
+import time
+from functools import wraps
 
+def timing_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()  # 记录开始时间
+        result = func(*args, **kwargs)
+        end_time = time.time()  # 记录结束时间
+        print(f"Function {func.__name__} took {end_time - start_time:.4f} seconds")
+        return result
+    return wrapper
+
+class Timer:
+    def __init__(self, comment="Block"):
+        self.comment = comment
+
+    def __enter__(self):
+        self.start_time = time.time()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.end_time = time.time()
+        self.interval = self.end_time - self.start_time
+        print(f"{self.comment} took {self.interval:.4f} seconds")
 warnings.filterwarnings("ignore")
 os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 import os
@@ -143,7 +167,7 @@ class BaseTrainer(object):
         record_table.to_csv(record_path, index=False)
 
     
-
+    @timing_decorator
     def _save_checkpoint(self, epoch, save_best=False,save_last=False):
         state = {
             'epoch': epoch,
@@ -339,7 +363,7 @@ class TFTrainer(BaseTrainer):
         loss = np.sum(- y_true * np.log(p) - (1 - y_true) * np.log(1 - p))
 
         return loss / len(y_true)
-
+    
     def _train_epoch(self, epoch):
         train_loss = 0
         self.model.train()
@@ -461,7 +485,7 @@ class MoETrainer(BaseTrainer):
         loss = np.sum(- y_true * np.log(p) - (1 - y_true) * np.log(1 - p))
 
         return loss / len(y_true)
-
+    @timing_decorator
     def _train_epoch(self, epoch):
         train_loss = 0
         self.model.train()
@@ -488,7 +512,7 @@ class MoETrainer(BaseTrainer):
                 self.optimizer.step()  # 更新参数
                 self.optimizer.zero_grad()  # 清空梯度
 
-            
+
         log = {'train_loss': train_loss / len(self.train_dataloader)}
         print(f"""train loss {log['train_loss']}""")
 
