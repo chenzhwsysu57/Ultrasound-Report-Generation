@@ -498,7 +498,7 @@ class MoETrainer(BaseTrainer):
             images, reports_ids, reports_masks, mesh_label = images.to(self.device), reports_ids.to(self.device), reports_masks.to(self.device), mesh_label.to(self.device)
 
 
-            output, pred_classified = self.model(images, reports_ids, mode='train')
+            output, pred_classified, expert_loss = self.model(images, reports_ids, mode='train')
             ORGAN_L = self.criterionBCE(pred_classified, mesh_label)
             RG_L = self.criterion(output, reports_ids, reports_masks)
             batch_loss = self.lambda1 * RG_L + self.lambda2 * ORGAN_L

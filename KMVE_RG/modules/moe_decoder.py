@@ -93,9 +93,11 @@ class Decoder(nn.Module):
         self.norm = LayerNorm(layer.d_model)
 
     def forward(self, x, hidden_states, src_mask, tgt_mask, routes):
+        total_loss = 0
         for layer in self.layers:
-            x = layer(x, hidden_states, src_mask, tgt_mask, routes)
-        return self.norm(x)
+            x, loss = layer(x, hidden_states, src_mask, tgt_mask, routes)
+            total_loss += loss
+        return self.norm(x), total_loss
 
 
 class DecoderLayer(nn.Module):
@@ -105,13 +107,24 @@ class DecoderLayer(nn.Module):
         self.self_attn = self_attn
         self.src_attn = src_attn
         self.feed_forward = feed_forward
-        self.sublayer = clones(SublayerConnection(d_model, dropout), 3)
+        self.norm1 = LayerNorm(self.d_model)
+        self.norm2 = LayerNorm(self.d_model)
+        self.norm3 = LayerNorm(self.d_model)
 
     def forward(self, x, hidden_states, src_mask, tgt_mask, routes):
         m = hidden_states
-        x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, tgt_mask))
-        x = self.sublayer[1](x, lambda x: self.src_attn(x, m, m, src_mask))
-        return self.sublayer[2](x, lambda x: self.feed_forward(x, routes))
+
+        x = x + self.self_attn(x, x, x, tgt_mask)
+        x = self.norm1(x)
+
+        x = x + self.src_attn(x, m, m, src_mask)
+        x = self.norm2(x)
+
+        ffn_out, loss = self.feed_forward(x, routes)  
+        x = x + ffn_out  
+        x = self.norm3(x)
+
+        return x, loss  
 
 
 class MultiHeadedAttention(nn.Module):
@@ -200,7 +213,7 @@ class MixtureOfExpertsFFN(nn.Module):
         # 三个独立的专家
         self.experts = nn.ModuleList([
             PositionwiseFeedForward(d_model, d_ff) for _ in range(num_experts)
-            ])
+        ])
         
 
     def forward(self, x, routes):
@@ -236,7 +249,9 @@ class MixtureOfExpertsFFN(nn.Module):
         # 组合输出（共享专家 + MoE 输出）
         output = shared_out + routed_out  # [batch, seq_len, d_model]
 
-        return output
+        expert_loss = torch.sum(torch.norm(expert_outputs, p=2, dim=-1), dim=-1).mean()  # Example loss
+
+        return output, expert_loss
 
         
 class MoEDecoderOnly(GenModel):
@@ -297,14 +312,14 @@ class MoEDecoderOnly(GenModel):
 
     def _forward(self, fc_feats, att_feats, seq, att_masks=None, routes=None):
         att_feats, seq, att_masks, seq_mask = self._prepare_feature_forward(att_feats, att_masks, seq)
-        out = self.model(att_feats, seq, att_masks, seq_mask, routes=routes)
+        out, loss = self.model(att_feats, seq, att_masks, seq_mask, routes=routes)
         outputs = F.log_softmax(self.logit(out), dim=-1)
-        return outputs, out
+        return outputs, out, loss  
 
     def core(self, it, memory, state, mask):
         if len(state) == 0:
             ys = it.unsqueeze(1)
         else:
             ys = torch.cat([state[0][0], it.unsqueeze(1)], dim=1)
-        out = self.model.decode(memory, mask, ys, subsequent_mask(ys.size(1)).to(memory.device), routes=self.routes)
+        out, _ = self.model.decode(memory, mask, ys, subsequent_mask(ys.size(1)).to(memory.device), routes=self.routes)
         return out[:, -1], [ys.unsqueeze(0)]

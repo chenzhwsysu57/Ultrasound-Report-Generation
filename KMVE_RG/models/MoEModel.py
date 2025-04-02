@@ -44,9 +44,9 @@ class MoEModel(nn.Module):
         if mode == 'train':
             # print(f"train mode, input shape: {fc_feats.shape}, {att_feats.shape}, {targets.shape}")
             # print(f"fc_feats dtype: {fc_feats.dtype}, att_feats dtype: {att_feats.dtype}, targets dtype: {targets.dtype}")
-            output, _ = self.encoder_decoder(fc_feats, att_feats, targets, routes=self.routes, mode='forward')
+            output, _, expert_loss = self.encoder_decoder(fc_feats, att_feats, targets, routes=self.routes, mode='forward')
             
-            return output, classified
+            return output, classified, expert_loss
         elif mode == 'sample':
             output, _ = self.encoder_decoder(fc_feats, att_feats, mode='sample')
             # print(f"sample mode, input shape: {fc_feats.shape}, {att_feats.shape}")
