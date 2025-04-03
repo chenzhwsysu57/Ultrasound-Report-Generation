@@ -17,6 +17,10 @@ def hyperbolic_distance(x, y, alpha=1.0):
     euclidean_dist = torch.norm(x - y, dim=-1, p=2) ** 2  # ||x - y||^2
     return torch.acosh(1 + alpha * euclidean_dist + 1e-6)  # 避免数值问题
 
+# def hyperbolic_distance(x, y, alpha=1.0):
+#     """优化后的双曲距离计算，避免使用 torch.acosh"""
+#     euclidean_dist = torch.norm(x - y, dim=-1, p=2)  # ||x - y||
+#     return torch.sqrt(2 * alpha * euclidean_dist + 1e-6)  # 近似替代 arcosh
 # def arcosh(x, eps=1e-6):
 #     return torch.log(x + torch.sqrt(x**2 - 1 + eps))
 
@@ -46,7 +50,19 @@ def hyperbolic_distance(x, y, alpha=1.0):
 #     ).mean()
 
 #     return shared_loss, expert_shared_loss, expert_diversity_loss
+from functools import wraps
+import time
+def timing_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()  # 记录开始时间
+        result = func(*args, **kwargs)
+        end_time = time.time()  # 记录结束时间
+        print(f"Function {func.__name__} took {end_time - start_time:.4f} seconds")
+        return result
+    return wrapper
 
+@timing_decorator
 def compute_expert_loss(shared_outputs, expert_outputs, routes, alpha=1.0):
     """
     计算三种损失
@@ -61,12 +77,18 @@ def compute_expert_loss(shared_outputs, expert_outputs, routes, alpha=1.0):
 
     # 1. 通用特征约束：不同类别的共享特征应尽可能相似
     shared_features = shared_outputs.mean(dim=1)  # [batch, d_ff]
-    shared_dist = []
-    for i in range(batch_size):
-        for j in range(batch_size):
-            if i != j:
-                shared_dist.append(hyperbolic_distance(shared_features[i], shared_features[j], alpha))
-    shared_loss = torch.stack(shared_dist).mean()
+    # shared_dist = []
+    # for i in range(batch_size):
+    #     for j in range(batch_size):
+    #         if i != j:
+    #             shared_dist.append(hyperbolic_distance(shared_features[i], shared_features[j], alpha))
+    # shared_loss = torch.stack(shared_dist).mean()
+    shared_dist_matrix = hyperbolic_distance(
+        shared_features.unsqueeze(1),  # [batch, 1, d_ff]
+        shared_features.unsqueeze(0),  # [1, batch, d_ff]
+        alpha
+    )  # 得到 [batch, batch] 的距离矩阵
+    shared_loss = shared_dist_matrix.sum() / (batch_size * (batch_size - 1))  # 排除自身
 
     # 2. 各路由专家与通用专家不同
     routes_expanded = routes.unsqueeze(1).unsqueeze(2)
@@ -76,14 +98,18 @@ def compute_expert_loss(shared_outputs, expert_outputs, routes, alpha=1.0):
     expert_shared_loss = -expert_shared_dist.mean()  # 负号表示最大化
 
     # 3. 专家之间不同（不同类别专家应有区别）
-    expert_dist = []
-    for i in range(num_experts):
-        for j in range(num_experts):
-            if i != j:
-                expert_i = expert_outputs[:, :, :, i].mean(dim=1)  # [batch, d_ff]
-                expert_j = expert_outputs[:, :, :, j].mean(dim=1)  # [batch, d_ff]
-                expert_dist.append(hyperbolic_distance(expert_i, expert_j, alpha))
-    expert_diversity_loss = -torch.stack(expert_dist).mean()  # 负号表示最大化
+    # expert_dist = []
+    # for i in range(num_experts):
+    #     for j in range(num_experts):
+    #         if i != j:
+    #             expert_i = expert_outputs[:, :, :, i].mean(dim=1)  # [batch, d_ff]
+    #             expert_j = expert_outputs[:, :, :, j].mean(dim=1)  # [batch, d_ff]
+    #             expert_dist.append(hyperbolic_distance(expert_i, expert_j, alpha))
+    # expert_diversity_loss = -torch.stack(expert_dist).mean()  # 负号表示最大化
+    expert_i = expert_outputs.mean(dim=1).unsqueeze(2)  # [batch, d_ff, 1, num_experts]
+    expert_j = expert_outputs.mean(dim=1).unsqueeze(3)  # [batch, d_ff, num_experts, 1]
+    expert_dist_matrix = hyperbolic_distance(expert_i, expert_j, alpha)  # [batch, d_ff, num_experts, num_experts]
+    expert_diversity_loss = -expert_dist_matrix.sum() / (num_experts * (num_experts - 1))
 
     return shared_loss, expert_shared_loss, expert_diversity_loss
 
@@ -289,7 +315,7 @@ class MixtureOfExpertsFFN(nn.Module):
             PositionwiseFeedForward(d_model, d_ff) for _ in range(num_experts)
         ])
         
-
+    @timing_decorator
     def forward(self, x, routes):
         # routing_weights = routes
         max_indices = routes.argmax(dim=1)
@@ -311,14 +337,14 @@ class MixtureOfExpertsFFN(nn.Module):
         batch_size = binary_routes.size(0)
         num_experts = len(self.experts)
         repeat_factor = num_experts // 3
-        routing_weights = binary_routes.repeat_interleave(repeat_factor, dim=1) 
-        routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
+        # routing_weights = binary_routes.repeat_interleave(repeat_factor, dim=1) 
+        # routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
+        routing_weights = binary_routes.unsqueeze(1).unsqueeze(2).expand(-1, 1, 1, num_experts)
 
         # 按照 routing_weights 计算专家输出的加权和
         routed_out = torch.sum(expert_outputs * routing_weights, dim=-1)  # [batch, seq_len, d_ff]
 
         # 共享专家计算
-        # shared_out = self.shared_expert(x)  # [batch, seq_len, d_ff]
         shared_out = sum(expert(x) for expert in self.shared_experts)
         # 组合输出（共享专家 + MoE 输出）
         output = shared_out + routed_out  # [batch, seq_len, d_model]
@@ -329,7 +355,7 @@ class MixtureOfExpertsFFN(nn.Module):
             expert_outputs.view(*expert_outputs.shape[:-1], -1, repeat_factor).sum(dim=-1), 
             binary_routes)
         expert_loss = shared_loss + expert_shared_loss + expert_diversity_loss + 12
-
+        print(shared_loss, expert_shared_loss, expert_diversity_loss)
 
         return output, expert_loss
 
