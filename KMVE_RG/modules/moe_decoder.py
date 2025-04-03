@@ -12,6 +12,80 @@ import torch.nn.functional as F
 
 from .Generator import pack_wrapper, GenModel
 
+def hyperbolic_distance(x, y, alpha=1.0):
+    """计算双曲空间中的 arcosh 距离"""
+    euclidean_dist = torch.norm(x - y, dim=-1, p=2) ** 2  # ||x - y||^2
+    return torch.acosh(1 + alpha * euclidean_dist + 1e-6)  # 避免数值问题
+
+# def arcosh(x, eps=1e-6):
+#     return torch.log(x + torch.sqrt(x**2 - 1 + eps))
+
+# def compute_expert_loss(shared_out, expert_outputs, routes, alpha=1.0):
+#     """
+#     shared_out: 共享专家的输出, 形状 [batch, seq_len, d_ff]
+#     expert_outputs: 所有专家的输出, 形状 [batch, seq_len, d_ff, num_experts]
+#     routes: 路由选择权重, 形状 [batch, num_experts]
+#     alpha: 超参数，控制 arcosh 距离的尺度
+#     """
+
+#     # 确保 routes 形状匹配 expert_outputs
+#     routes_expanded = routes.unsqueeze(1).unsqueeze(2)  # [batch, 1, 1, num_experts]
+
+#     # 按照路由权重计算专家输出的加权和
+#     expert_selected_outputs = torch.sum(expert_outputs * routes_expanded, dim=-1)  # [batch, seq_len, d_ff]
+
+#     ## 1. 通用特征约束（希望共享专家的特征在不同类别之间接近） min L_shared
+#     shared_loss = arcosh(1 + alpha * torch.norm(shared_out[:, None, :, :] - shared_out[:, :, None, :], dim=-1)).mean()
+
+#     ## 2. 专家与共享专家不同（希望专家与共享专家学到的特征有差异） max L_expert_shared
+#     expert_shared_loss = -arcosh(1 + alpha * torch.norm(expert_selected_outputs - shared_out, dim=-1)).mean()
+
+#     ## 3. 专家之间不同（希望不同专家的特征不相似） max L_expert_diversity
+#     expert_diversity_loss = -arcosh(
+#         1 + alpha * torch.norm(expert_selected_outputs[:, None, :, :] - expert_selected_outputs[:, :, None, :], dim=-1)
+#     ).mean()
+
+#     return shared_loss, expert_shared_loss, expert_diversity_loss
+
+def compute_expert_loss(shared_outputs, expert_outputs, routes, alpha=1.0):
+    """
+    计算三种损失
+    shared_outputs: 共享专家的输出 [batch, seq_len, d_ff]
+    expert_outputs: 所有专家的输出 [batch, seq_len, d_ff, num_experts]
+    routes: 样本的路由分配 [batch, num_experts]
+    alpha: 距离度量的缩放因子
+    """
+
+    batch_size, seq_len, d_ff, num_experts = expert_outputs.shape
+    device = shared_outputs.device
+
+    # 1. 通用特征约束：不同类别的共享特征应尽可能相似
+    shared_features = shared_outputs.mean(dim=1)  # [batch, d_ff]
+    shared_dist = []
+    for i in range(batch_size):
+        for j in range(batch_size):
+            if i != j:
+                shared_dist.append(hyperbolic_distance(shared_features[i], shared_features[j], alpha))
+    shared_loss = torch.stack(shared_dist).mean()
+
+    # 2. 各路由专家与通用专家不同
+    routes_expanded = routes.unsqueeze(1).unsqueeze(2)
+    expert_selected_outputs = torch.sum(expert_outputs * routes_expanded, dim=-1)  # [batch, seq_len, d_ff]
+    expert_mean = expert_selected_outputs.mean(dim=1)  # [batch, d_ff]
+    expert_shared_dist = hyperbolic_distance(shared_features, expert_mean, alpha)
+    expert_shared_loss = -expert_shared_dist.mean()  # 负号表示最大化
+
+    # 3. 专家之间不同（不同类别专家应有区别）
+    expert_dist = []
+    for i in range(num_experts):
+        for j in range(num_experts):
+            if i != j:
+                expert_i = expert_outputs[:, :, :, i].mean(dim=1)  # [batch, d_ff]
+                expert_j = expert_outputs[:, :, :, j].mean(dim=1)  # [batch, d_ff]
+                expert_dist.append(hyperbolic_distance(expert_i, expert_j, alpha))
+    expert_diversity_loss = -torch.stack(expert_dist).mean()  # 负号表示最大化
+
+    return shared_loss, expert_shared_loss, expert_diversity_loss
 
 def clones(module, N):
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
@@ -249,7 +323,13 @@ class MixtureOfExpertsFFN(nn.Module):
         # 组合输出（共享专家 + MoE 输出）
         output = shared_out + routed_out  # [batch, seq_len, d_model]
 
-        expert_loss = torch.sum(torch.norm(expert_outputs, p=2, dim=-1), dim=-1).mean()  # Example loss
+        # TODO 重写 loss。 loss 包含三部分组成
+        shared_loss, expert_shared_loss, expert_diversity_loss = compute_expert_loss(
+            shared_out, 
+            expert_outputs.view(*expert_outputs.shape[:-1], -1, repeat_factor).sum(dim=-1), 
+            binary_routes)
+        expert_loss = shared_loss + expert_shared_loss + expert_diversity_loss + 12
+
 
         return output, expert_loss
 
