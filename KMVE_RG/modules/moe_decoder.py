@@ -233,7 +233,7 @@ class MixtureOfExpertsFFN(nn.Module):
             PositionwiseFeedForward(d_model, d_ff) for _ in range(num_experts)
         ])
         
-    @timing_decorator
+    # @timing_decorator
     def forward(self, x, routes):
         # routing_weights = routes
         max_indices = routes.argmax(dim=1)
@@ -319,10 +319,10 @@ class MixtureOfExpertsFFN(nn.Module):
         transformed_distances = torch.acosh(1 + alpha * euclidean_distances + 1e-6)
         loss3_argmax = transformed_distances.sum()
         expert_loss = (loss1_argmin - loss2_argmax - loss3_argmax )/1500 + 10
-        print("loss1_argmin: ", loss1_argmin)
-        print("loss2_argmax: ", loss2_argmax)
-        print("loss3_argmax: ", loss3_argmax)
-        print("total expert_loss: ", expert_loss)
+        # print("loss1_argmin: ", loss1_argmin)
+        # print("loss2_argmax: ", loss2_argmax)
+        # print("loss3_argmax: ", loss3_argmax)
+        # print("total expert_loss: ", expert_loss)
         
         return output, expert_loss
 
