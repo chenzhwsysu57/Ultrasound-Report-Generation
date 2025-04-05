@@ -17,39 +17,6 @@ def hyperbolic_distance(x, y, alpha=1.0):
     euclidean_dist = torch.norm(x - y, dim=-1, p=2) ** 2  # ||x - y||^2
     return torch.acosh(1 + alpha * euclidean_dist + 1e-6)  # 避免数值问题
 
-# def hyperbolic_distance(x, y, alpha=1.0):
-#     """优化后的双曲距离计算，避免使用 torch.acosh"""
-#     euclidean_dist = torch.norm(x - y, dim=-1, p=2)  # ||x - y||
-#     return torch.sqrt(2 * alpha * euclidean_dist + 1e-6)  # 近似替代 arcosh
-# def arcosh(x, eps=1e-6):
-#     return torch.log(x + torch.sqrt(x**2 - 1 + eps))
-
-# def compute_expert_loss(shared_out, expert_outputs, routes, alpha=1.0):
-#     """
-#     shared_out: 共享专家的输出, 形状 [batch, seq_len, d_ff]
-#     expert_outputs: 所有专家的输出, 形状 [batch, seq_len, d_ff, num_experts]
-#     routes: 路由选择权重, 形状 [batch, num_experts]
-#     alpha: 超参数，控制 arcosh 距离的尺度
-#     """
-
-#     # 确保 routes 形状匹配 expert_outputs
-#     routes_expanded = routes.unsqueeze(1).unsqueeze(2)  # [batch, 1, 1, num_experts]
-
-#     # 按照路由权重计算专家输出的加权和
-#     expert_selected_outputs = torch.sum(expert_outputs * routes_expanded, dim=-1)  # [batch, seq_len, d_ff]
-
-#     ## 1. 通用特征约束（希望共享专家的特征在不同类别之间接近） min L_shared
-#     shared_loss = arcosh(1 + alpha * torch.norm(shared_out[:, None, :, :] - shared_out[:, :, None, :], dim=-1)).mean()
-
-#     ## 2. 专家与共享专家不同（希望专家与共享专家学到的特征有差异） max L_expert_shared
-#     expert_shared_loss = -arcosh(1 + alpha * torch.norm(expert_selected_outputs - shared_out, dim=-1)).mean()
-
-#     ## 3. 专家之间不同（希望不同专家的特征不相似） max L_expert_diversity
-#     expert_diversity_loss = -arcosh(
-#         1 + alpha * torch.norm(expert_selected_outputs[:, None, :, :] - expert_selected_outputs[:, :, None, :], dim=-1)
-#     ).mean()
-
-#     return shared_loss, expert_shared_loss, expert_diversity_loss
 from functools import wraps
 import time
 def timing_decorator(func):
@@ -63,55 +30,6 @@ def timing_decorator(func):
     return wrapper
 
 @timing_decorator
-def compute_expert_loss(shared_outputs, expert_outputs, routes, alpha=1.0):
-    """
-    计算三种损失
-    shared_outputs: 共享专家的输出 [batch, seq_len, d_ff]
-    expert_outputs: 所有专家的输出 [batch, seq_len, d_ff, num_experts]
-    routes: 样本的路由分配 [batch, num_experts]
-    alpha: 距离度量的缩放因子
-    """
-
-    batch_size, seq_len, d_ff, num_experts = expert_outputs.shape
-    device = shared_outputs.device
-
-    # 1. 通用特征约束：不同类别的共享特征应尽可能相似
-    shared_features = shared_outputs.mean(dim=1)  # [batch, d_ff]
-    # shared_dist = []
-    # for i in range(batch_size):
-    #     for j in range(batch_size):
-    #         if i != j:
-    #             shared_dist.append(hyperbolic_distance(shared_features[i], shared_features[j], alpha))
-    # shared_loss = torch.stack(shared_dist).mean()
-    shared_dist_matrix = hyperbolic_distance(
-        shared_features.unsqueeze(1),  # [batch, 1, d_ff]
-        shared_features.unsqueeze(0),  # [1, batch, d_ff]
-        alpha
-    )  # 得到 [batch, batch] 的距离矩阵
-    shared_loss = shared_dist_matrix.sum() / (batch_size * (batch_size - 1))  # 排除自身
-
-    # 2. 各路由专家与通用专家不同
-    routes_expanded = routes.unsqueeze(1).unsqueeze(2)
-    expert_selected_outputs = torch.sum(expert_outputs * routes_expanded, dim=-1)  # [batch, seq_len, d_ff]
-    expert_mean = expert_selected_outputs.mean(dim=1)  # [batch, d_ff]
-    expert_shared_dist = hyperbolic_distance(shared_features, expert_mean, alpha)
-    expert_shared_loss = -expert_shared_dist.mean()  # 负号表示最大化
-
-    # 3. 专家之间不同（不同类别专家应有区别）
-    # expert_dist = []
-    # for i in range(num_experts):
-    #     for j in range(num_experts):
-    #         if i != j:
-    #             expert_i = expert_outputs[:, :, :, i].mean(dim=1)  # [batch, d_ff]
-    #             expert_j = expert_outputs[:, :, :, j].mean(dim=1)  # [batch, d_ff]
-    #             expert_dist.append(hyperbolic_distance(expert_i, expert_j, alpha))
-    # expert_diversity_loss = -torch.stack(expert_dist).mean()  # 负号表示最大化
-    expert_i = expert_outputs.mean(dim=1).unsqueeze(2)  # [batch, d_ff, 1, num_experts]
-    expert_j = expert_outputs.mean(dim=1).unsqueeze(3)  # [batch, d_ff, num_experts, 1]
-    expert_dist_matrix = hyperbolic_distance(expert_i, expert_j, alpha)  # [batch, d_ff, num_experts, num_experts]
-    expert_diversity_loss = -expert_dist_matrix.sum() / (num_experts * (num_experts - 1))
-
-    return shared_loss, expert_shared_loss, expert_diversity_loss
 
 def clones(module, N):
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
@@ -329,16 +247,12 @@ class MixtureOfExpertsFFN(nn.Module):
         """
         # TODO
         # batch_size, seq_len, _ = x.shape  
-        # 计算所有专家的输出 [batch_size, seq_len, d_ff, num_experts]
+        
         expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=-1)  # [batch, seq_len, d_ff, num_experts]
 
-        # 调整 routing_weights 形状以匹配 expert_outputs
-        # routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
-        batch_size = binary_routes.size(0)
         num_experts = len(self.experts)
         repeat_factor = num_experts // 3
-        # routing_weights = binary_routes.repeat_interleave(repeat_factor, dim=1) 
-        # routing_weights = routing_weights.unsqueeze(1).unsqueeze(2)  # [batch_size, 1, 1, num_experts]
+        
         routing_weights = binary_routes.unsqueeze(1).unsqueeze(2).expand(-1, 1, 1, num_experts)
 
         # 按照 routing_weights 计算专家输出的加权和
@@ -350,13 +264,66 @@ class MixtureOfExpertsFFN(nn.Module):
         output = shared_out + routed_out  # [batch, seq_len, d_model]
 
         # TODO 重写 loss。 loss 包含三部分组成
-        shared_loss, expert_shared_loss, expert_diversity_loss = compute_expert_loss(
-            shared_out, 
-            expert_outputs.view(*expert_outputs.shape[:-1], -1, repeat_factor).sum(dim=-1), 
-            binary_routes)
-        expert_loss = shared_loss + expert_shared_loss + expert_diversity_loss + 12
-        print(shared_loss, expert_shared_loss, expert_diversity_loss)
 
+        ###################
+        ### Shared loss ###
+        ###################
+        mean_tensor = torch.mean(shared_out, dim=1)  # [12, 512]
+        # 计算 L2 距离
+        differences = mean_tensor.unsqueeze(1) - mean_tensor.unsqueeze(0)
+        euclidean_distances = torch.norm(differences, dim=-1)
+
+        alpha = 0.5  # 示例值
+        transformed_distances = torch.acosh(1 + alpha * euclidean_distances + 1e-6)
+
+        # 假设 transformed_distances 是损失的一部分
+        loss1_argmin  = transformed_distances.sum()  # 示例损失计算
+
+        ##############################
+        ### cross share-route loss ###
+        ##############################
+        loss2_argmax = 0.0
+        groups = [torch.nonzero(binary_routes[:, i]).squeeze() for i in range(3)]
+        groups = [group if group.dim() > 0 else group.unsqueeze(0) for group in groups]
+
+        
+        for group in groups:
+            # 提取每组的数据
+            shared_group = shared_out[group]
+            routed_group = routed_out[group]
+            
+            # 计算均值
+            shared_mean = torch.mean(shared_group, dim=1)  # [4, 512]
+            routed_mean = torch.mean(routed_group, dim=1)  # [4, 512]
+            
+            # 计算 L2 距离
+            differences = shared_mean.unsqueeze(1) - routed_mean.unsqueeze(0)
+            euclidean_distances = torch.norm(differences, dim=-1)  # [4, 4]
+            
+            # 应用 torch.acosh
+            transformed_distances = torch.acosh(1 + alpha * euclidean_distances + 1e-6)
+            
+            # 计算组损失
+            group_loss = transformed_distances.sum()
+            loss2_argmax += group_loss
+
+        ##############################
+        ### cross share loss ###
+        ##############################
+        # TODO 针对这三组routed_group，每个group按照sample取均值得到shape为115,1024的向量三个；然后求他们的距离作为 loss3_argmax
+        loss3_argmax = 0.0
+        routed_means = [torch.mean(routed_out[group], dim=0) for group in groups]
+        routed_means_tensor = torch.stack(routed_means)
+        differences = routed_means_tensor.unsqueeze(1) - routed_means_tensor.unsqueeze(0)
+        euclidean_distances = torch.norm(differences, dim=-1)  # [3, 3]
+        transformed_distances = torch.acosh(1 + alpha * euclidean_distances + 1e-6)
+        loss3_argmax = transformed_distances.sum()
+        expert_loss = (loss1_argmin - loss2_argmax - loss3_argmax )/1500 + 10
+        print("loss1_argmin: ", loss1_argmin)
+        print("loss2_argmax: ", loss2_argmax)
+        print("loss3_argmax: ", loss3_argmax)
+        print("total expert_loss: ", expert_loss)
+        
         return output, expert_loss
 
         
