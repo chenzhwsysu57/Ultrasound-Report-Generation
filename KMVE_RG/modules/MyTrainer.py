@@ -472,8 +472,8 @@ class MoETrainer(BaseTrainer):
         self.test_dataloader = test_dataloader
 
         self.lambda1 = 0.6 # tf 交叉熵的loss
-        self.lambda2 = 0.4 # MoE 的 loss
-        
+        self.lambda2 = 0.4 # 图像 的 loss
+        self.lambda3 = 0.1 # MoE loss
     
 
     def logloss(self, y_true, y_pred, eps=1e-15):
@@ -503,11 +503,9 @@ class MoETrainer(BaseTrainer):
             RG_L = self.criterion(output, reports_ids, reports_masks)
             batch_loss = self.lambda1 * RG_L + self.lambda2 * ORGAN_L + expert_loss
             batch_loss /= accumulation_steps
-            train_loss = train_loss + self.lambda1 * RG_L.item() + self.lambda2 * ORGAN_L.item() 
-            t1 = time.time()
+            train_loss = train_loss + self.lambda1 * RG_L.item() + self.lambda2 * ORGAN_L.item() + self.lambda3 * expert_loss.item()
+            
             batch_loss.backward()
-            t2 = time.time()
-            # print(f"Batch {batch_idx} - Backward pass time: {t2 - t1:.4f} seconds")
             
             if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(self.train_dataloader):
                 torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)

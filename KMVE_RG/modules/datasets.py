@@ -19,7 +19,7 @@ def timing_decorator(func):
         return result
     return wrapper
 class BaseDataset(Dataset):
-    @timing_decorator
+    # @timing_decorator
     def __init__(self, args, tokenizer, split, transform=None):
         self.image_dir = args.image_dir
         self.ann_path = args.ann_path
