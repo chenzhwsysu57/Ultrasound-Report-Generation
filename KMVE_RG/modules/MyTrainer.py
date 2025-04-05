@@ -507,7 +507,7 @@ class MoETrainer(BaseTrainer):
             t1 = time.time()
             batch_loss.backward()
             t2 = time.time()
-            print(f"Batch {batch_idx} - Backward pass time: {t2 - t1:.4f} seconds")
+            # print(f"Batch {batch_idx} - Backward pass time: {t2 - t1:.4f} seconds")
             
             if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(self.train_dataloader):
                 torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
