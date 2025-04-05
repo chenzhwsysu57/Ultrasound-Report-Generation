@@ -29,7 +29,7 @@ def timing_decorator(func):
         return result
     return wrapper
 
-@timing_decorator
+
 
 def clones(module, N):
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
