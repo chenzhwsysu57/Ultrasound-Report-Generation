@@ -473,7 +473,7 @@ class MoETrainer(BaseTrainer):
 
         self.lambda1 = 0.6 # tf 交叉熵的loss
         self.lambda2 = 0.4 # 图像 的 loss
-        self.lambda3 = 0.1 # MoE loss
+        self.lambda3 = 0.01 # MoE loss
     
 
     def logloss(self, y_true, y_pred, eps=1e-15):

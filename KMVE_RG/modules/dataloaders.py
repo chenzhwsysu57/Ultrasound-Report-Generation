@@ -108,6 +108,7 @@ class MyDataLoader(DataLoader):
             self.batch_size = args.evaluate_batch
 
         if self.args.custom_sampler:
+            print("Using custom sampler")
             self.sampler = BalancedSampler(self.dataset)
             self.shuffle = None
         else:
