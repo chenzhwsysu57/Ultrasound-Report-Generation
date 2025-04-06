@@ -473,7 +473,7 @@ class MoETrainer(BaseTrainer):
 
         self.lambda1 = 0.6 # tf 交叉熵的loss
         self.lambda2 = 0.4 # 图像 的 loss
-        self.lambda3 = 0.01 # MoE loss
+        self.lambda3 = 0.0001 # MoE loss
     
 
     def logloss(self, y_true, y_pred, eps=1e-15):
@@ -501,7 +501,7 @@ class MoETrainer(BaseTrainer):
             output, pred_classified, expert_loss = self.model(images, reports_ids, mode='train')
             ORGAN_L = self.criterionBCE(pred_classified, mesh_label)
             RG_L = self.criterion(output, reports_ids, reports_masks)
-            batch_loss = self.lambda1 * RG_L + self.lambda2 * ORGAN_L + expert_loss
+            batch_loss = self.lambda1 * RG_L + self.lambda2 * ORGAN_L + self.lambda3 * expert_loss
             batch_loss /= accumulation_steps
             train_loss = train_loss + self.lambda1 * RG_L.item() + self.lambda2 * ORGAN_L.item() + self.lambda3 * expert_loss.item()
             
