@@ -261,7 +261,8 @@ class MixtureOfExpertsFFN(nn.Module):
         shared_out = sum(expert(x) for expert in self.shared_experts)
         # 组合输出（共享专家 + MoE 输出）
         output = shared_out + routed_out  # [batch, seq_len, d_model]
-
+        if self.training == False:
+            return output, 0
         # TODO 重写 loss。 loss 包含三部分组成
 
         ###################
@@ -327,7 +328,7 @@ class MixtureOfExpertsFFN(nn.Module):
 
         
 class MoEDecoderOnly(GenModel):
-
+    
     def make_model(self, tgt_vocab):
         c = copy.deepcopy
         attn = MultiHeadedAttention(self.num_heads, self.d_model)
@@ -360,6 +361,9 @@ class MoEDecoderOnly(GenModel):
         self.model = self.make_model(tgt_vocab)
         self.logit = nn.Linear(args.d_model, tgt_vocab)
         self.routes = None
+
+        self.training = True
+
     def _prepare_feature(self, fc_feats, att_feats, att_masks):
         att_feats, seq, att_masks, seq_mask = self._prepare_feature_forward(att_feats, att_masks)
         memory = self.model.encode(att_feats, att_masks)
@@ -393,5 +397,7 @@ class MoEDecoderOnly(GenModel):
             ys = it.unsqueeze(1)
         else:
             ys = torch.cat([state[0][0], it.unsqueeze(1)], dim=1)
+        self.training = False
         out, _ = self.model.decode(memory, mask, ys, subsequent_mask(ys.size(1)).to(memory.device), routes=self.routes)
+        self.training = True
         return out[:, -1], [ys.unsqueeze(0)]
