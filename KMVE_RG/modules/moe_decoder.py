@@ -125,24 +125,23 @@ class DecoderLayer(nn.Module):
         self.self_attn = self_attn
         self.src_attn = src_attn
         self.feed_forward = feed_forward
-        self.norm1 = LayerNorm(self.d_model)
-        self.norm2 = LayerNorm(self.d_model)
-        self.norm3 = LayerNorm(self.d_model)
+        self.norms = clones(LayerNorm(d_model), 3)
+        self.dropouts = clones(nn.Dropout(dropout), 3)
 
     def forward(self, x, hidden_states, src_mask, tgt_mask, routes):
         m = hidden_states
 
-        x = x + self.self_attn(x, x, x, tgt_mask)
-        x = self.norm1(x)
+        normx = self.norms[0](x)
+        x = x + self.dropouts[0](self.self_attn(normx, normx, normx, tgt_mask))
 
-        x = x + self.src_attn(x, m, m, src_mask)
-        x = self.norm2(x)
+        normx = self.norms[1](x)
+        x = x + self.dropouts[1](self.src_attn(normx, m, m, src_mask))
 
-        ffn_out, loss = self.feed_forward(x, routes)  
-        x = x + ffn_out  
-        x = self.norm3(x)
+        normx = self.norms[2](x)
+        ffn_out, loss = self.feed_forward(normx, routes)
+        x = x + self.dropouts[2](ffn_out)
 
-        return x, loss  
+        return x, loss
 
 
 class MultiHeadedAttention(nn.Module):
