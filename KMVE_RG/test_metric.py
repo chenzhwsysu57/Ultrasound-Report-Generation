@@ -26,16 +26,17 @@ def main(cmd_args, config_args):
     model_class = getattr(model_module, cmd_args["model"])
 
     tokenizer = Tokenizer(config_args)
-    test_dataloader = MyDataLoader(config_args, tokenizer, split='test', shuffle=True)
+    test_dataloader = MyDataLoader(config_args, tokenizer, split='test', shuffle=False)
     model = model_class(config_args, tokenizer)
     model = model.to(device)
-    model.eval()
+    
 
     # load weight
     checkpoint = torch.load(cmd_args["ckpt"])
     model.load_state_dict(checkpoint['state_dict'])
     print(f"checkpoint loaded from {cmd_args['ckpt']}")
     metric_ftns = compute_scores
+    model.eval()
     with torch.no_grad():
         test_gts, test_res, test_organ = [], [], []
 
@@ -56,12 +57,22 @@ def main(cmd_args, config_args):
             organ_res = {i: [re] for i, (re, org) in enumerate(zip(test_res, test_organ)) if org == organ}
             organ_metrics[organ] = metric_ftns(organ_gts, organ_res)
             
-        print(f"\033[1;35mtest result on {cmd_args['comment']}\033[0m")
+        print(f"\033[1;35mtest result on {cmd_args['comment']}, seed = {config_args.seed}\033[0m")
+        win = 0
         for organ in set(test_organ):
             # 输出结果，只保留三位小数
+            if organ == 'Mammary' and organ_metrics[organ]['BLEU_1'] > 0.761:
+                win += 1
+            elif organ == 'Liver' and organ_metrics[organ]['BLEU_1'] > 0.872:
+                win += 1
+            elif organ == 'Thyroid' and organ_metrics[organ]['BLEU_1'] > 0.729:
+                win += 1
+            else:
+                pass
             result = f"{organ},{cmd_args['method']},{organ_metrics[organ]['BLEU_1']:.3f},{organ_metrics[organ]['BLEU_2']:.3f},{organ_metrics[organ]['BLEU_3']:.3f},{organ_metrics[organ]['BLEU_4']:.3f},{organ_metrics[organ]['METEOR']:.3f},{organ_metrics[organ]['ROUGE_L']:.3f},0,0,0,0"
-            
+        
             print(result)
+        print(f"\033[1;36m win = {win} \033[0m")
 
 
 if __name__ == '__main__':

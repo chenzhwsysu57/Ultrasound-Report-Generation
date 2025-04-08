@@ -1,0 +1,522 @@
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.281 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 35, in main
+    checkpoint = torch.load(cmd_args["ckpt"])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-share1route3-dff1024-bs64-seed43/Models/all_epoch_70_checkpoint.pth'
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.282 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 35, in main
+    checkpoint = torch.load(cmd_args["ckpt"])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-share1route3-dff1024-bs64-seed43/Models/all_epoch_70_checkpoint.pth'
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.277 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 35, in main
+    checkpoint = torch.load(cmd_args["ckpt"])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-share1route3-dff1024-bs64-seed43/Models/all_epoch_70_checkpoint.pth'
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.252 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 35, in main
+    checkpoint = torch.load(cmd_args["ckpt"])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moe-share1route3-dff1024-bs64-seed43/Models/all_epoch_70_checkpoint.pth'
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.271 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 36, in main
+    model.load_state_dict(checkpoint['state_dict'])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2581, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for MoEModel:
+	Missing key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.norms.0.gamma", "encoder_decoder.model.decoder.layers.0.norms.0.beta", "encoder_decoder.model.decoder.layers.0.norms.1.gamma", "encoder_decoder.model.decoder.layers.0.norms.1.beta", "encoder_decoder.model.decoder.layers.0.norms.2.gamma", "encoder_decoder.model.decoder.layers.0.norms.2.beta", "encoder_decoder.model.decoder.layers.1.norms.0.gamma", "encoder_decoder.model.decoder.layers.1.norms.0.beta", "encoder_decoder.model.decoder.layers.1.norms.1.gamma", "encoder_decoder.model.decoder.layers.1.norms.1.beta", "encoder_decoder.model.decoder.layers.1.norms.2.gamma", "encoder_decoder.model.decoder.layers.1.norms.2.beta", "encoder_decoder.model.decoder.layers.2.norms.0.gamma", "encoder_decoder.model.decoder.layers.2.norms.0.beta", "encoder_decoder.model.decoder.layers.2.norms.1.gamma", "encoder_decoder.model.decoder.layers.2.norms.1.beta", "encoder_decoder.model.decoder.layers.2.norms.2.gamma", "encoder_decoder.model.decoder.layers.2.norms.2.beta". 
+	Unexpected key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.beta". 
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.274 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 36, in main
+    model.load_state_dict(checkpoint['state_dict'])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2581, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for MoEModel:
+	Missing key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.norms.0.gamma", "encoder_decoder.model.decoder.layers.0.norms.0.beta", "encoder_decoder.model.decoder.layers.0.norms.1.gamma", "encoder_decoder.model.decoder.layers.0.norms.1.beta", "encoder_decoder.model.decoder.layers.0.norms.2.gamma", "encoder_decoder.model.decoder.layers.0.norms.2.beta", "encoder_decoder.model.decoder.layers.1.norms.0.gamma", "encoder_decoder.model.decoder.layers.1.norms.0.beta", "encoder_decoder.model.decoder.layers.1.norms.1.gamma", "encoder_decoder.model.decoder.layers.1.norms.1.beta", "encoder_decoder.model.decoder.layers.1.norms.2.gamma", "encoder_decoder.model.decoder.layers.1.norms.2.beta", "encoder_decoder.model.decoder.layers.2.norms.0.gamma", "encoder_decoder.model.decoder.layers.2.norms.0.beta", "encoder_decoder.model.decoder.layers.2.norms.1.gamma", "encoder_decoder.model.decoder.layers.2.norms.1.beta", "encoder_decoder.model.decoder.layers.2.norms.2.gamma", "encoder_decoder.model.decoder.layers.2.norms.2.beta". 
+	Unexpected key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.beta". 
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.293 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 36, in main
+    model.load_state_dict(checkpoint['state_dict'])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2581, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for MoEModel:
+	Missing key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.norms.0.gamma", "encoder_decoder.model.decoder.layers.0.norms.0.beta", "encoder_decoder.model.decoder.layers.0.norms.1.gamma", "encoder_decoder.model.decoder.layers.0.norms.1.beta", "encoder_decoder.model.decoder.layers.0.norms.2.gamma", "encoder_decoder.model.decoder.layers.0.norms.2.beta", "encoder_decoder.model.decoder.layers.1.norms.0.gamma", "encoder_decoder.model.decoder.layers.1.norms.0.beta", "encoder_decoder.model.decoder.layers.1.norms.1.gamma", "encoder_decoder.model.decoder.layers.1.norms.1.beta", "encoder_decoder.model.decoder.layers.1.norms.2.gamma", "encoder_decoder.model.decoder.layers.1.norms.2.beta", "encoder_decoder.model.decoder.layers.2.norms.0.gamma", "encoder_decoder.model.decoder.layers.2.norms.0.beta", "encoder_decoder.model.decoder.layers.2.norms.1.gamma", "encoder_decoder.model.decoder.layers.2.norms.1.beta", "encoder_decoder.model.decoder.layers.2.norms.2.gamma", "encoder_decoder.model.decoder.layers.2.norms.2.beta". 
+	Unexpected key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.beta". 
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.296 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 130, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 35, in main
+    checkpoint = torch.load(cmd_args["ckpt"])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1462, in load
+    return _load(
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1964, in _load
+    result = unpickler.load()
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/_weights_only_unpickler.py", line 512, in load
+    self.append(self.persistent_load(pid))
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1928, in persistent_load
+    typed_storage = load_tensor(
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 1900, in load_tensor
+    wrap_storage=restore_location(storage, location),
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 693, in default_restore_location
+    result = fn(storage, location)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/serialization.py", line 632, in _deserialize
+    return obj.to(device=device)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/storage.py", line 292, in to
+    return _to(self, device, non_blocking)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/_utils.py", line 100, in _to
+    untyped_storage.copy_(self, non_blocking)
+KeyboardInterrupt
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.270 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:02<00:59,  2.21s/it]  7%|▋         | 2/28 [00:04<00:53,  2.06s/it] 11%|█         | 3/28 [00:06<00:51,  2.07s/it] 14%|█▍        | 4/28 [00:09<00:57,  2.41s/it] 18%|█▊        | 5/28 [00:11<00:52,  2.29s/it] 21%|██▏       | 6/28 [00:13<00:47,  2.18s/it] 25%|██▌       | 7/28 [00:15<00:44,  2.13s/it] 29%|██▊       | 8/28 [00:16<00:38,  1.90s/it] 32%|███▏      | 9/28 [00:17<00:31,  1.66s/it] 36%|███▌      | 10/28 [00:18<00:26,  1.50s/it] 39%|███▉      | 11/28 [00:20<00:23,  1.39s/it] 43%|████▎     | 12/28 [00:21<00:24,  1.50s/it] 46%|████▋     | 13/28 [00:23<00:24,  1.60s/it] 50%|█████     | 14/28 [00:25<00:23,  1.71s/it] 54%|█████▎    | 15/28 [00:27<00:23,  1.83s/it] 57%|█████▋    | 16/28 [00:30<00:23,  1.98s/it] 61%|██████    | 17/28 [00:33<00:25,  2.28s/it] 64%|██████▍   | 18/28 [00:36<00:25,  2.56s/it] 68%|██████▊   | 19/28 [00:40<00:27,  3.02s/it] 71%|███████▏  | 20/28 [00:45<00:28,  3.62s/it] 75%|███████▌  | 21/28 [00:49<00:26,  3.75s/it] 79%|███████▊  | 22/28 [00:53<00:22,  3.82s/it] 82%|████████▏ | 23/28 [00:57<00:19,  3.87s/it] 86%|████████▌ | 24/28 [01:01<00:15,  3.92s/it] 89%|████████▉ | 25/28 [01:05<00:11,  3.95s/it] 93%|█████████▎| 26/28 [01:09<00:07,  3.99s/it] 96%|█████████▋| 27/28 [01:14<00:04,  4.30s/it]100%|██████████| 28/28 [01:18<00:00,  4.21s/it]100%|██████████| 28/28 [01:18<00:00,  2.80s/it]
+Function compute_scores took 4.0954 seconds
+Function compute_scores took 3.9631 seconds
+Function compute_scores took 4.6669 seconds
+[1;35mtest result on moe, seed = 1000[0m
+Thyroid,moe,0.695,0.636,0.586,0.542,0.424,0.726,0,0,0,0
+Mammary,moe,0.737,0.684,0.644,0.611,0.454,0.750,0,0,0,0
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.273 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:04<02:03,  4.57s/it]  7%|▋         | 2/28 [00:09<02:11,  5.05s/it] 11%|█         | 3/28 [00:14<01:55,  4.60s/it] 14%|█▍        | 4/28 [00:18<01:45,  4.38s/it] 18%|█▊        | 5/28 [00:22<01:37,  4.22s/it] 21%|██▏       | 6/28 [00:24<01:23,  3.78s/it] 25%|██▌       | 7/28 [00:27<01:13,  3.51s/it] 29%|██▊       | 8/28 [00:30<01:06,  3.34s/it] 32%|███▏      | 9/28 [00:33<01:01,  3.24s/it] 36%|███▌      | 10/28 [00:36<00:52,  2.90s/it] 39%|███▉      | 11/28 [00:38<00:44,  2.64s/it] 43%|████▎     | 12/28 [00:39<00:36,  2.29s/it] 46%|████▋     | 13/28 [00:40<00:29,  1.98s/it] 50%|█████     | 14/28 [00:43<00:32,  2.34s/it] 54%|█████▎    | 15/28 [00:46<00:29,  2.27s/it] 57%|█████▋    | 16/28 [00:48<00:26,  2.22s/it] 61%|██████    | 17/28 [00:50<00:24,  2.18s/it] 64%|██████▍   | 18/28 [00:52<00:21,  2.18s/it] 68%|██████▊   | 19/28 [00:54<00:19,  2.20s/it] 71%|███████▏  | 20/28 [00:57<00:18,  2.28s/it] 75%|███████▌  | 21/28 [01:00<00:18,  2.57s/it] 79%|███████▊  | 22/28 [01:04<00:18,  3.00s/it] 82%|████████▏ | 23/28 [01:08<00:16,  3.31s/it] 86%|████████▌ | 24/28 [01:12<00:14,  3.56s/it] 89%|████████▉ | 25/28 [01:18<00:12,  4.11s/it] 93%|█████████▎| 26/28 [01:22<00:08,  4.14s/it] 96%|█████████▋| 27/28 [01:26<00:04,  4.11s/it]100%|██████████| 28/28 [01:29<00:00,  3.97s/it]100%|██████████| 28/28 [01:29<00:00,  3.21s/it]
+Function compute_scores took 3.6870 seconds
+Function compute_scores took 4.7718 seconds
+Function compute_scores took 4.2192 seconds
+[1;35mtest result on moe, seed = 1001[0m
+Mammary,moe,0.741,0.688,0.648,0.616,0.456,0.751,0,0,0,0
+Liver,moe,0.880,0.853,0.832,0.814,0.548,0.872,0,0,0,0
+Thyroid,moe,0.695,0.635,0.584,0.540,0.422,0.721,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.284 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:04<02:01,  4.50s/it]  7%|▋         | 2/28 [00:08<01:48,  4.18s/it] 11%|█         | 3/28 [00:12<01:42,  4.09s/it] 14%|█▍        | 4/28 [00:16<01:37,  4.08s/it] 18%|█▊        | 5/28 [00:20<01:34,  4.10s/it] 21%|██▏       | 6/28 [00:24<01:30,  4.10s/it] 25%|██▌       | 7/28 [00:28<01:23,  3.96s/it] 29%|██▊       | 8/28 [00:32<01:19,  4.00s/it] 32%|███▏      | 9/28 [00:35<01:10,  3.73s/it] 36%|███▌      | 10/28 [00:38<01:03,  3.52s/it] 39%|███▉      | 11/28 [00:41<00:56,  3.34s/it] 43%|████▎     | 12/28 [00:44<00:51,  3.19s/it] 46%|████▋     | 13/28 [00:47<00:47,  3.13s/it] 50%|█████     | 14/28 [00:50<00:43,  3.08s/it] 54%|█████▎    | 15/28 [00:52<00:37,  2.86s/it] 57%|█████▋    | 16/28 [00:54<00:31,  2.62s/it] 61%|██████    | 17/28 [00:57<00:27,  2.50s/it] 64%|██████▍   | 18/28 [00:59<00:23,  2.39s/it] 68%|██████▊   | 19/28 [01:01<00:20,  2.33s/it] 71%|███████▏  | 20/28 [01:03<00:18,  2.31s/it] 75%|███████▌  | 21/28 [01:06<00:17,  2.56s/it] 79%|███████▊  | 22/28 [01:09<00:15,  2.53s/it] 82%|████████▏ | 23/28 [01:12<00:13,  2.72s/it] 86%|████████▌ | 24/28 [01:16<00:12,  3.13s/it] 89%|████████▉ | 25/28 [01:20<00:10,  3.38s/it] 93%|█████████▎| 26/28 [01:24<00:07,  3.59s/it] 96%|█████████▋| 27/28 [01:28<00:03,  3.73s/it]100%|██████████| 28/28 [01:32<00:00,  3.77s/it]100%|██████████| 28/28 [01:32<00:00,  3.30s/it]
+Function compute_scores took 4.7464 seconds
+Function compute_scores took 4.8555 seconds
+Function compute_scores took 3.9328 seconds
+[1;35mtest result on moe, seed = 1002[0m
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+Thyroid,moe,0.698,0.637,0.585,0.540,0.423,0.719,0,0,0,0
+Mammary,moe,0.724,0.672,0.634,0.603,0.447,0.747,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.276 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:04<02:00,  4.46s/it]  7%|▋         | 2/28 [00:08<01:50,  4.24s/it] 11%|█         | 3/28 [00:12<01:44,  4.16s/it] 14%|█▍        | 4/28 [00:16<01:38,  4.12s/it] 18%|█▊        | 5/28 [00:21<01:41,  4.39s/it] 21%|██▏       | 6/28 [00:25<01:33,  4.27s/it] 25%|██▌       | 7/28 [00:29<01:27,  4.17s/it] 29%|██▊       | 8/28 [00:32<01:17,  3.89s/it] 32%|███▏      | 9/28 [00:36<01:14,  3.95s/it] 36%|███▌      | 10/28 [00:40<01:11,  3.99s/it] 39%|███▉      | 11/28 [00:45<01:08,  4.05s/it] 43%|████▎     | 12/28 [00:49<01:05,  4.09s/it] 46%|████▋     | 13/28 [00:54<01:07,  4.52s/it] 50%|█████     | 14/28 [00:59<01:05,  4.70s/it] 54%|█████▎    | 15/28 [01:05<01:02,  4.81s/it] 57%|█████▋    | 16/28 [01:09<00:55,  4.64s/it] 61%|██████    | 17/28 [01:13<00:48,  4.39s/it] 64%|██████▍   | 18/28 [01:16<00:40,  4.09s/it] 68%|██████▊   | 19/28 [01:19<00:34,  3.80s/it] 71%|███████▏  | 20/28 [01:22<00:28,  3.58s/it] 75%|███████▌  | 21/28 [01:26<00:26,  3.77s/it] 79%|███████▊  | 22/28 [01:30<00:22,  3.69s/it] 82%|████████▏ | 23/28 [01:34<00:19,  3.91s/it] 86%|████████▌ | 24/28 [01:39<00:17,  4.27s/it] 89%|████████▉ | 25/28 [01:45<00:13,  4.52s/it] 93%|█████████▎| 26/28 [01:50<00:09,  4.69s/it] 96%|█████████▋| 27/28 [01:55<00:04,  4.81s/it]100%|██████████| 28/28 [02:00<00:00,  5.09s/it]100%|██████████| 28/28 [02:00<00:00,  4.32s/it]
+Function compute_scores took 4.4474 seconds
+Function compute_scores took 4.3567 seconds
+Function compute_scores took 4.9811 seconds
+[1;35mtest result on moe, seed = 1003[0m
+Mammary,moe,0.744,0.700,0.666,0.638,0.467,0.774,0,0,0,0
+Thyroid,moe,0.692,0.631,0.580,0.536,0.422,0.716,0,0,0,0
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.281 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:05<02:26,  5.42s/it]  7%|▋         | 2/28 [00:11<02:29,  5.74s/it] 11%|█         | 3/28 [00:16<02:13,  5.33s/it] 14%|█▍        | 4/28 [00:20<01:57,  4.88s/it] 18%|█▊        | 5/28 [00:24<01:46,  4.63s/it] 21%|██▏       | 6/28 [00:28<01:38,  4.50s/it] 25%|██▌       | 7/28 [00:32<01:30,  4.32s/it] 29%|██▊       | 8/28 [00:35<01:18,  3.92s/it] 32%|███▏      | 9/28 [00:38<01:09,  3.66s/it] 36%|███▌      | 10/28 [00:41<01:01,  3.44s/it] 39%|███▉      | 11/28 [00:45<01:00,  3.58s/it] 43%|████▎     | 12/28 [00:48<00:54,  3.41s/it] 46%|████▋     | 13/28 [00:51<00:49,  3.28s/it] 50%|█████     | 14/28 [00:55<00:46,  3.32s/it] 54%|█████▎    | 15/28 [00:59<00:45,  3.52s/it] 57%|█████▋    | 16/28 [01:03<00:43,  3.64s/it] 61%|██████    | 17/28 [01:06<00:39,  3.58s/it] 64%|██████▍   | 18/28 [01:10<00:35,  3.54s/it] 68%|██████▊   | 19/28 [01:13<00:30,  3.40s/it] 71%|███████▏  | 20/28 [01:17<00:28,  3.57s/it] 75%|███████▌  | 21/28 [01:20<00:24,  3.44s/it] 79%|███████▊  | 22/28 [01:23<00:19,  3.32s/it] 82%|████████▏ | 23/28 [01:26<00:16,  3.30s/it] 86%|████████▌ | 24/28 [01:30<00:14,  3.59s/it] 89%|████████▉ | 25/28 [01:34<00:11,  3.78s/it] 93%|█████████▎| 26/28 [01:38<00:07,  3.84s/it] 96%|█████████▋| 27/28 [01:42<00:03,  3.90s/it]100%|██████████| 28/28 [01:46<00:00,  3.93s/it]100%|██████████| 28/28 [01:46<00:00,  3.82s/it]
+Function compute_scores took 4.8967 seconds
+Function compute_scores took 5.0129 seconds
+Function compute_scores took 4.1152 seconds
+[1;35mtest result on moe, seed = 1004[0m
+Mammary,moe,0.752,0.705,0.669,0.639,0.470,0.780,0,0,0,0
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+Thyroid,moe,0.696,0.636,0.585,0.541,0.426,0.727,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.258 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:05<02:30,  5.57s/it]  7%|▋         | 2/28 [00:10<02:17,  5.27s/it] 11%|█         | 3/28 [00:16<02:18,  5.56s/it] 14%|█▍        | 4/28 [00:21<02:08,  5.34s/it] 18%|█▊        | 5/28 [00:26<02:00,  5.23s/it] 21%|██▏       | 6/28 [00:31<01:53,  5.16s/it] 25%|██▌       | 7/28 [00:36<01:47,  5.10s/it] 29%|██▊       | 8/28 [00:41<01:41,  5.07s/it] 32%|███▏      | 9/28 [00:45<01:30,  4.78s/it] 36%|███▌      | 10/28 [00:50<01:27,  4.85s/it] 39%|███▉      | 11/28 [00:54<01:18,  4.61s/it] 43%|████▎     | 12/28 [00:58<01:11,  4.46s/it] 46%|████▋     | 13/28 [01:03<01:05,  4.39s/it] 50%|█████     | 14/28 [01:08<01:04,  4.60s/it] 54%|█████▎    | 15/28 [01:13<01:01,  4.73s/it] 57%|█████▋    | 16/28 [01:18<00:57,  4.82s/it] 61%|██████    | 17/28 [01:24<00:56,  5.14s/it] 64%|██████▍   | 18/28 [01:28<00:49,  5.00s/it] 68%|██████▊   | 19/28 [01:32<00:41,  4.65s/it] 71%|███████▏  | 20/28 [01:35<00:33,  4.18s/it] 75%|███████▌  | 21/28 [01:38<00:26,  3.85s/it] 79%|███████▊  | 22/28 [01:41<00:21,  3.60s/it] 82%|████████▏ | 23/28 [01:44<00:17,  3.43s/it] 86%|████████▌ | 24/28 [01:48<00:13,  3.38s/it] 89%|████████▉ | 25/28 [01:52<00:10,  3.62s/it] 93%|█████████▎| 26/28 [01:58<00:08,  4.25s/it] 96%|█████████▋| 27/28 [02:02<00:04,  4.46s/it]100%|██████████| 28/28 [02:07<00:00,  4.54s/it]100%|██████████| 28/28 [02:07<00:00,  4.56s/it]
+Function compute_scores took 4.1663 seconds
+Function compute_scores took 4.2188 seconds
+Function compute_scores took 4.6789 seconds
+[1;35mtest result on moe, seed = 1005[0m
+Mammary,moe,0.742,0.691,0.653,0.622,0.458,0.762,0,0,0,0
+Thyroid,moe,0.692,0.630,0.577,0.531,0.420,0.707,0,0,0,0
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.275 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:05<02:27,  5.45s/it]  7%|▋         | 2/28 [00:10<02:15,  5.22s/it] 11%|█         | 3/28 [00:15<02:08,  5.13s/it] 14%|█▍        | 4/28 [00:20<02:01,  5.08s/it] 18%|█▊        | 5/28 [00:25<01:55,  5.01s/it] 21%|██▏       | 6/28 [00:31<01:56,  5.31s/it] 25%|██▌       | 7/28 [00:36<01:49,  5.21s/it] 29%|██▊       | 8/28 [00:41<01:43,  5.16s/it] 32%|███▏      | 9/28 [00:46<01:35,  5.01s/it] 36%|███▌      | 10/28 [00:50<01:25,  4.73s/it] 39%|███▉      | 11/28 [00:54<01:16,  4.53s/it] 43%|████▎     | 12/28 [00:58<01:10,  4.39s/it] 46%|████▋     | 13/28 [01:02<01:04,  4.27s/it] 50%|█████     | 14/28 [01:06<01:00,  4.33s/it] 54%|█████▎    | 15/28 [01:10<00:55,  4.25s/it] 57%|█████▋    | 16/28 [01:14<00:50,  4.20s/it] 61%|██████    | 17/28 [01:19<00:45,  4.18s/it] 64%|██████▍   | 18/28 [01:23<00:41,  4.16s/it] 68%|██████▊   | 19/28 [01:27<00:36,  4.08s/it] 71%|███████▏  | 20/28 [01:30<00:30,  3.76s/it] 75%|███████▌  | 21/28 [01:32<00:23,  3.35s/it] 79%|███████▊  | 22/28 [01:34<00:17,  2.96s/it] 82%|████████▏ | 23/28 [01:36<00:13,  2.70s/it] 86%|████████▌ | 24/28 [01:39<00:11,  2.81s/it] 89%|████████▉ | 25/28 [01:41<00:07,  2.65s/it] 93%|█████████▎| 26/28 [01:44<00:04,  2.49s/it] 96%|█████████▋| 27/28 [01:46<00:02,  2.41s/it]100%|██████████| 28/28 [01:48<00:00,  2.43s/it]100%|██████████| 28/28 [01:48<00:00,  3.88s/it]
+Function compute_scores took 5.0043 seconds
+Function compute_scores took 3.9639 seconds
+Function compute_scores took 4.0703 seconds
+[1;35mtest result on moe, seed = 1006[0m
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+Mammary,moe,0.719,0.665,0.626,0.594,0.444,0.738,0,0,0,0
+Thyroid,moe,0.703,0.644,0.593,0.550,0.429,0.726,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.318 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:06<02:51,  6.33s/it]  7%|▋         | 2/28 [00:11<02:25,  5.58s/it] 11%|█         | 3/28 [00:16<02:13,  5.33s/it] 14%|█▍        | 4/28 [00:21<02:05,  5.21s/it] 18%|█▊        | 5/28 [00:26<01:58,  5.17s/it] 21%|██▏       | 6/28 [00:31<01:52,  5.13s/it] 25%|██▌       | 7/28 [00:37<01:53,  5.40s/it] 29%|██▊       | 8/28 [00:42<01:46,  5.30s/it] 32%|███▏      | 9/28 [00:46<01:33,  4.91s/it] 36%|███▌      | 10/28 [00:50<01:23,  4.64s/it] 39%|███▉      | 11/28 [00:54<01:15,  4.46s/it] 43%|████▎     | 12/28 [00:58<01:09,  4.34s/it] 46%|████▋     | 13/28 [01:03<01:04,  4.31s/it] 50%|█████     | 14/28 [01:08<01:06,  4.78s/it] 54%|█████▎    | 15/28 [01:14<01:03,  4.89s/it] 57%|█████▋    | 16/28 [01:19<00:59,  4.94s/it] 61%|██████    | 17/28 [01:24<00:54,  4.99s/it] 64%|██████▍   | 18/28 [01:29<00:49,  5.00s/it] 68%|██████▊   | 19/28 [01:34<00:45,  5.01s/it] 71%|███████▏  | 20/28 [01:39<00:40,  5.02s/it] 75%|███████▌  | 21/28 [01:45<00:37,  5.34s/it] 79%|███████▊  | 22/28 [01:50<00:31,  5.22s/it] 82%|████████▏ | 23/28 [01:54<00:24,  4.93s/it] 86%|████████▌ | 24/28 [01:58<00:18,  4.53s/it] 89%|████████▉ | 25/28 [02:01<00:12,  4.04s/it] 93%|█████████▎| 26/28 [02:04<00:07,  3.75s/it] 96%|█████████▋| 27/28 [02:07<00:03,  3.55s/it]100%|██████████| 28/28 [02:10<00:00,  3.42s/it]100%|██████████| 28/28 [02:10<00:00,  4.66s/it]
+Function compute_scores took 5.0463 seconds
+Function compute_scores took 4.1199 seconds
+Function compute_scores took 4.9894 seconds
+[1;35mtest result on moe, seed = 1007[0m
+Thyroid,moe,0.692,0.629,0.576,0.530,0.421,0.711,0,0,0,0
+Mammary,moe,0.746,0.696,0.659,0.629,0.463,0.769,0,0,0,0
+Liver,moe,0.881,0.854,0.832,0.815,0.549,0.872,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.255 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:05<02:29,  5.54s/it]  7%|▋         | 2/28 [00:10<02:16,  5.27s/it] 11%|█         | 3/28 [00:16<02:19,  5.57s/it] 14%|█▍        | 4/28 [00:21<02:09,  5.38s/it] 18%|█▊        | 5/28 [00:26<02:00,  5.23s/it] 21%|██▏       | 6/28 [00:31<01:53,  5.16s/it] 25%|██▌       | 7/28 [00:36<01:47,  5.12s/it] 29%|██▊       | 8/28 [00:41<01:40,  5.03s/it] 32%|███▏      | 9/28 [00:45<01:29,  4.72s/it] 36%|███▌      | 10/28 [00:50<01:26,  4.78s/it] 39%|███▉      | 11/28 [00:54<01:17,  4.58s/it] 43%|████▎     | 12/28 [00:58<01:10,  4.39s/it] 46%|████▋     | 13/28 [01:02<01:01,  4.11s/it] 50%|█████     | 14/28 [01:06<00:57,  4.08s/it] 54%|█████▎    | 15/28 [01:09<00:52,  4.04s/it] 57%|█████▋    | 16/28 [01:14<00:48,  4.04s/it] 61%|██████    | 17/28 [01:18<00:44,  4.06s/it] 64%|██████▍   | 18/28 [01:23<00:43,  4.34s/it] 68%|██████▊   | 19/28 [01:27<00:38,  4.28s/it] 71%|███████▏  | 20/28 [01:31<00:33,  4.19s/it] 75%|███████▌  | 21/28 [01:35<00:28,  4.12s/it] 79%|███████▊  | 22/28 [01:39<00:24,  4.08s/it] 82%|████████▏ | 23/28 [01:42<00:19,  3.82s/it] 86%|████████▌ | 24/28 [01:45<00:14,  3.59s/it] 89%|████████▉ | 25/28 [01:48<00:09,  3.29s/it] 93%|█████████▎| 26/28 [01:50<00:05,  2.99s/it] 96%|█████████▋| 27/28 [01:52<00:02,  2.74s/it]100%|██████████| 28/28 [01:55<00:00,  2.80s/it]100%|██████████| 28/28 [01:55<00:00,  4.12s/it]
+Function compute_scores took 4.6155 seconds
+Function compute_scores took 4.7523 seconds
+Function compute_scores took 4.1402 seconds
+[1;35mtest result on moe, seed = 1008[0m
+Thyroid,moe,0.686,0.627,0.577,0.534,0.418,0.720,0,0,0,0
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+Mammary,moe,0.730,0.684,0.648,0.619,0.457,0.764,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.345 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+checkpoint loaded from /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed43/Models/all_epoch_66_checkpoint.pth
+  0%|          | 0/28 [00:00<?, ?it/s]  4%|▎         | 1/28 [00:04<02:02,  4.53s/it]  7%|▋         | 2/28 [00:08<01:49,  4.22s/it] 11%|█         | 3/28 [00:12<01:47,  4.30s/it] 14%|█▍        | 4/28 [00:16<01:32,  3.86s/it] 18%|█▊        | 5/28 [00:19<01:22,  3.57s/it] 21%|██▏       | 6/28 [00:22<01:15,  3.42s/it] 25%|██▌       | 7/28 [00:25<01:09,  3.32s/it] 29%|██▊       | 8/28 [00:28<01:04,  3.23s/it] 32%|███▏      | 9/28 [00:31<01:02,  3.26s/it] 36%|███▌      | 10/28 [00:35<01:02,  3.49s/it] 39%|███▉      | 11/28 [00:39<01:02,  3.68s/it] 43%|████▎     | 12/28 [00:43<01:00,  3.79s/it] 46%|████▋     | 13/28 [00:49<01:03,  4.22s/it] 50%|█████     | 14/28 [00:53<00:58,  4.21s/it] 54%|█████▎    | 15/28 [00:57<00:54,  4.16s/it] 57%|█████▋    | 16/28 [01:01<00:49,  4.10s/it] 61%|██████    | 17/28 [01:05<00:44,  4.07s/it] 64%|██████▍   | 18/28 [01:09<00:40,  4.05s/it] 68%|██████▊   | 19/28 [01:13<00:36,  4.05s/it] 71%|███████▏  | 20/28 [01:17<00:32,  4.08s/it] 75%|███████▌  | 21/28 [01:22<00:30,  4.39s/it] 79%|███████▊  | 22/28 [01:26<00:25,  4.29s/it] 82%|████████▏ | 23/28 [01:29<00:19,  3.96s/it] 86%|████████▌ | 24/28 [01:32<00:14,  3.65s/it] 89%|████████▉ | 25/28 [01:35<00:10,  3.48s/it] 93%|█████████▎| 26/28 [01:43<00:09,  4.84s/it] 96%|█████████▋| 27/28 [01:47<00:04,  4.43s/it]100%|██████████| 28/28 [01:50<00:00,  4.04s/it]100%|██████████| 28/28 [01:50<00:00,  3.95s/it]
+Function compute_scores took 7.2172 seconds
+Function compute_scores took 5.9144 seconds
+Function compute_scores took 5.6075 seconds
+[1;35mtest result on moe, seed = 1009[0m
+Liver,moe,0.880,0.854,0.832,0.815,0.548,0.872,0,0,0,0
+Mammary,moe,0.729,0.678,0.641,0.610,0.451,0.751,0,0,0,0
+Thyroid,moe,0.702,0.641,0.589,0.545,0.426,0.722,0,0,0,0
+[1;36m win = 1 [0m
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.361 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Function __init__ took 64.9055 seconds
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 119, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 36, in main
+    model.load_state_dict(checkpoint['state_dict'])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2581, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for MoEModel:
+	Missing key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.beta". 
+	Unexpected key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.norms.0.gamma", "encoder_decoder.model.decoder.layers.0.norms.0.beta", "encoder_decoder.model.decoder.layers.0.norms.1.gamma", "encoder_decoder.model.decoder.layers.0.norms.1.beta", "encoder_decoder.model.decoder.layers.0.norms.2.gamma", "encoder_decoder.model.decoder.layers.0.norms.2.beta", "encoder_decoder.model.decoder.layers.1.norms.0.gamma", "encoder_decoder.model.decoder.layers.1.norms.0.beta", "encoder_decoder.model.decoder.layers.1.norms.1.gamma", "encoder_decoder.model.decoder.layers.1.norms.1.beta", "encoder_decoder.model.decoder.layers.1.norms.2.gamma", "encoder_decoder.model.decoder.layers.1.norms.2.beta", "encoder_decoder.model.decoder.layers.2.norms.0.gamma", "encoder_decoder.model.decoder.layers.2.norms.0.beta", "encoder_decoder.model.decoder.layers.2.norms.1.gamma", "encoder_decoder.model.decoder.layers.2.norms.1.beta", "encoder_decoder.model.decoder.layers.2.norms.2.gamma", "encoder_decoder.model.decoder.layers.2.norms.2.beta". 
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.352 seconds.
+Prefix dict has been built successfully.
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet101_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet101_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Using cuda device
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+Function __init__ took 93.3569 seconds
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 119, in <module>
+    main(cmd_line_args,config_args)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/test_metric.py", line 36, in main
+    model.load_state_dict(checkpoint['state_dict'])
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2581, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for MoEModel:
+	Missing key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.0.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.1.sublayer.2.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.0.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.1.norm.beta", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.gamma", "encoder_decoder.model.decoder.layers.2.sublayer.2.norm.beta". 
+	Unexpected key(s) in state_dict: "encoder_decoder.model.decoder.layers.0.norms.0.gamma", "encoder_decoder.model.decoder.layers.0.norms.0.beta", "encoder_decoder.model.decoder.layers.0.norms.1.gamma", "encoder_decoder.model.decoder.layers.0.norms.1.beta", "encoder_decoder.model.decoder.layers.0.norms.2.gamma", "encoder_decoder.model.decoder.layers.0.norms.2.beta", "encoder_decoder.model.decoder.layers.1.norms.0.gamma", "encoder_decoder.model.decoder.layers.1.norms.0.beta", "encoder_decoder.model.decoder.layers.1.norms.1.gamma", "encoder_decoder.model.decoder.layers.1.norms.1.beta", "encoder_decoder.model.decoder.layers.1.norms.2.gamma", "encoder_decoder.model.decoder.layers.1.norms.2.beta", "encoder_decoder.model.decoder.layers.2.norms.0.gamma", "encoder_decoder.model.decoder.layers.2.norms.0.beta", "encoder_decoder.model.decoder.layers.2.norms.1.gamma", "encoder_decoder.model.decoder.layers.2.norms.1.beta", "encoder_decoder.model.decoder.layers.2.norms.2.gamma", "encoder_decoder.model.decoder.layers.2.norms.2.beta". 

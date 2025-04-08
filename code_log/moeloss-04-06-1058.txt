@@ -1,0 +1,477 @@
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.250 seconds.
+Prefix dict has been built successfully.
+using moe.
+Result_prefix: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42
+accumulation_steps: 1
+amsgrad: True
+ann_path: /home/chenzhw/ultrasound_report_gen/USData/all.json
+attn_pth: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Attn_pth
+batch_size: 64
+bos_idx: 0
+cuda: True
+custom_sampler: True
+d_ff: 1024
+d_model: 512
+d_vf: 2048
+data_prefix: /home/chenzhw/ultrasound_report_gen/USData
+dataset_name: all
+debug: -1
+decoderonly: False
+decoding_constraintt: 0
+dict_pth:  
+drop_prob_lm: 0.5
+dropout: 0.1
+early_stop: 100
+eos_idx: 0
+epochs: 100
+evaluate_batch: 1
+gamma: 0.1
+image_dir: /home/chenzhw/ultrasound_report_gen/USData/all_report
+image_type: 2d
+jieba_dir: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+logit_layers: 1
+lr_ed: 0.001
+lr_scheduler: StepLR
+lr_ve: 5e-05
+max_seq_length: 150
+max_seq_length_train: 150
+model: moe
+monitor_metric: BLEU_4
+monitor_mode: max
+n_gpu: 1
+nhidden: 512
+norm: layernorm
+num_experts: 3
+num_heads: 8
+num_layers: 3
+num_shared_experts: 1
+num_workers: 10
+optim: Adam
+organ_mapping: [('Liver', 0), ('Mammary', 1), ('Thyroid', 2)]
+output_logsoftmax: 1
+pad_idx: 0
+record_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Records
+result: moeloss-share1route3-dff1024-bs64-seed42
+reverse_organ_mapping: [(0, 'Liver'), (1, 'Mammary'), (2, 'Thyroid')]
+sample_n: 1
+save_dir: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models
+save_period: 1
+seed: 42
+step_size: 60
+technical_word: /home/chenzhw/ultrasound_report_gen/USData/key_technical_words.txt
+threshold: 3
+train_smooth_gamma1: 4.0
+train_smooth_gamma2: 5.0
+train_smooth_gamma3: 10.0
+use_bn: 0
+visual_extractor: resnet101
+visual_extractor_pretrained: True
+weight_decay: 5e-05
+reading ann from /home/chenzhw/ultrasound_report_gen/USData/all.json
+[1;35m len(self.tokens) = [0m1152
+tokenizer size: 1153
+Using custom sampler
+Using custom sampler
+Using custom sampler
+first init the imagenet pretrained!
+using moe with layern.
+vocabulary size: 1153
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:02<02:14,  2.99s/it]Training with batch size 64:   4%|▍         | 2/46 [00:03<01:08,  1.56s/it]Training with batch size 64:   7%|▋         | 3/46 [00:04<00:46,  1.09s/it]Training with batch size 64:   9%|▊         | 4/46 [00:04<00:35,  1.18it/s]Training with batch size 64:  11%|█         | 5/46 [00:05<00:29,  1.40it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:05<00:25,  1.57it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:06<00:22,  1.70it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:06<00:20,  1.83it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:06<00:19,  1.87it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:07<00:18,  1.92it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:07<00:17,  1.97it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:08<00:16,  2.00it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:09<00:23,  1.41it/s]Training with batch size 64:  30%|███       | 14/46 [00:10<00:20,  1.56it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:10<00:18,  1.66it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:11<00:17,  1.73it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:11<00:16,  1.80it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:12<00:15,  1.85it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:12<00:14,  1.85it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:13<00:13,  1.90it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:13<00:12,  1.93it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:14<00:12,  1.96it/s]Training with batch size 64:  50%|█████     | 23/46 [00:14<00:11,  1.98it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:15<00:10,  2.02it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:15<00:10,  2.02it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:16<00:10,  2.00it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:16<00:09,  1.99it/s]Training with batch size 64:  61%|██████    | 28/46 [00:17<00:09,  1.99it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:17<00:08,  1.98it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:18<00:08,  2.00it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:18<00:07,  2.00it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:19<00:06,  2.01it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:19<00:06,  2.00it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:20<00:05,  2.02it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:20<00:05,  2.01it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:21<00:04,  2.02it/s]Training with batch size 64:  80%|████████  | 37/46 [00:21<00:04,  2.04it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:22<00:03,  2.06it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:22<00:03,  2.05it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:23<00:02,  2.06it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:23<00:02,  2.09it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:23<00:01,  2.11it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:24<00:01,  2.10it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:24<00:00,  2.10it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:25<00:00,  2.11it/s]Training with batch size 64: 100%|██████████| 46/46 [00:25<00:00,  2.21it/s]Training with batch size 64: 100%|██████████| 46/46 [00:25<00:00,  1.78it/s]
+train loss 2.8491990858280145
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:04<00:26,  4.45s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:08<00:20,  4.17s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:12<00:15,  4.00s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:16<00:12,  4.27s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:20<00:08,  4.19s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:24<00:04,  4.10s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:28<00:00,  3.99s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:28<00:00,  4.09s/it]
+Function compute_scores took 5.9974 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:05<01:06,  5.10s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:09<00:54,  4.53s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:13<00:48,  4.40s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:18<00:46,  4.64s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:22<00:39,  4.39s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:25<00:32,  4.11s/it]Test with batch size 64:  50%|█████     | 7/14 [00:29<00:27,  3.99s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:33<00:23,  3.86s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:36<00:18,  3.77s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:40<00:14,  3.71s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:44<00:11,  3.67s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:48<00:07,  3.87s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:52<00:03,  3.93s/it]Test with batch size 64: 100%|██████████| 14/14 [00:56<00:00,  3.97s/it]Test with batch size 64: 100%|██████████| 14/14 [00:56<00:00,  4.04s/it]
+Function compute_scores took 5.9449 seconds
+Function compute_scores took 4.5458 seconds
+Function compute_scores took 3.9843 seconds
+Function _train_epoch took 131.7016 seconds
+	epoch          : 1
+	train_loss     : 2.8491990858280145
+	val_BLEU_1     : 0.06149206349206252
+	val_BLEU_2     : 3.134669469544633e-11
+	val_BLEU_3     : 2.509713619336672e-14
+	val_BLEU_4     : 7.113387530626713e-16
+	val_METEOR     : 0.029717334376585136
+	val_ROUGE_L    : 0.08577473200229804
+	val_CIDER      : 1.1809979092801298e-10
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.05261648745519588
+	test_Thyroid_BLEU_2: 3.557670235059735e-11
+	test_Thyroid_BLEU_3: 3.129597508178104e-14
+	test_Thyroid_BLEU_4: 9.2979237642109e-16
+	test_Thyroid_METEOR: 0.028378894325026622
+	test_Thyroid_ROUGE_L: 0.07812757735970127
+	test_Mammary_BLEU_1: 0.038327359617681286
+	test_Mammary_BLEU_2: 3.036401623532138e-11
+	test_Mammary_BLEU_3: 2.8159017892048115e-14
+	test_Mammary_BLEU_4: 8.589793892849921e-16
+	test_Mammary_METEOR: 0.022671030950056126
+	test_Mammary_ROUGE_L: 0.05805448143083255
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_1_checkpoint.pth ...
+Saving current best: all_best.pth ...
+Function _save_checkpoint took 2.3356 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_1_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.2156 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:01<01:11,  1.59s/it]Training with batch size 64:   4%|▍         | 2/46 [00:02<00:41,  1.06it/s]Training with batch size 64:   7%|▋         | 3/46 [00:02<00:32,  1.32it/s]Training with batch size 64:   9%|▊         | 4/46 [00:03<00:27,  1.52it/s]Training with batch size 64:  11%|█         | 5/46 [00:03<00:24,  1.67it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:04<00:22,  1.75it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:05<00:29,  1.31it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:05<00:25,  1.49it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:06<00:23,  1.61it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:06<00:20,  1.73it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:07<00:19,  1.81it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:07<00:18,  1.87it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:08<00:17,  1.92it/s]Training with batch size 64:  30%|███       | 14/46 [00:08<00:16,  1.98it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:09<00:15,  2.01it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:09<00:14,  2.01it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:10<00:14,  2.01it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:10<00:14,  2.00it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:11<00:13,  1.98it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:11<00:12,  2.00it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:12<00:12,  2.02it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:12<00:11,  2.03it/s]Training with batch size 64:  50%|█████     | 23/46 [00:13<00:11,  2.03it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:13<00:10,  2.04it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:14<00:10,  2.00it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:14<00:09,  2.02it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:15<00:09,  2.01it/s]Training with batch size 64:  61%|██████    | 28/46 [00:15<00:09,  1.99it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:16<00:08,  1.99it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:16<00:08,  2.00it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:17<00:07,  2.02it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:17<00:06,  2.00it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:18<00:06,  2.02it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:18<00:05,  2.03it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:19<00:05,  2.03it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:19<00:04,  2.01it/s]Training with batch size 64:  80%|████████  | 37/46 [00:20<00:04,  2.03it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:20<00:03,  2.03it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:21<00:03,  2.04it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:21<00:02,  2.04it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:22<00:02,  2.04it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:22<00:01,  2.04it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:23<00:01,  2.05it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:23<00:00,  2.02it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:24<00:00,  2.03it/s]Training with batch size 64: 100%|██████████| 46/46 [00:24<00:00,  2.17it/s]Training with batch size 64: 100%|██████████| 46/46 [00:24<00:00,  1.88it/s]
+train loss 2.489874918831628
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:04<00:25,  4.32s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:08<00:20,  4.17s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:12<00:16,  4.15s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:17<00:13,  4.38s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:21<00:08,  4.27s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:25<00:04,  4.19s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:28<00:00,  3.96s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:28<00:00,  4.12s/it]
+Function compute_scores took 5.8015 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:05<01:07,  5.17s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:08<00:51,  4.27s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:13<00:47,  4.35s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:16<00:40,  4.10s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:20<00:35,  3.91s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:24<00:30,  3.81s/it]Test with batch size 64:  50%|█████     | 7/14 [00:27<00:26,  3.75s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:31<00:22,  3.71s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:35<00:18,  3.69s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:39<00:15,  3.98s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:45<00:13,  4.41s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:49<00:08,  4.37s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:54<00:04,  4.47s/it]Test with batch size 64: 100%|██████████| 14/14 [00:57<00:00,  4.22s/it]Test with batch size 64: 100%|██████████| 14/14 [00:57<00:00,  4.12s/it]
+Function compute_scores took 6.0394 seconds
+Function compute_scores took 4.6007 seconds
+Function compute_scores took 4.1997 seconds
+Function _train_epoch took 131.8866 seconds
+	epoch          : 2
+	train_loss     : 2.489874918831628
+	val_BLEU_1     : 0.06050793650793555
+	val_BLEU_2     : 3.1094844681052964e-11
+	val_BLEU_3     : 2.4962529587410298e-14
+	val_BLEU_4     : 7.084754213916229e-16
+	val_METEOR     : 0.02952683098432452
+	val_ROUGE_L    : 0.08440751726391808
+	val_CIDER      : 1.1964366310613633e-10
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.05459976105137265
+	test_Thyroid_BLEU_2: 3.624099687175133e-11
+	test_Thyroid_BLEU_3: 3.1684348675497614e-14
+	test_Thyroid_BLEU_4: 9.384328532412863e-16
+	test_Thyroid_METEOR: 0.028847625725727674
+	test_Thyroid_ROUGE_L: 0.08049041304783472
+	test_Mammary_BLEU_1: 0.03933094384707194
+	test_Mammary_BLEU_2: 3.075898132601383e-11
+	test_Mammary_BLEU_3: 2.8402680342169977e-14
+	test_Mammary_BLEU_4: 8.645479991748836e-16
+	test_Mammary_METEOR: 0.023172559428663607
+	test_Mammary_ROUGE_L: 0.059526039057562305
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_2_checkpoint.pth ...
+Function _save_checkpoint took 1.0461 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_2_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.2823 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:02<01:37,  2.16s/it]Training with batch size 64:   4%|▍         | 2/46 [00:02<00:51,  1.18s/it]Training with batch size 64:   7%|▋         | 3/46 [00:03<00:37,  1.15it/s]Training with batch size 64:   9%|▊         | 4/46 [00:03<00:30,  1.38it/s]Training with batch size 64:  11%|█         | 5/46 [00:04<00:26,  1.56it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:04<00:23,  1.69it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:05<00:21,  1.80it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:05<00:20,  1.87it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:06<00:19,  1.91it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:06<00:18,  1.95it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:07<00:17,  1.99it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:07<00:17,  2.00it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:08<00:16,  2.02it/s]Training with batch size 64:  30%|███       | 14/46 [00:08<00:15,  2.05it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:08<00:14,  2.07it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:09<00:14,  2.08it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:09<00:13,  2.09it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:10<00:13,  2.09it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:10<00:12,  2.09it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:11<00:12,  2.08it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:11<00:11,  2.11it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:12<00:11,  2.10it/s]Training with batch size 64:  50%|█████     | 23/46 [00:12<00:10,  2.10it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:13<00:10,  2.08it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:13<00:10,  2.09it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:14<00:09,  2.07it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:14<00:09,  2.09it/s]Training with batch size 64:  61%|██████    | 28/46 [00:15<00:08,  2.10it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:15<00:08,  2.10it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:16<00:07,  2.10it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:16<00:07,  2.11it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:17<00:06,  2.11it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:17<00:06,  2.13it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:18<00:05,  2.13it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:18<00:05,  2.10it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:18<00:04,  2.12it/s]Training with batch size 64:  80%|████████  | 37/46 [00:19<00:04,  2.09it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:19<00:03,  2.04it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:20<00:03,  2.04it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:20<00:02,  2.04it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:21<00:02,  2.03it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:21<00:01,  2.04it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:22<00:01,  2.04it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:22<00:00,  2.03it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:23<00:00,  2.02it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  2.14it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  1.93it/s]
+train loss 2.476405239744403
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:05<00:30,  5.02s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:09<00:23,  4.61s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:14<00:19,  4.91s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:19<00:14,  4.83s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:23<00:09,  4.74s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:27<00:04,  4.48s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:31<00:00,  4.06s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:31<00:00,  4.44s/it]
+Function compute_scores took 6.0456 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:04<00:58,  4.47s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:08<00:52,  4.35s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:12<00:44,  4.03s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:16<00:38,  3.89s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:20<00:35,  3.91s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:24<00:32,  4.09s/it]Test with batch size 64:  50%|█████     | 7/14 [00:29<00:29,  4.26s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:33<00:26,  4.39s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:39<00:23,  4.67s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:43<00:18,  4.69s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:48<00:13,  4.65s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:52<00:08,  4.48s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:56<00:04,  4.32s/it]Test with batch size 64: 100%|██████████| 14/14 [00:59<00:00,  3.97s/it]Test with batch size 64: 100%|██████████| 14/14 [00:59<00:00,  4.25s/it]
+Function compute_scores took 5.9679 seconds
+Function compute_scores took 4.6088 seconds
+Function compute_scores took 4.9550 seconds
+Function _train_epoch took 136.3109 seconds
+	epoch          : 3
+	train_loss     : 2.476405239744403
+	val_BLEU_1     : 0.0617777777777768
+	val_BLEU_2     : 3.141943431942456e-11
+	val_BLEU_3     : 2.5135946259613457e-14
+	val_BLEU_4     : 7.121636012919595e-16
+	val_METEOR     : 0.029567353347092262
+	val_ROUGE_L    : 0.085987741105105
+	val_CIDER      : 1.2079318291469505e-10
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.05416965352449094
+	test_Thyroid_BLEU_2: 3.6097971112322334e-11
+	test_Thyroid_BLEU_3: 3.1600931838432365e-14
+	test_Thyroid_BLEU_4: 9.36579251373855e-16
+	test_Thyroid_METEOR: 0.028801961633381647
+	test_Thyroid_ROUGE_L: 0.07984952331172325
+	test_Mammary_BLEU_1: 0.041170848267621483
+	test_Mammary_BLEU_2: 3.147021222868721e-11
+	test_Mammary_BLEU_3: 2.8838841375489366e-14
+	test_Mammary_BLEU_4: 8.744862227244727e-16
+	test_Mammary_METEOR: 0.023357050748716836
+	test_Mammary_ROUGE_L: 0.06128281577262649
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_3_checkpoint.pth ...
+Saving current best: all_best.pth ...
+Function _save_checkpoint took 2.1480 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_3_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.2500 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:01<01:05,  1.46s/it]Training with batch size 64:   4%|▍         | 2/46 [00:01<00:39,  1.12it/s]Training with batch size 64:   7%|▋         | 3/46 [00:02<00:30,  1.41it/s]Training with batch size 64:   9%|▊         | 4/46 [00:02<00:26,  1.61it/s]Training with batch size 64:  11%|█         | 5/46 [00:03<00:23,  1.77it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:03<00:21,  1.85it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:04<00:20,  1.93it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:04<00:19,  1.97it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:05<00:18,  1.98it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:05<00:18,  1.98it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:06<00:17,  2.01it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:06<00:16,  2.03it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:07<00:16,  2.05it/s]Training with batch size 64:  30%|███       | 14/46 [00:07<00:15,  2.09it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:08<00:15,  2.05it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:08<00:14,  2.07it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:09<00:13,  2.07it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:09<00:13,  2.08it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:10<00:13,  2.06it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:10<00:12,  2.06it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:11<00:12,  2.05it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:11<00:11,  2.03it/s]Training with batch size 64:  50%|█████     | 23/46 [00:12<00:11,  2.06it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:12<00:10,  2.04it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:13<00:10,  2.04it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:13<00:09,  2.03it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:14<00:09,  2.03it/s]Training with batch size 64:  61%|██████    | 28/46 [00:14<00:08,  2.00it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:15<00:08,  2.02it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:15<00:07,  2.02it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:16<00:07,  2.00it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:16<00:07,  1.97it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:17<00:06,  1.97it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:17<00:06,  1.96it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:18<00:05,  1.99it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:18<00:05,  1.98it/s]Training with batch size 64:  80%|████████  | 37/46 [00:19<00:04,  1.96it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:19<00:04,  1.96it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:20<00:03,  1.98it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:20<00:02,  2.00it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:21<00:02,  1.98it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:21<00:02,  2.00it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:22<00:01,  2.01it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:22<00:01,  1.98it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:23<00:00,  2.00it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  2.10it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  1.95it/s]
+train loss 2.4742124969759076
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:05<00:31,  5.21s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:08<00:21,  4.26s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:12<00:15,  3.98s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:16<00:11,  3.84s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:19<00:07,  3.75s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:23<00:03,  3.71s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:26<00:00,  3.52s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:26<00:00,  3.78s/it]
+Function compute_scores took 5.9393 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:05<01:15,  5.83s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:10<01:02,  5.20s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:15<00:55,  5.02s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:19<00:48,  4.83s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:24<00:44,  4.91s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:29<00:38,  4.86s/it]Test with batch size 64:  50%|█████     | 7/14 [00:34<00:32,  4.68s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:38<00:28,  4.67s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:42<00:22,  4.45s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:46<00:17,  4.32s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:50<00:12,  4.19s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:54<00:08,  4.19s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:58<00:04,  4.11s/it]Test with batch size 64: 100%|██████████| 14/14 [01:01<00:00,  3.73s/it]Test with batch size 64: 100%|██████████| 14/14 [01:01<00:00,  4.40s/it]
+Function compute_scores took 6.6742 seconds
+Function compute_scores took 4.5543 seconds
+Function compute_scores took 4.0875 seconds
+Function _train_epoch took 133.1815 seconds
+	epoch          : 4
+	train_loss     : 2.4742124969759076
+	val_BLEU_1     : 0.06084126984126888
+	val_BLEU_2     : 3.1180376539298514e-11
+	val_BLEU_3     : 2.500828452276754e-14
+	val_BLEU_4     : 7.094491455943094e-16
+	val_METEOR     : 0.029464783318919958
+	val_ROUGE_L    : 0.0847538338856563
+	val_CIDER      : 0.0
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.0541457586618864
+	test_Thyroid_BLEU_2: 3.609000861721889e-11
+	test_Thyroid_BLEU_3: 3.1596284642506766e-14
+	test_Thyroid_BLEU_4: 9.364759502912302e-16
+	test_Thyroid_METEOR: 0.028874487512888503
+	test_Thyroid_ROUGE_L: 0.07989246592698752
+	test_Mammary_BLEU_1: 0.03808841099163589
+	test_Mammary_BLEU_2: 3.026921732697462e-11
+	test_Mammary_BLEU_3: 2.810037753513822e-14
+	test_Mammary_BLEU_4: 8.576374395709998e-16
+	test_Mammary_METEOR: 0.022822616439729104
+	test_Mammary_ROUGE_L: 0.05804001961991255
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_4_checkpoint.pth ...
+Function _save_checkpoint took 1.0584 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_4_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.2457 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:01<01:02,  1.40s/it]Training with batch size 64:   4%|▍         | 2/46 [00:01<00:37,  1.16it/s]Training with batch size 64:   7%|▋         | 3/46 [00:02<00:29,  1.46it/s]Training with batch size 64:   9%|▊         | 4/46 [00:02<00:25,  1.64it/s]Training with batch size 64:  11%|█         | 5/46 [00:03<00:23,  1.76it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:03<00:21,  1.84it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:04<00:20,  1.90it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:04<00:19,  1.97it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:05<00:18,  2.01it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:05<00:17,  2.04it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:06<00:16,  2.06it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:06<00:16,  2.06it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:07<00:15,  2.08it/s]Training with batch size 64:  30%|███       | 14/46 [00:07<00:15,  2.06it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:08<00:15,  2.04it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:08<00:14,  2.06it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:09<00:13,  2.07it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:09<00:13,  2.07it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:10<00:13,  2.07it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:10<00:12,  2.10it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:11<00:11,  2.11it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:11<00:11,  2.12it/s]Training with batch size 64:  50%|█████     | 23/46 [00:11<00:10,  2.14it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:12<00:10,  2.12it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:12<00:09,  2.12it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:13<00:09,  2.15it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:13<00:08,  2.15it/s]Training with batch size 64:  61%|██████    | 28/46 [00:14<00:08,  2.17it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:14<00:07,  2.18it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:15<00:07,  2.17it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:15<00:06,  2.17it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:16<00:06,  2.17it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:16<00:05,  2.18it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:17<00:05,  2.20it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:17<00:04,  2.21it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:17<00:04,  2.22it/s]Training with batch size 64:  80%|████████  | 37/46 [00:18<00:04,  2.20it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:18<00:03,  2.19it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:19<00:03,  2.19it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:19<00:02,  2.20it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:20<00:03,  1.52it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:21<00:02,  1.68it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:21<00:01,  1.79it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:22<00:01,  1.87it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:22<00:00,  1.94it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  2.13it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  1.99it/s]
+train loss 2.4734474731022784
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:04<00:24,  4.16s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:07<00:19,  3.89s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:11<00:15,  3.77s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:15<00:11,  3.72s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:18<00:07,  3.70s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:23<00:03,  3.91s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:27<00:00,  4.03s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:27<00:00,  3.92s/it]
+Function compute_scores took 6.9038 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:05<01:16,  5.86s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:10<01:00,  5.01s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:14<00:52,  4.79s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:18<00:44,  4.42s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:22<00:38,  4.22s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:26<00:33,  4.17s/it]Test with batch size 64:  50%|█████     | 7/14 [00:31<00:30,  4.36s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:35<00:26,  4.34s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:39<00:21,  4.25s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:43<00:17,  4.25s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:48<00:12,  4.27s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:53<00:08,  4.44s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:57<00:04,  4.45s/it]Test with batch size 64: 100%|██████████| 14/14 [01:00<00:00,  4.12s/it]Test with batch size 64: 100%|██████████| 14/14 [01:00<00:00,  4.35s/it]
+Function compute_scores took 6.6436 seconds
+Function compute_scores took 4.5973 seconds
+Function compute_scores took 4.1523 seconds
+Function _train_epoch took 134.0211 seconds
+	epoch          : 5
+	train_loss     : 2.4734474731022784
+	val_BLEU_1     : 0.060888888888887924
+	val_BLEU_2     : 3.1192576230618645e-11
+	val_BLEU_3     : 2.5014807288979542e-14
+	val_BLEU_4     : 7.095879222081764e-16
+	val_METEOR     : 0.0294644211609745
+	val_ROUGE_L    : 0.08482392189677104
+	val_CIDER      : 1.197152580416607e-10
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.05340501792114568
+	test_Thyroid_BLEU_2: 3.584229390680918e-11
+	test_Thyroid_BLEU_3: 3.1451538291179915e-14
+	test_Thyroid_BLEU_4: 9.332565231691895e-16
+	test_Thyroid_METEOR: 0.028693391533202814
+	test_Thyroid_ROUGE_L: 0.07935642620238235
+	test_Mammary_BLEU_1: 0.037968936678613195
+	test_Mammary_BLEU_2: 3.0221706361686477e-11
+	test_Mammary_BLEU_3: 2.8070965353780296e-14
+	test_Mammary_BLEU_4: 8.569640956904584e-16
+	test_Mammary_METEOR: 0.022662539362018855
+	test_Mammary_ROUGE_L: 0.05765507134514816
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_5_checkpoint.pth ...
+Function _save_checkpoint took 1.0568 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_5_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.9159 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:01<01:02,  1.40s/it]Training with batch size 64:   4%|▍         | 2/46 [00:01<00:37,  1.18it/s]Training with batch size 64:   7%|▋         | 3/46 [00:02<00:28,  1.49it/s]Training with batch size 64:   9%|▊         | 4/46 [00:02<00:24,  1.69it/s]Training with batch size 64:  11%|█         | 5/46 [00:03<00:22,  1.82it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:03<00:21,  1.88it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:04<00:19,  1.99it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:04<00:18,  2.05it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:05<00:17,  2.08it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:05<00:16,  2.13it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:06<00:16,  2.14it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:06<00:15,  2.15it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:06<00:15,  2.16it/s]Training with batch size 64:  30%|███       | 14/46 [00:07<00:14,  2.16it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:07<00:14,  2.17it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:08<00:13,  2.17it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:08<00:13,  2.18it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:09<00:12,  2.16it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:09<00:12,  2.16it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:10<00:12,  2.16it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:10<00:11,  2.16it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:11<00:11,  2.15it/s]Training with batch size 64:  50%|█████     | 23/46 [00:11<00:10,  2.15it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:12<00:10,  2.16it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:12<00:09,  2.16it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:12<00:09,  2.16it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:13<00:08,  2.16it/s]Training with batch size 64:  61%|██████    | 28/46 [00:14<00:11,  1.53it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:14<00:10,  1.69it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:15<00:08,  1.81it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:15<00:07,  1.91it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:16<00:07,  1.98it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:16<00:06,  2.05it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:17<00:05,  2.10it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:17<00:05,  2.13it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:18<00:04,  2.16it/s]Training with batch size 64:  80%|████████  | 37/46 [00:18<00:04,  2.17it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:19<00:03,  2.17it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:19<00:03,  2.17it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:19<00:02,  2.19it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:20<00:02,  2.19it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:20<00:01,  2.20it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:21<00:01,  2.21it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:21<00:00,  2.21it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:22<00:00,  2.21it/s]Training with batch size 64: 100%|██████████| 46/46 [00:22<00:00,  2.38it/s]Training with batch size 64: 100%|██████████| 46/46 [00:22<00:00,  2.04it/s]
+train loss 2.474992919733135
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:04<00:26,  4.47s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:08<00:22,  4.51s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:13<00:18,  4.51s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:17<00:13,  4.46s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:22<00:09,  4.54s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:27<00:04,  4.74s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:31<00:00,  4.52s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:31<00:00,  4.54s/it]
+Function compute_scores took 6.0239 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:04<01:03,  4.87s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:08<00:52,  4.36s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:12<00:46,  4.18s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:16<00:41,  4.15s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:21<00:39,  4.37s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:25<00:34,  4.27s/it]Test with batch size 64:  50%|█████     | 7/14 [00:29<00:29,  4.19s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:33<00:24,  4.14s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:37<00:20,  4.07s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:41<00:16,  4.11s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:46<00:12,  4.12s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:50<00:08,  4.11s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:54<00:04,  4.26s/it]Test with batch size 64: 100%|██████████| 14/14 [00:57<00:00,  3.73s/it]Test with batch size 64: 100%|██████████| 14/14 [00:57<00:00,  4.09s/it]
+Function compute_scores took 5.9795 seconds
+Function compute_scores took 4.5896 seconds
+Function compute_scores took 4.3765 seconds
+Function _train_epoch took 132.9593 seconds
+	epoch          : 6
+	train_loss     : 2.474992919733135
+	val_BLEU_1     : 0.061476190476189504
+	val_BLEU_2     : 3.134264865545588e-11
+	val_BLEU_3     : 2.509497655681933e-14
+	val_BLEU_4     : 7.112928439493235e-16
+	val_METEOR     : 0.02975962933010099
+	val_ROUGE_L    : 0.08576911426852708
+	val_CIDER      : 1.1778313339995147e-10
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.054958183990440744
+	test_Thyroid_BLEU_2: 3.635975523549559e-11
+	test_Thyroid_BLEU_3: 3.175352869572618e-14
+	test_Thyroid_BLEU_4: 9.399691741055413e-16
+	test_Thyroid_METEOR: 0.02882536632236368
+	test_Thyroid_ROUGE_L: 0.08077969605798976
+	test_Mammary_BLEU_1: 0.04164874551971227
+	test_Mammary_BLEU_2: 3.165233303282861e-11
+	test_Mammary_BLEU_3: 2.894999622785095e-14
+	test_Mammary_BLEU_4: 8.770129356262355e-16
+	test_Mammary_METEOR: 0.023390766484865228
+	test_Mammary_ROUGE_L: 0.06191981729786874
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_6_checkpoint.pth ...
+Function _save_checkpoint took 1.0524 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_6_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.2560 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:01<00:56,  1.25s/it]Training with batch size 64:   4%|▍         | 2/46 [00:01<00:34,  1.28it/s]Training with batch size 64:   7%|▋         | 3/46 [00:02<00:27,  1.57it/s]Training with batch size 64:   9%|▊         | 4/46 [00:02<00:24,  1.73it/s]Training with batch size 64:  11%|█         | 5/46 [00:03<00:22,  1.83it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:03<00:20,  1.93it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:04<00:19,  2.01it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:04<00:18,  2.07it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:04<00:17,  2.11it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:05<00:16,  2.14it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:05<00:16,  2.16it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:06<00:15,  2.18it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:06<00:15,  2.18it/s]Training with batch size 64:  30%|███       | 14/46 [00:07<00:14,  2.19it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:07<00:14,  2.17it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:08<00:14,  2.12it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:08<00:13,  2.11it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:09<00:19,  1.47it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:10<00:16,  1.59it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:10<00:15,  1.69it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:11<00:13,  1.79it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:11<00:12,  1.86it/s]Training with batch size 64:  50%|█████     | 23/46 [00:12<00:12,  1.91it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:12<00:11,  1.93it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:13<00:10,  1.97it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:13<00:10,  1.97it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:14<00:09,  1.99it/s]Training with batch size 64:  61%|██████    | 28/46 [00:14<00:09,  1.96it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:15<00:08,  1.95it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:15<00:08,  1.97it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:16<00:07,  1.97it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:16<00:07,  1.98it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:17<00:06,  1.97it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:17<00:06,  1.95it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:18<00:05,  1.97it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:18<00:05,  1.97it/s]Training with batch size 64:  80%|████████  | 37/46 [00:19<00:04,  1.98it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:19<00:04,  1.97it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:20<00:03,  1.95it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:20<00:03,  1.96it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:21<00:02,  1.94it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:21<00:02,  1.95it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:22<00:01,  1.95it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:22<00:01,  1.95it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:23<00:00,  1.96it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  2.09it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  1.92it/s]
+train loss 2.470241355412773
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:05<00:31,  5.30s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:10<00:25,  5.01s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:14<00:19,  4.81s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:19<00:14,  4.79s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:23<00:09,  4.55s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:27<00:04,  4.44s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:31<00:00,  4.17s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:31<00:00,  4.49s/it]
+Function compute_scores took 5.9665 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:04<01:03,  4.87s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:08<00:51,  4.33s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:12<00:46,  4.19s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:17<00:43,  4.36s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:21<00:38,  4.24s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:25<00:33,  4.19s/it]Test with batch size 64:  50%|█████     | 7/14 [00:29<00:28,  4.09s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:33<00:24,  4.04s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:37<00:20,  4.03s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:41<00:15,  3.93s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:44<00:11,  3.87s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:49<00:08,  4.03s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:52<00:03,  3.92s/it]Test with batch size 64: 100%|██████████| 14/14 [00:55<00:00,  3.52s/it]Test with batch size 64: 100%|██████████| 14/14 [00:55<00:00,  3.97s/it]
+Function compute_scores took 6.0742 seconds
+Function compute_scores took 4.7985 seconds
+Function compute_scores took 4.3127 seconds
+Function _train_epoch took 132.2620 seconds
+	epoch          : 7
+	train_loss     : 2.470241355412773
+	val_BLEU_1     : 0.061333333333332365
+	val_BLEU_2     : 3.1306210764444084e-11
+	val_BLEU_3     : 2.5075523078823828e-14
+	val_BLEU_4     : 7.108792613475397e-16
+	val_METEOR     : 0.02955358898471044
+	val_ROUGE_L    : 0.08544501694194541
+	val_CIDER      : 1.2044111692215116e-10
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.05292712066905489
+	test_Thyroid_BLEU_2: 3.5681565321600046e-11
+	test_Thyroid_BLEU_3: 3.135744187756722e-14
+	test_Thyroid_BLEU_4: 9.311616580566128e-16
+	test_Thyroid_METEOR: 0.028543048135520416
+	test_Thyroid_ROUGE_L: 0.07848010807188303
+	test_Mammary_BLEU_1: 0.03715651135005885
+	test_Mammary_BLEU_2: 2.989662951935863e-11
+	test_Mammary_BLEU_3: 2.7869307678525272e-14
+	test_Mammary_BLEU_4: 8.523427092838586e-16
+	test_Mammary_METEOR: 0.02270049518952663
+	test_Mammary_ROUGE_L: 0.05696928936881821
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_7_checkpoint.pth ...
+Function _save_checkpoint took 1.0681 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_7_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.1439 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:01<01:05,  1.47s/it]Training with batch size 64:   4%|▍         | 2/46 [00:01<00:40,  1.09it/s]Training with batch size 64:   7%|▋         | 3/46 [00:02<00:31,  1.37it/s]Training with batch size 64:   9%|▊         | 4/46 [00:03<00:27,  1.55it/s]Training with batch size 64:  11%|█         | 5/46 [00:03<00:24,  1.67it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:04<00:22,  1.76it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:04<00:21,  1.84it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:05<00:20,  1.87it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:06<00:26,  1.38it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:06<00:23,  1.51it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:07<00:21,  1.62it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:07<00:19,  1.72it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:08<00:18,  1.80it/s]Training with batch size 64:  30%|███       | 14/46 [00:08<00:17,  1.88it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:09<00:16,  1.93it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:09<00:15,  1.96it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:10<00:14,  1.98it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:10<00:14,  1.98it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:11<00:13,  1.98it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:11<00:12,  2.00it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:12<00:12,  1.98it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:12<00:12,  1.96it/s]Training with batch size 64:  50%|█████     | 23/46 [00:13<00:11,  1.95it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:13<00:11,  1.95it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:14<00:10,  1.97it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:14<00:10,  1.97it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:15<00:09,  1.97it/s]Training with batch size 64:  61%|██████    | 28/46 [00:15<00:09,  1.97it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:16<00:08,  1.96it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:16<00:08,  1.95it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:17<00:07,  1.97it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:17<00:07,  1.97it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:18<00:06,  1.95it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:18<00:06,  1.94it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:19<00:05,  1.93it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:19<00:05,  1.95it/s]Training with batch size 64:  80%|████████  | 37/46 [00:20<00:04,  1.96it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:20<00:04,  1.96it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:21<00:03,  1.96it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:21<00:03,  1.97it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:22<00:02,  1.98it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:22<00:01,  2.01it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:23<00:01,  2.03it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:23<00:00,  2.05it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:24<00:00,  2.04it/s]Training with batch size 64: 100%|██████████| 46/46 [00:24<00:00,  2.20it/s]Training with batch size 64: 100%|██████████| 46/46 [00:24<00:00,  1.86it/s]
+train loss 2.4703711274563256
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:04<00:28,  4.73s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:08<00:21,  4.29s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:12<00:16,  4.25s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:17<00:13,  4.48s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:21<00:08,  4.29s/it]Validation with batch size 64:  86%|████████▌ | 6/7 [00:25<00:04,  4.28s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:29<00:00,  4.19s/it]Validation with batch size 64: 100%|██████████| 7/7 [00:29<00:00,  4.28s/it]
+Function compute_scores took 6.0593 seconds
+Test with batch size 64:   0%|          | 0/14 [00:00<?, ?it/s]Test with batch size 64:   7%|▋         | 1/14 [00:05<01:09,  5.38s/it]Test with batch size 64:  14%|█▍        | 2/14 [00:10<01:05,  5.42s/it]Test with batch size 64:  21%|██▏       | 3/14 [00:15<00:55,  5.01s/it]Test with batch size 64:  29%|██▊       | 4/14 [00:19<00:48,  4.80s/it]Test with batch size 64:  36%|███▌      | 5/14 [00:23<00:40,  4.50s/it]Test with batch size 64:  43%|████▎     | 6/14 [00:27<00:33,  4.22s/it]Test with batch size 64:  50%|█████     | 7/14 [00:31<00:28,  4.08s/it]Test with batch size 64:  57%|█████▋    | 8/14 [00:34<00:23,  3.94s/it]Test with batch size 64:  64%|██████▍   | 9/14 [00:38<00:19,  3.87s/it]Test with batch size 64:  71%|███████▏  | 10/14 [00:42<00:15,  3.80s/it]Test with batch size 64:  79%|███████▊  | 11/14 [00:46<00:11,  3.99s/it]Test with batch size 64:  86%|████████▌ | 12/14 [00:50<00:07,  3.91s/it]Test with batch size 64:  93%|█████████▎| 13/14 [00:54<00:04,  4.00s/it]Test with batch size 64: 100%|██████████| 14/14 [00:58<00:00,  3.88s/it]Test with batch size 64: 100%|██████████| 14/14 [00:58<00:00,  4.16s/it]
+Function compute_scores took 5.9893 seconds
+Function compute_scores took 4.7576 seconds
+Function compute_scores took 4.2735 seconds
+Function _train_epoch took 134.3099 seconds
+	epoch          : 8
+	train_loss     : 2.4703711274563256
+	val_BLEU_1     : 0.061476190476189504
+	val_BLEU_2     : 3.134264865545588e-11
+	val_BLEU_3     : 2.509497655681933e-14
+	val_BLEU_4     : 7.112928439493235e-16
+	val_METEOR     : 0.02959901285674482
+	val_ROUGE_L    : 0.08560930108192218
+	val_CIDER      : 0.0
+	test_Liver_BLEU_1: 0.0913261648745498
+	test_Liver_BLEU_2: 4.687080087905308e-11
+	test_Liver_BLEU_3: 3.7610832230677935e-14
+	test_Liver_BLEU_4: 1.0672209032173665e-15
+	test_Liver_METEOR: 0.03463799802884234
+	test_Liver_ROUGE_L: 0.11801446801514806
+	test_Thyroid_BLEU_1: 0.05354838709677292
+	test_Thyroid_BLEU_2: 3.589037212279687e-11
+	test_Thyroid_BLEU_3: 3.1479657696672885e-14
+	test_Thyroid_BLEU_4: 9.33882240264326e-16
+	test_Thyroid_METEOR: 0.02880866959695502
+	test_Thyroid_ROUGE_L: 0.07943140294932764
+	test_Mammary_BLEU_1: 0.03820788530465859
+	test_Mammary_BLEU_2: 3.0316653835198247e-11
+	test_Mammary_BLEU_3: 2.812972827460166e-14
+	test_Mammary_BLEU_4: 8.58309201219803e-16
+	test_Mammary_METEOR: 0.022821068456069325
+	test_Mammary_ROUGE_L: 0.058265794961279226
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_8_checkpoint.pth ...
+Function _save_checkpoint took 1.0559 seconds
+Saving checkpoint: /home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/moeloss-share1route3-dff1024-bs64-seed42/Models/all_epoch_8_checkpoint.pth ...
+Saving last checkpoint: all_last.pth ...
+Function _save_checkpoint took 2.9372 seconds
+Training with batch size 64:   0%|          | 0/46 [00:00<?, ?it/s]Training with batch size 64:   2%|▏         | 1/46 [00:01<01:05,  1.45s/it]Training with batch size 64:   4%|▍         | 2/46 [00:01<00:38,  1.13it/s]Training with batch size 64:   7%|▋         | 3/46 [00:02<00:30,  1.41it/s]Training with batch size 64:   9%|▊         | 4/46 [00:02<00:26,  1.60it/s]Training with batch size 64:  11%|█         | 5/46 [00:03<00:23,  1.73it/s]Training with batch size 64:  13%|█▎        | 6/46 [00:03<00:21,  1.84it/s]Training with batch size 64:  15%|█▌        | 7/46 [00:04<00:20,  1.87it/s]Training with batch size 64:  17%|█▋        | 8/46 [00:04<00:19,  1.95it/s]Training with batch size 64:  20%|█▉        | 9/46 [00:05<00:18,  1.98it/s]Training with batch size 64:  22%|██▏       | 10/46 [00:05<00:17,  2.03it/s]Training with batch size 64:  24%|██▍       | 11/46 [00:06<00:17,  2.02it/s]Training with batch size 64:  26%|██▌       | 12/46 [00:06<00:16,  2.05it/s]Training with batch size 64:  28%|██▊       | 13/46 [00:07<00:16,  2.06it/s]Training with batch size 64:  30%|███       | 14/46 [00:07<00:15,  2.07it/s]Training with batch size 64:  33%|███▎      | 15/46 [00:08<00:15,  2.02it/s]Training with batch size 64:  35%|███▍      | 16/46 [00:08<00:14,  2.06it/s]Training with batch size 64:  37%|███▋      | 17/46 [00:09<00:13,  2.07it/s]Training with batch size 64:  39%|███▉      | 18/46 [00:09<00:13,  2.06it/s]Training with batch size 64:  41%|████▏     | 19/46 [00:10<00:13,  2.07it/s]Training with batch size 64:  43%|████▎     | 20/46 [00:10<00:12,  2.08it/s]Training with batch size 64:  46%|████▌     | 21/46 [00:11<00:12,  2.07it/s]Training with batch size 64:  48%|████▊     | 22/46 [00:11<00:11,  2.08it/s]Training with batch size 64:  50%|█████     | 23/46 [00:12<00:10,  2.11it/s]Training with batch size 64:  52%|█████▏    | 24/46 [00:12<00:10,  2.10it/s]Training with batch size 64:  54%|█████▍    | 25/46 [00:13<00:09,  2.11it/s]Training with batch size 64:  57%|█████▋    | 26/46 [00:13<00:09,  2.08it/s]Training with batch size 64:  59%|█████▊    | 27/46 [00:14<00:09,  2.08it/s]Training with batch size 64:  61%|██████    | 28/46 [00:14<00:08,  2.07it/s]Training with batch size 64:  63%|██████▎   | 29/46 [00:14<00:08,  2.09it/s]Training with batch size 64:  65%|██████▌   | 30/46 [00:15<00:07,  2.10it/s]Training with batch size 64:  67%|██████▋   | 31/46 [00:15<00:07,  2.11it/s]Training with batch size 64:  70%|██████▉   | 32/46 [00:16<00:06,  2.11it/s]Training with batch size 64:  72%|███████▏  | 33/46 [00:16<00:06,  2.11it/s]Training with batch size 64:  74%|███████▍  | 34/46 [00:17<00:05,  2.10it/s]Training with batch size 64:  76%|███████▌  | 35/46 [00:17<00:05,  2.10it/s]Training with batch size 64:  78%|███████▊  | 36/46 [00:18<00:04,  2.11it/s]Training with batch size 64:  80%|████████  | 37/46 [00:18<00:04,  2.10it/s]Training with batch size 64:  83%|████████▎ | 38/46 [00:19<00:03,  2.09it/s]Training with batch size 64:  85%|████████▍ | 39/46 [00:19<00:03,  2.08it/s]Training with batch size 64:  87%|████████▋ | 40/46 [00:20<00:02,  2.08it/s]Training with batch size 64:  89%|████████▉ | 41/46 [00:20<00:02,  2.09it/s]Training with batch size 64:  91%|█████████▏| 42/46 [00:21<00:01,  2.09it/s]Training with batch size 64:  93%|█████████▎| 43/46 [00:21<00:01,  2.07it/s]Training with batch size 64:  96%|█████████▌| 44/46 [00:22<00:00,  2.07it/s]Training with batch size 64:  98%|█████████▊| 45/46 [00:22<00:00,  2.07it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  2.20it/s]Training with batch size 64: 100%|██████████| 46/46 [00:23<00:00,  2.00it/s]
+train loss 2.4664599762708432
+Validation with batch size 64:   0%|          | 0/7 [00:00<?, ?it/s]Validation with batch size 64:  14%|█▍        | 1/7 [00:04<00:26,  4.49s/it]Validation with batch size 64:  29%|██▊       | 2/7 [00:09<00:23,  4.64s/it]Validation with batch size 64:  43%|████▎     | 3/7 [00:13<00:17,  4.42s/it]Validation with batch size 64:  57%|█████▋    | 4/7 [00:17<00:12,  4.31s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:21<00:08,  4.18s/it]Validation with batch size 64:  71%|███████▏  | 5/7 [00:22<00:08,  4.40s/it]
+Traceback (most recent call last):
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 101, in <module>
+    main(config)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/my_main.py", line 52, in main
+    trainer.train()
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 102, in train
+    result = self._train_epoch(epoch)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 25, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/MyTrainer.py", line 526, in _train_epoch
+    output,_  = self.model(images, mode='sample')
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/models/MoEModel.py", line 51, in forward
+    output, _ = self.encoder_decoder(fc_feats, att_feats, mode='sample')
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Caption.py", line 18, in forward
+    return getattr(self, '_' + mode)(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Generator.py", line 113, in _sample
+    logprobs, state, attn_map = self.get_logprobs_state(it, p_fc_feats, p_att_feats, pp_att_feats, p_att_masks, state,
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/Generator.py", line 83, in get_logprobs_state
+    output, state = self.core(xt, p_att_feats, state, att_masks)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/moe_decoder.py", line 397, in core
+    out, _ = self.model.decode(memory, mask, ys, subsequent_mask(ys.size(1)).to(memory.device), routes=self.routes)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/moe_decoder.py", line 70, in decode
+    return self.decoder(self.tgt_embed(tgt), hidden_states, src_mask, tgt_mask, routes)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/moe_decoder.py", line 116, in forward
+    x, loss = layer(x, hidden_states, src_mask, tgt_mask, routes)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/moe_decoder.py", line 141, in forward
+    ffn_out, loss = self.feed_forward(x, routes)  
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/moe_decoder.py", line 251, in forward
+    expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=-1)  # [batch, seq_len, d_ff, num_experts]
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/moe_decoder.py", line 251, in <listcomp>
+    expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=-1)  # [batch, seq_len, d_ff, num_experts]
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/KMVE_RG/modules/moe_decoder.py", line 178, in forward
+    return self.w_2(self.dropout(F.relu(self.w_1(x))))
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/chenzhw/miniconda3/envs/NassirUSReportGen/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+KeyboardInterrupt

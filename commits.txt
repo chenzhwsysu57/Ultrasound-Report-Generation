@@ -1,0 +1,557 @@
+cfbe67e 2025-04-06 20:10:48 +0800 remove test time moe loss compute
+8	2	KMVE_RG/modules/moe_decoder.py
+
+c1ba192 2025-04-06 19:52:26 +0800 hyperparam lambda3
+1	1	KMVE_RG/modules/MyTrainer.py
+
+1539c0c 2025-04-06 14:40:42 +0800 fix sublayerconnection decoupling
+2	2	KMVE_RG/modules/MyTrainer.py
+10	11	KMVE_RG/modules/moe_decoder.py
+
+e0c0c6b 2025-04-06 11:26:26 +0800 add lambda3
+2	2	KMVE_RG/modules/MyTrainer.py
+
+1b59db4 2025-04-06 10:38:32 +0800 change lambda3
+1	1	KMVE_RG/modules/MyTrainer.py
+1	0	KMVE_RG/modules/dataloaders.py
+
+ee3c337 2025-04-06 02:51:20 +0800 remove print
+1	1	KMVE_RG/modules/moe_decoder.py
+
+6abf83f 2025-04-06 02:50:23 +0800 remove print
+4	6	KMVE_RG/modules/MyTrainer.py
+1	1	KMVE_RG/modules/datasets.py
+
+9caa1b7 2025-04-06 02:45:19 +0800 remove print
+1	1	KMVE_RG/modules/MyTrainer.py
+
+4c5e981 2025-04-06 02:43:34 +0800 moe loss
+5	5	KMVE_RG/modules/moe_decoder.py
+
+503ce97 2025-04-06 02:41:32 +0800 moe loss
+61	94	KMVE_RG/modules/moe_decoder.py
+
+52f82ea 2025-04-03 15:04:27 +0800 debuging moe loss
+3	1	KMVE_RG/modules/MyTrainer.py
+46	20	KMVE_RG/modules/moe_decoder.py
+
+35f9f63 2025-04-03 14:15:13 +0800 train time load
+9	25	KMVE_RG/modules/datasets.py
+
+eeea6be 2025-04-03 13:30:00 +0800 moe loss
+1	1	KMVE_RG/modules/MyTrainer.py
+81	1	KMVE_RG/modules/moe_decoder.py
+
+0ab2521 2025-04-02 18:08:35 +0800 moe loss
+2	2	KMVE_RG/models/MoEModel.py
+1	1	KMVE_RG/modules/MyTrainer.py
+26	11	KMVE_RG/modules/moe_decoder.py
+26	0	test.py
+
+a01965c 2025-04-01 16:56:32 +0800 add time comsume log
+2	2	KMVE_RG/config_urg.py
+29	5	KMVE_RG/modules/MyTrainer.py
+38	7	KMVE_RG/modules/datasets.py
+14	0	KMVE_RG/modules/metrics.py
+3	0	train2.sh
+5	0	train3.sh
+
+8984979 2025-04-01 01:23:26 +0800 save last pth
+9	4	KMVE_RG/modules/MyTrainer.py
+
+dcf8689 2025-03-31 21:00:18 +0800 write moe
+13	7	KMVE_RG/modules/moe_decoder.py
+
+a6f1062 2025-03-31 17:38:15 +0800 num worker 10
+3	2	KMVE_RG/config_urg.py
+3	2	KMVE_RG/modules/dataloaders.py
+
+266d7e3 2025-03-31 17:04:25 +0800 reorganize trainlog
+0	0	2025-0322-2143-tf-accgrad.txt => code_log/2025-0322-2143-tf-accgrad.txt
+0	0	2025-0323-1833-accstep.txt => code_log/2025-0323-1833-accstep.txt
+0	0	2025-0323-1833-bs64-accstep1.txt => code_log/2025-0323-1833-bs64-accstep1.txt
+0	0	2025-0323-2143-tf-accgrad.txt => code_log/2025-0323-2143-tf-accgrad.txt
+0	0	2025-0325-1206-debug-cs-l.txt => code_log/2025-0325-1206-debug-cs-l.txt
+0	0	2025-0325-1422-bs30-debug-cs-l.txt => code_log/2025-0325-1422-bs30-debug-cs-l.txt
+0	0	2025-0325-1750-decoder-only.txt => code_log/2025-0325-1750-decoder-only.txt
+0	0	2025-0325-2007-decoder-only.txt => code_log/2025-0325-2007-decoder-only.txt
+0	0	2025-0325-2147-decoder-only-bs32.txt => code_log/2025-0325-2147-decoder-only-bs32.txt
+0	0	2025-0325-2320-decoder-rmsn.txt => code_log/2025-0325-2320-decoder-rmsn.txt
+0	0	2025-0325-2346-decoder-rmsn-bs64.txt => code_log/2025-0325-2346-decoder-rmsn-bs64.txt
+0	0	2025-0326-1001-decoder-accstep2-bs64.txt => code_log/2025-0326-1001-decoder-accstep2-bs64.txt
+0	0	2025-0326-1135-decoder-rmsn.txt => code_log/2025-0326-1135-decoder-rmsn.txt
+0	0	2025-0326-1143-decoder-bs64-2.txt => code_log/2025-0326-1143-decoder-bs64-2.txt
+0	0	2025-0326-1441-moe.txt => code_log/2025-0326-1441-moe.txt
+0	0	2025-0326-1644-moe.txt => code_log/2025-0326-1644-moe.txt
+0	0	2025-0326-1656-moe.txt => code_log/2025-0326-1656-moe.txt
+0	0	20250319-tf-balsam.txt => code_log/20250319-tf-balsam.txt
+0	0	20250319-tf-organ-classify.txt => code_log/20250319-tf-organ-classify.txt
+0	0	202503221633_tf_balsam_accgrad.txt => code_log/202503221633_tf_balsam_accgrad.txt
+0	0	20250322_tf_balsam.txt => code_log/20250322_tf_balsam.txt
+
+574b0f2 2025-03-31 16:19:42 +0800 refine moe
+2	1	KMVE_RG/config_urg.py
+22	7	KMVE_RG/modules/MyTrainer.py
+15	7	KMVE_RG/modules/moe_decoder.py
+
+5b724d7 2025-03-31 14:09:19 +0800 refine train
+1	1	KMVE_RG/config_urg.py
+12	43	KMVE_RG/modules/MyTrainer.py
+4	0	log.sh
+4	0	train.sh
+89	74	wandb_urg.py
+
+9485ccc 2025-03-31 11:38:38 +0800 change savee period
+1	1	KMVE_RG/config_urg.py
+
+44a621a 2025-03-31 11:36:00 +0800 change log to test organ during train time
+34	9	KMVE_RG/modules/MyTrainer.py
+
+013a1a4 2025-03-31 10:58:16 +0800 fix seed everything
+3	3	KMVE_RG/config_urg.py
+2	0	KMVE_RG/my_main.py
+19	1	KMVE_RG/test_metric.py
+
+f17db77 2025-03-31 10:47:20 +0800 fix seed everything
+19	4	KMVE_RG/my_main.py
+
+8c0d78a 2025-03-31 10:31:06 +0800 remove unused config
+4	6	KMVE_RG/config_urg.py
+
+1989e49 2025-03-31 10:29:59 +0800 Merge branch 'czw/better-embedding' of https://github.com/chenzhwsysu57/Ultrasound-Report-Generation into czw/better-embedding
+37d235b 2025-03-27 15:39:14 +0800 test script for moe
+3	2	KMVE_RG/test_metric.py
+
+1c20224 2025-03-27 11:48:00 +0800 fix typo
+4	4	KMVE_RG/modules/MyTrainer.py
+
+726ad18 2025-03-27 09:49:12 +0800 add moe log
+2224	0	2025-0326-1656-moe.txt
+
+da477b9 2025-03-26 16:54:51 +0800 Merge branch 'czw/better-embedding' of https://github.com/chenzhwsysu57/Ultrasound-Report-Generation into czw/better-embedding
+db12783 2025-03-26 16:54:42 +0800 add moe log
+1861	0	2025-0326-1441-moe.txt
+98	0	2025-0326-1644-moe.txt
+1	1	KMVE_RG/config_urg.py
+1	1	KMVE_RG/modules/moe_decoder.py
+
+e5f82b4 2025-03-26 16:53:23 +0800 layernorm for moe
+4	4	KMVE_RG/models/MoEModel.py
+
+9259083 2025-03-26 16:50:51 +0800 layernorm for moe
+7	2	KMVE_RG/models/MoEModel.py
+14	2	KMVE_RG/modules/moe_decoder.py
+284	0	KMVE_RG/modules/moe_decoder_rmsn.py
+
+a92c52a 2025-03-26 15:58:46 +0800 bugfix moe
+1	1	KMVE_RG/modules/moe_decoder.py
+
+d744fac 2025-03-26 14:37:04 +0800 add decoder log
+2349	0	2025-0326-1143-decoder-bs64-2.txt
+
+2e4da10 2025-03-26 11:41:50 +0800 add decoder log
+2225	0	2025-0325-2346-decoder-rmsn-bs64.txt
+1186	0	2025-0326-1001-decoder-accstep2-bs64.txt
+
+2eed33a 2025-03-25 23:43:32 +0800 add decoder log
+1179	1	2025-0325-2007-decoder-only.txt
+1254	0	2025-0325-2147-decoder-only-bs32.txt
+
+f5907ee 2025-03-26 14:29:05 +0800 add moe
+72	0	KMVE_RG/models/MoEModel.py
+107	0	KMVE_RG/modules/MyTrainer.py
+284	0	KMVE_RG/modules/moe_decoder.py
+9	2	KMVE_RG/my_main.py
+
+cbf65e9 2025-03-26 11:41:00 +0800 modify step size
+166	0	2025-0326-1135-decoder-rmsn.txt
+1	1	KMVE_RG/config_urg.py
+
+dfa720b 2025-03-26 11:21:06 +0800 add log for decoder-rmsn
+2837	0	2025-0325-2320-decoder-rmsn.txt
+
+21c9e4e 2025-03-25 23:19:54 +0800 add torchviz to requirements.txt
+2	1	requirements.txt
+
+bba5ea0 2025-03-26 11:25:27 +0800 add rmsn test
+6	6	KMVE_RG/test_metric.py
+
+8a40428 2025-03-26 11:23:07 +0800 add rmsn test
+22	5	KMVE_RG/test_metric.py
+
+2b3cf61 2025-03-25 23:21:52 +0800 add rmsn
+6	2	KMVE_RG/models/AllOrgan.py
+1	0	KMVE_RG/modules/encoder_decoder.py
+339	0	KMVE_RG/modules/encoder_decoder_rmsn.py
+21	3	KMVE_RG/my_main.py
+
+abd486f 2025-03-25 20:47:21 +0800 Merge branch 'czw/better-embedding' of https://github.com/chenzhwsysu57/Ultrasound-Report-Generation into czw/better-embedding
+4e925ea 2025-03-25 20:27:59 +0800 add decoder-only for test-metric
+1879	1	2025-0325-1750-decoder-only.txt
+417	0	2025-0325-2007-decoder-only.txt
+2	2	KMVE_RG/modules/MyTrainer.py
+3	4	KMVE_RG/test_metric.py
+
+390226b 2025-03-25 18:01:46 +0800 add decoder-only
+370	0	2025-0325-1750-decoder-only.txt
+6	2	KMVE_RG/models/AllOrgan.py
+81	0	KMVE_RG/modules/encoder_decoder.py
+1	0	KMVE_RG/my_main.py
+
+ca89b21 2025-03-25 17:34:03 +0800 comment out CS_L related code
+348	0	2025-0323-1833-accstep.txt
+2349	0	2025-0323-1833-bs64-accstep1.txt
+1242	0	2025-0325-1206-debug-cs-l.txt
+2011	0	2025-0325-1422-bs30-debug-cs-l.txt
+1	1	KMVE_RG/config_urg.py
+21	19	KMVE_RG/modules/MyTrainer.py
+1	1	result_viewer.ipynb
+30	24	wandb_urg.py
+
+6f86c61 2025-03-25 11:03:15 +0800 debugging grad
+353	0	2025-0322-2143-tf-accgrad.txt
+1279	0	2025-0323-2143-tf-accgrad.txt
+762	0	202503221633_tf_balsam_accgrad.txt
+5	5	KMVE_RG/modules/MyTrainer.py
+
+f7ad183 2025-03-22 15:51:33 +0800 add acc steps ; reduce grad compute
+852	0	20250322_tf_balsam.txt
+2	2	KMVE_RG/config_urg.py
+20	36	KMVE_RG/modules/MyTrainer.py
+1	5	KMVE_RG/my_main.py
+7	1	README.md
+1	1	wandb_urg.py
+
+346e522 2025-03-22 13:54:42 +0800 add readme
+2	2	.gitignore
+0	0	KMVE_RG/{config_nassir_urg.py => config_urg.py}
+1	1	KMVE_RG/inference_one.py
+1	1	KMVE_RG/modules/patch_metric_for_csv.py
+2	37	KMVE_RG/modules/result_csv_fix.py
+2	2	KMVE_RG/my_main.py
+1	1	KMVE_RG/test_metric.py
+1	1	Knowledge_Distiller/knowledge_distiller.py
+40	45	README.md
+1	1	config_template
+19	0	requirements.txt
+1	1	wandb_urg.py
+
+cb2d763 2025-03-22 13:05:03 +0800 result plot
+0	887	20250319_tf_organclassify.txt
+-	-	classifier_train_log.pdf
+-	-	compare 2 epoch.pdf
+100	0	log_parse.py
+18	18	origin_result.csv
+349	42	result_viewer.ipynb
+-	-	sampler.pdf
+-	-	sampler_train_log.pdf
+
+ee9b1f4 2025-03-20 22:44:44 +0800 bug fix
+1	1	KMVE_RG/config_nassir_urg.py
+4	16	KMVE_RG/modules/MyTrainer.py
+0	125	KMVE_RG/modules/predicter.py
+0	14	KMVE_RG/modules/tools.py
+2	2	Knowledge_Distiller/knowledge_distiller.py
+14	0	config_template
+
+6e57fe0 2025-03-20 18:00:22 +0800 change config init method
+3	2	KMVE_RG/my_main.py
+
+74c787d 2025-03-20 17:58:37 +0800 change config init method
+22	7	KMVE_RG/config_nassir_urg.py
+1	1	KMVE_RG/modules/datasets.py
+6	5	KMVE_RG/my_main.py
+
+cce7337 2025-03-20 17:17:26 +0800 add .config.yaml file
+2	1	.gitignore
+16	2	KMVE_RG/config_nassir_urg.py
+
+dca0f3e 2025-03-20 16:55:39 +0800 trained sampler to sota
+1308	0	20250319-tf-balsam.txt
+629	1	20250319-tf-organ-classify.txt
+4	1	origin_result.csv
+5	3	result_viewer.ipynb
+3	1	wandb_urg.py
+
+76919f7 2025-03-19 15:35:27 +0800 Merge remote-tracking branch 'refs/remotes/origin/czw/better-embedding' into czw/better-embedding
+15c1323 2025-03-19 15:34:34 +0800 HOME and REPO added
+613	0	20250319-tf-organ-classify.txt
+8	4	KMVE_RG/config_nassir_urg.py
+1	1	KMVE_RG/modules/MyTrainer.py
+
+78e1ba6 2025-03-19 15:17:20 +0800 add upsampler
+887	0	20250319_tf_organclassify.txt
+3	0	KMVE_RG/config_nassir_urg.py
+80	1	KMVE_RG/modules/dataloaders.py
+4	2	KMVE_RG/modules/datasets.py
+22	0	KMVE_RG/modules/patch_metric_for_csv.py
+15	15	KMVE_RG/modules/result_csv_fix.py
+4	1	origin_result.csv
+110	4	result_viewer.ipynb
+
+bd752bc 2025-03-19 01:14:12 +0800 add epoch 11 and 13 metrics
+1	9	KMVE_RG/test_metric.py
+17	11	origin_result.csv
+9	36	result_viewer.ipynb
+
+bd53c41 2025-03-18 23:19:06 +0800 TF with organ classify train-ing
+-	-	KMVE_RG/__pycache__/config.cpython-310.pyc
+-	-	KMVE_RG/__pycache__/config.cpython-38.pyc
+7	13	KMVE_RG/config_nassir_urg.py
+112	0	KMVE_RG/inference_one.py
+29	7	KMVE_RG/models/AllOrgan.py
+45	0	KMVE_RG/models/AllOrganAnno.py
+19	13	KMVE_RG/modules/MyTrainer.py
+6	1	KMVE_RG/modules/dataloaders.py
+2	1	KMVE_RG/modules/datasets.py
+3	1	KMVE_RG/modules/optimizers.py
+73	15	KMVE_RG/modules/result_csv_fix.py
+34	1	KMVE_RG/modules/tokenizers.py
+8	3	KMVE_RG/my_main.py
+14	8	result_viewer.ipynb
+
+9239661 2025-03-03 16:30:40 +0800 add tqdm anno to tftrainer; remove test metric cal during training to result_csv_fix.py
+37	9	KMVE_RG/modules/MyTrainer.py
+
+a70e4e7 2025-03-03 16:25:19 +0800 code to fix result csv
+113	0	KMVE_RG/modules/result_csv_fix.py
+
+684676f 2025-02-28 16:12:22 +0800 对比原文与复现的原文
+2	2	KMVE_RG/modules/MyTrainer.py
+2	1	KMVE_RG/my_main.py
+7	1	origin_result.csv
+61	456	result_viewer.ipynb
+
+ce1094b 2025-02-27 18:04:57 +0800 trained tf only using all organs at once.
+24	3	KMVE_RG/config_nassir_urg.py
+45	0	KMVE_RG/models/AllOrgan.py
+0	0	KMVE_RG/models/{SGF_model.py => SGF.py}
+115	0	KMVE_RG/modules/MyTrainer.py
+5	2	KMVE_RG/modules/dataloaders.py
+17	6	KMVE_RG/modules/optimizers.py
+20	9	KMVE_RG/my_main.py
+92	0	KMVE_RG/test_metric.py
+25	0	origin_result.csv
+593	0	result_viewer.ipynb
+4	2	wandb_urg.py
+
+48be3c9 2025-02-22 19:15:37 +0800 add wandb and ignore
+1	0	.gitignore
+3	2	wandb_urg.py
+
+1c13813 2025-02-21 13:22:27 +0800 Stop tracking __pycache__ files and update .gitignore
+2	1	.gitignore
+
+22f331a 2025-02-21 13:21:43 +0800 Stop tracking __pycache__ files and update .gitignore
+1	0	.gitignore
+-	-	KMVE_RG/models/__pycache__/SGF_model.cpython-310.pyc
+-	-	KMVE_RG/models/__pycache__/SGF_model.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/Caption.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/Caption.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/Generator.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/Generator.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/MyTrainer.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/MyTrainer.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/dataloaders.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/dataloaders.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/datasets.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/datasets.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/encoder_decoder.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/encoder_decoder.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/loss.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/loss.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/metrics.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/metrics.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/new_model_utils.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/new_model_utils.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/optimizers.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/optimizers.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/predicter.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/predicter.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/tokenizers.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/tools.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/tools.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/utils.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/visual_extractor.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/visual_extractor.cpython-38.pyc
+
+dc941f7 2025-02-21 13:20:45 +0800 Update .gitignore and remove some tracked files
+4	0	.gitignore
+0	81	KMVE_RG/config.py
+0	23	KMVE_RG/pycocoevalcap/README.md
+0	0	KMVE_RG/pycocoevalcap/__init__.py
+-	-	KMVE_RG/pycocoevalcap/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/__pycache__/__init__.cpython-38.pyc
+0	19	KMVE_RG/pycocoevalcap/bleu/LICENSE
+0	1	KMVE_RG/pycocoevalcap/bleu/__init__.py
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu_scorer.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu_scorer.cpython-38.pyc
+0	57	KMVE_RG/pycocoevalcap/bleu/bleu.py
+0	268	KMVE_RG/pycocoevalcap/bleu/bleu_scorer.py
+0	0	KMVE_RG/pycocoevalcap/cider/__init__.py
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider_scorer.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider_scorer.cpython-38.pyc
+0	59	KMVE_RG/pycocoevalcap/cider/cider.py
+0	197	KMVE_RG/pycocoevalcap/cider/cider_scorer.py
+0	74	KMVE_RG/pycocoevalcap/eval.py
+0	26	KMVE_RG/pycocoevalcap/license.txt
+0	1	KMVE_RG/pycocoevalcap/meteor/__init__.py
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/meteor.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/meteor.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/meteor-1.5.jar
+0	90	KMVE_RG/pycocoevalcap/meteor/meteor.py
+0	1	KMVE_RG/pycocoevalcap/rouge/__init__.py
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/rouge.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/rouge.cpython-38.pyc
+0	105	KMVE_RG/pycocoevalcap/rouge/rouge.py
+0	1	KMVE_RG/pycocoevalcap/tokenizer/__init__.py
+0	76	KMVE_RG/pycocoevalcap/tokenizer/ptbtokenizer.py
+-	-	KMVE_RG/pycocoevalcap/tokenizer/stanford-corenlp-3.4.1.jar
+
+2baaed5 2025-02-21 13:17:17 +0800 reorganize baseline of Nassir
+123	0	KMVE_RG/config_nassir_urg.py
+26	12	KMVE_RG/modules/MyTrainer.py
+3	3	KMVE_RG/modules/metrics.py
+6	3	KMVE_RG/modules/tokenizers.py
+7	3	KMVE_RG/my_main.py
+4	4	Knowledge_Distiller/knowledge_distiller.py
+88	0	wandb_urg.py
+
+a40daf0 2025-02-21 13:15:33 +0800 add ignore file
+5	0	.gitignore
+
+adeca0b 2024-10-14 09:57:06 +0800 Update README.md
+10	0	README.md
+
+5bb80d5 2024-07-31 00:27:23 +0800 Update data
+1	1	README.md
+
+79fae14 2024-07-31 00:07:18 +0800 Update tokenizers.py for technical word
+2	1	KMVE_RG/modules/tokenizers.py
+
+91b6512 2024-07-31 00:05:47 +0800 Update config.py for technical words
+81	80	KMVE_RG/config.py
+
+cdb2cb9 2024-06-03 11:49:31 +0800 Update README.md
+27	5	README.md
+
+f59e6c3 2024-06-02 17:04:04 +0800 Update README.md
+3	0	README.md
+
+3963ed5 2024-05-03 23:52:50 +0800 Update README.md
+9	0	README.md
+
+305870e 2024-05-03 23:44:45 +0800 Add files via upload
+-	-	KMVE_RG/__pycache__/config.cpython-310.pyc
+-	-	KMVE_RG/__pycache__/config.cpython-38.pyc
+80	0	KMVE_RG/config.py
+50	0	KMVE_RG/models/SGF_model.py
+-	-	KMVE_RG/models/__pycache__/SGF_model.cpython-310.pyc
+-	-	KMVE_RG/models/__pycache__/SGF_model.cpython-38.pyc
+23	0	KMVE_RG/modules/Caption.py
+187	0	KMVE_RG/modules/Generator.py
+327	0	KMVE_RG/modules/Generator_beam.py
+304	0	KMVE_RG/modules/MyTrainer.py
+0	0	KMVE_RG/modules/__init__.py
+-	-	KMVE_RG/modules/__pycache__/Caption.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/Caption.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/Generator.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/Generator.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/MyTrainer.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/MyTrainer.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/dataloaders.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/dataloaders.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/datasets.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/datasets.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/encoder_decoder.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/encoder_decoder.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/loss.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/loss.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/metrics.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/metrics.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/new_model_utils.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/new_model_utils.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/optimizers.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/optimizers.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/predicter.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/predicter.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/tokenizers.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/tools.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/tools.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/utils.cpython-38.pyc
+-	-	KMVE_RG/modules/__pycache__/visual_extractor.cpython-310.pyc
+-	-	KMVE_RG/modules/__pycache__/visual_extractor.cpython-38.pyc
+61	0	KMVE_RG/modules/dataloaders.py
+47	0	KMVE_RG/modules/datasets.py
+259	0	KMVE_RG/modules/encoder_decoder.py
+22	0	KMVE_RG/modules/loss.py
+38	0	KMVE_RG/modules/metrics.py
+61	0	KMVE_RG/modules/new_model_utils.py
+22	0	KMVE_RG/modules/optimizers.py
+125	0	KMVE_RG/modules/predicter.py
+91	0	KMVE_RG/modules/tokenizers.py
+14	0	KMVE_RG/modules/tools.py
+55	0	KMVE_RG/modules/utils.py
+32	0	KMVE_RG/modules/visual_extractor.py
+39	0	KMVE_RG/my_main.py
+23	0	KMVE_RG/pycocoevalcap/README.md
+0	0	KMVE_RG/pycocoevalcap/__init__.py
+-	-	KMVE_RG/pycocoevalcap/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/__pycache__/__init__.cpython-38.pyc
+19	0	KMVE_RG/pycocoevalcap/bleu/LICENSE
+1	0	KMVE_RG/pycocoevalcap/bleu/__init__.py
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu_scorer.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/bleu/__pycache__/bleu_scorer.cpython-38.pyc
+57	0	KMVE_RG/pycocoevalcap/bleu/bleu.py
+268	0	KMVE_RG/pycocoevalcap/bleu/bleu_scorer.py
+0	0	KMVE_RG/pycocoevalcap/cider/__init__.py
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider_scorer.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/cider/__pycache__/cider_scorer.cpython-38.pyc
+59	0	KMVE_RG/pycocoevalcap/cider/cider.py
+197	0	KMVE_RG/pycocoevalcap/cider/cider_scorer.py
+74	0	KMVE_RG/pycocoevalcap/eval.py
+26	0	KMVE_RG/pycocoevalcap/license.txt
+1	0	KMVE_RG/pycocoevalcap/meteor/__init__.py
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/meteor.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/__pycache__/meteor.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/meteor/meteor-1.5.jar
+90	0	KMVE_RG/pycocoevalcap/meteor/meteor.py
+1	0	KMVE_RG/pycocoevalcap/rouge/__init__.py
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/__init__.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/__init__.cpython-38.pyc
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/rouge.cpython-310.pyc
+-	-	KMVE_RG/pycocoevalcap/rouge/__pycache__/rouge.cpython-38.pyc
+105	0	KMVE_RG/pycocoevalcap/rouge/rouge.py
+1	0	KMVE_RG/pycocoevalcap/tokenizer/__init__.py
+76	0	KMVE_RG/pycocoevalcap/tokenizer/ptbtokenizer.py
+-	-	KMVE_RG/pycocoevalcap/tokenizer/stanford-corenlp-3.4.1.jar
+115	0	Knowledge_Distiller/knowledge_distiller.py
+
+1730623 2024-04-30 11:32:16 +0200 Initial commit
+2	0	README.md
