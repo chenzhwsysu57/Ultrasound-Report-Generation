@@ -12,9 +12,24 @@ from modules.tokenizers import Tokenizer
 from modules.metrics import compute_scores
 from config_nassir_urg import Config
 
+def seed_everything(seed: int):
+    if isinstance(seed, str):
+        seed = int(seed)
+    import random, os
+    import numpy as np
+    import torch
 
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.backends.mps.is_available():
+        torch.mps.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 def main(cmd_args, config_args):
-
+    seed_everything(cmd_args.seed)
     # 对指定器官、指定模型的测试集给出结果。输出：
     # Dataset,Method,B1,B2,B3,B4,Meteor,Rougel,CEacc,CEpre,CErecall,CEF1
     # 不包含器官分类
@@ -29,13 +44,14 @@ def main(cmd_args, config_args):
     test_dataloader = MyDataLoader(config_args, tokenizer, split='test', shuffle=True)
     model = model_class(config_args, tokenizer)
     model = model.to(device)
-    model.eval()
+    
 
     # load weight
     checkpoint = torch.load(cmd_args.ckpt)
     model.load_state_dict(checkpoint['state_dict'])
     print(f"checkpoint loaded from {cmd_args.ckpt}")
     metric_ftns = compute_scores
+    model.eval()
     with torch.no_grad():
         test_gts, test_res, test_organ = [], [], []
 
@@ -67,6 +83,7 @@ def main(cmd_args, config_args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process some parameters.')
     parser.add_argument('--model', type=str, default='AllOrgan', help='Path to the model')
+    parser.add_argument('--seed', type=int, default=3, help='Path to the model')
     parser.add_argument('--dataset', type=str, default='Liver', help='Path to the dataset')
     parser.add_argument('--save_path', type=str,  help='Path to save the results')
     parser.add_argument('--config', type=str, help='Path to the config file')
