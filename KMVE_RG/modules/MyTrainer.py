@@ -392,6 +392,10 @@ class TFTrainer(BaseTrainer):
             
         log = {'train_loss': train_loss / len(self.train_dataloader)}
         print(f"""train loss {log['train_loss']}""")
+        
+        self.model.saved_grads # TODO 保存
+        self.model.encoder_decoder.model.decoder.layers[0].src_attn.k_grads # TODO 保存
+        self.model.encoder_decoder.model.decoder.layers[0].src_attn.q_grads # TODO 保存
 
         self.model.eval()
         with torch.no_grad():

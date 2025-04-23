@@ -126,7 +126,7 @@ class DecoderLayer(nn.Module):
     def forward(self, x, hidden_states, src_mask, tgt_mask, memory):
         m = hidden_states
         x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, tgt_mask))
-        x = self.sublayer[1](x, lambda x: self.src_attn(x, m, m, src_mask))
+        x = self.sublayer[1](x, lambda x: self.src_attn(x, m, m, src_mask,register_hook=True))
         return self.sublayer[2](x, self.feed_forward)
 
 
@@ -139,17 +139,29 @@ class MultiHeadedAttention(nn.Module):
         self.linears = clones(nn.Linear(d_model, d_model), 4)
         self.attn = None
         self.dropout = nn.Dropout(p=dropout)
+        self.q_grads = []
+        self.k_grads = []
 
-    def forward(self, query, key, value, mask=None):
+
+    def forward(self, query, key, value, mask=None, register_hook=False):
         if mask is not None:
             mask = mask.unsqueeze(1)
         nbatches = query.size(0)
         query, key, value = [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)
                              for l, x in zip(self.linears, (query, key, value))]
+        
+        if register_hook and query.requires_grad and key.requires_grad:
+            query.register_hook(self._save_q_grad)
+            key.register_hook(self._save_k_grad)
 
         x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
         x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
         return self.linears[-1](x)
+
+    def _save_q_grad(self, grad):
+        self.q_grads.append(grad.detach().cpu())
+    def _save_k_grad(self, grad):
+        self.k_grads.append(grad.detach().cpu())
 
 
 class PositionwiseFeedForward(nn.Module):

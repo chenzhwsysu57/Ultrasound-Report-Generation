@@ -29,10 +29,16 @@ class AllOrgan(nn.Module):
         print('vocabulary size:', self.tokenizer.get_vocab_size())
         self.classfication_layers = classfication()
 
+        self.saved_grads = []
+
     def __str__(self):
         model_parameters = filter(lambda p: p.requires_grad, self.parameters())
         params = sum([np.prod(p.size()) for p in model_parameters])
         return super().__str__() + '\nTrainable parameters: {}'.format(params)
+    
+    def dense_hook(self, grad):
+        # print("Hook triggered, grad norm:", grad.norm())
+        self.saved_grads.append(grad.detach().cpu())
 
     def forward(self, images, targets=None, mode='train'):
         att_feats_0, fc_feats_0, _, dense_vec1 = self.visual_extractor(images[:, 0])
@@ -40,6 +46,8 @@ class AllOrgan(nn.Module):
         fc_feats = torch.cat((fc_feats_0, fc_feats_1), dim=1)
         att_feats = torch.cat((att_feats_0, att_feats_1), dim=1)
         dense_vec = torch.cat((dense_vec1, dense_vec2), dim=1)
+        if att_feats.requires_grad:
+            att_feats.register_hook(self.dense_hook)
         if mode == 'train':
             # print(f"train mode, input shape: {fc_feats.shape}, {att_feats.shape}, {targets.shape}")
             # print(f"fc_feats dtype: {fc_feats.dtype}, att_feats dtype: {att_feats.dtype}, targets dtype: {targets.dtype}")
