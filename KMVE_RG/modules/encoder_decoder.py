@@ -9,8 +9,71 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch
+import json
+import functools
+import os
 
 from .Generator import pack_wrapper, GenModel
+
+def track_io_split(save_dir):
+    os.makedirs(save_dir, exist_ok=True)
+    counter = [0]  # 用列表包住，避免闭包问题
+
+    def decorator(fn):
+        @functools.wraps(fn)
+        def wrapper(*args, **kwargs):
+            counter[0] += 1
+            arg_names = fn.__code__.co_varnames[1:fn.__code__.co_argcount]
+            inputs = {name: args[i+1] for i, name in enumerate(arg_names)}
+            inputs.update(kwargs)
+
+            result = fn(*args, **kwargs)
+
+            record = {
+                'function': fn.__qualname__,
+                'inputs': inputs,
+                'output': result
+            }
+
+            save_path = os.path.join(save_dir, f"track_{counter[0]:05d}.pt")
+            torch.save(record, save_path)
+
+            return result
+        return wrapper
+    return decorator
+
+def track_io(filepath):
+    def decorator(fn):
+        @functools.wraps(fn)
+        def wrapper(*args, **kwargs):
+            arg_names = fn.__code__.co_varnames[1:fn.__code__.co_argcount]
+            inputs = {name: args[i+1] for i, name in enumerate(arg_names)}  # 跳过self
+            inputs.update(kwargs)
+            
+            result = fn(*args, **kwargs)
+            
+            # 记录
+            record = {
+                'function': fn.__qualname__,
+                'inputs': inputs,
+                'output': result
+            }
+            
+            # 如果已经有文件，读取出来append
+            if os.path.exists(filepath):
+                existing = torch.load(filepath)
+                if not isinstance(existing, list):
+                    existing = [existing]
+            else:
+                existing = []
+                
+            existing.append(record)
+            torch.save(existing, filepath)
+            
+            return result
+        return wrapper
+    return decorator
 
 
 def clones(module, N):
@@ -23,8 +86,10 @@ def attention(query, key, value, mask=None, dropout=None):
     if mask is not None:
         scores = scores.masked_fill(mask == 0, -1e9)
     p_attn = F.softmax(scores, dim=-1)
+    # TODO modify attention with human preference
     if dropout is not None:
         p_attn = dropout(p_attn)
+    
     return torch.matmul(p_attn, value), p_attn
 
 
@@ -109,7 +174,8 @@ class Decoder(nn.Module):
         self.norm = LayerNorm(layer.d_model)
 
     def forward(self, x, hidden_states, src_mask, tgt_mask, memory):
-        for layer in self.layers:
+        for idx, layer in enumerate(self.layers):
+            is_last_layer = (idx == len(self.layers) - 1)
             x = layer(x, hidden_states, src_mask, tgt_mask, memory)
         return self.norm(x)
 
@@ -140,6 +206,7 @@ class MultiHeadedAttention(nn.Module):
         self.attn = None
         self.dropout = nn.Dropout(p=dropout)
 
+    @track_io_split('tracker')
     def forward(self, query, key, value, mask=None):
         if mask is not None:
             mask = mask.unsqueeze(1)
@@ -148,6 +215,7 @@ class MultiHeadedAttention(nn.Module):
                              for l, x in zip(self.linears, (query, key, value))]
 
         x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
+        # print(f'Q.shape = {query.shape}\nK.shape = {key.shape}\nV.shape = {value.shape}')
         x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
         return self.linears[-1](x)
 
@@ -265,6 +333,7 @@ class EncoderDecoder(GenModel):
         outputs = F.log_softmax(self.logit(out), dim=-1)
         return outputs, out
 
+    @track_io_split('tracker')
     def core(self, it, memory, state, mask):
         if len(state) == 0:
             ys = it.unsqueeze(1)
