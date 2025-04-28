@@ -41,6 +41,7 @@ def main(cmd_args, config_args):
 
         for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in \
                 tqdm(enumerate(test_dataloader), total=len(test_dataloader)):
+            # TODO save images_id for attention analysis
             images, reports_ids, reports_masks, mesh_label = images.to(device), reports_ids.to(
                     device), reports_masks.to(device), mesh_label.to(device)
             output,_  = model(images, mode='sample') # output, _ 增加的这个是为了兼容 organ 分类

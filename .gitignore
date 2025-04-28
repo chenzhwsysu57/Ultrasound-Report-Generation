@@ -11,3 +11,4 @@ wandb/
 env.yaml
 Result*/
 .config.yaml
+tracker
