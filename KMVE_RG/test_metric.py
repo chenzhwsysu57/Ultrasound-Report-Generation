@@ -55,8 +55,7 @@ def main(cmd_args, config_args):
                     'reports_ids': reports_ids,
                     'reports_masks': reports_masks,
                     'mesh_label': mesh_label,
-                    'cmd_args': cmd_args,
-                    'config_args': config_args
+                    'cmd_args': cmd_args
                 }, batch_save_path)
             
             images, reports_ids, reports_masks, mesh_label = images.to(device), reports_ids.to(
