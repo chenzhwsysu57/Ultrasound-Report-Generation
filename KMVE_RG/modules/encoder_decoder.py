@@ -86,6 +86,7 @@ def attention(query, key, value, mask=None, dropout=None):
     if mask is not None:
         scores = scores.masked_fill(mask == 0, -1e9)
     p_attn = F.softmax(scores, dim=-1)
+    # print(f'attention func: pattn shape: {p_attn.shape}')
     # TODO modify attention with human preference
     if dropout is not None:
         p_attn = dropout(p_attn)
@@ -203,10 +204,15 @@ class MultiHeadedAttention(nn.Module):
         self.d_k = d_model // h
         self.h = h
         self.linears = clones(nn.Linear(d_model, d_model), 4)
-        self.attn = None
+        self.attns = {} # we want only save last layer attention
+        self.last_seq_len = 0 
+        self.save_attn = True
+        self.save_count = 0  
+        self.save_path = f'US-Report-Gen/tracker/batch_{self.save_count}/attn.pt'
+        os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
         self.dropout = nn.Dropout(p=dropout)
-
-    @track_io_split('tracker')
+        self.last_shape = None
+    # @track_io_split('tracker')
     def forward(self, query, key, value, mask=None):
         if mask is not None:
             mask = mask.unsqueeze(1)
@@ -214,12 +220,29 @@ class MultiHeadedAttention(nn.Module):
         query, key, value = [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)
                              for l, x in zip(self.linears, (query, key, value))]
 
-        x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
-        # print(f'Q.shape = {query.shape}\nK.shape = {key.shape}\nV.shape = {value.shape}')
+        x, attn = attention(query, key, value, mask=mask, dropout=self.dropout)
+        if self.save_attn and attn.size(3) == 98:
+            seq_len = attn.size(2)
+            if seq_len == 1:
+                
+                torch.save(self.attns, self.save_path)
+                self.attns.clear()
+
+                # update for next save
+                self.save_count += 1
+                self.save_path = f'US-Report-Gen/tracker/batch_{self.save_count}/attn.pt'
+                os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
+            
+            
+            attn_shape = tuple(attn.shape)
+            # print(tuple(attn.shape))
+            self.attns[attn_shape] = attn.detach().cpu()
+            self.last_seq_len = seq_len
+            
         x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
         return self.linears[-1](x)
 
-
+    
 class PositionwiseFeedForward(nn.Module):
     def __init__(self, d_model, d_ff, dropout=0.1):
         super(PositionwiseFeedForward, self).__init__()
@@ -304,7 +327,9 @@ class EncoderDecoder(GenModel):
         tgt_vocab = self.vocab_size + 1
         self.model = self.make_model(tgt_vocab)
         self.logit = nn.Linear(args.d_model, tgt_vocab)
-
+        self.past_values = []
+        self.last_seq_len = 0
+        self.save_count = 0
     def _prepare_feature(self, fc_feats, att_feats, att_masks):
         att_feats, seq, att_masks, seq_mask = self._prepare_feature_forward(att_feats, att_masks)
         memory = self.model.encode(att_feats, att_masks)
@@ -333,13 +358,21 @@ class EncoderDecoder(GenModel):
         outputs = F.log_softmax(self.logit(out), dim=-1)
         return outputs, out
 
-    @track_io_split('tracker')
+    # @track_io_split('tracker')
     def core(self, it, memory, state, mask):
         if len(state) == 0:
             ys = it.unsqueeze(1)
         else:
             ys = torch.cat([state[0][0], it.unsqueeze(1)], dim=1)
         out = self.model.decode(memory, mask, ys, subsequent_mask(ys.size(1)).to(memory.device))
+        
+        self.past_values.append(out.detach().cpu())
+        if out.size(1) < self.last_seq_len:
+            torch.save(self.past_values, f'US-Report-Gen/tracker/batch_{self.save_count}/past_values.pt')
+            self.past_values.clear()
+            self.save_count += 1
+        self.last_seq_len = out.size(1)
+
         return out[:, -1], [ys.unsqueeze(0)]
 
 class DecoderOnly(GenModel):

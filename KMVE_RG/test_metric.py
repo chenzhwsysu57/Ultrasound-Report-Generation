@@ -36,12 +36,29 @@ def main(cmd_args, config_args):
     model.load_state_dict(checkpoint['state_dict'])
     print(f"checkpoint loaded from {cmd_args['ckpt']}")
     metric_ftns = compute_scores
+    
+    
     with torch.no_grad():
         test_gts, test_res, test_organ = [], [], []
 
         for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in \
                 tqdm(enumerate(test_dataloader), total=len(test_dataloader)):
-            # TODO save images_id for attention analysis
+            if cmd_args.get('save_past_values', 'false') == 'true':
+                save_dir = f'US-Report-Gen/tracker/batch_{batch_idx}'
+                os.makedirs(save_dir, exist_ok=True)
+                batch_save_path = os.path.join(save_dir, f"source.pt")
+                torch.save({
+                    'batch_idx': batch_idx,
+                    'images_id': images_id,
+                    'images': images,
+                    'cap_lens': cap_lens,
+                    'reports_ids': reports_ids,
+                    'reports_masks': reports_masks,
+                    'mesh_label': mesh_label,
+                    'cmd_args': cmd_args,
+                    'config_args': config_args
+                }, batch_save_path)
+            
             images, reports_ids, reports_masks, mesh_label = images.to(device), reports_ids.to(
                     device), reports_masks.to(device), mesh_label.to(device)
             output,_  = model(images, mode='sample') # output, _ 增加的这个是为了兼容 organ 分类
@@ -76,7 +93,7 @@ if __name__ == '__main__':
     parser.add_argument('--comment', type=str, help='Comment')
     parser.add_argument('--decoderonly', type=str, default='False', help='use decoder only model.')
     parser.add_argument('--norm', type=str, default='layernorm', help='can also use rmsnorm')
-    
+    parser.add_argument('--save_past_values', type=str, default='false', help='should only be used during inference')
     known_args, unknown_args = parser.parse_known_args()
     extra_args = {}
     i = 0
