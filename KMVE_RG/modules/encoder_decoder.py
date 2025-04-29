@@ -209,7 +209,7 @@ class MultiHeadedAttention(nn.Module):
         self.save_attn = True
         self.save_count = 0  
         self.save_path = f'US-Report-Gen/tracker/batch_{self.save_count}/attn.pt'
-        os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
+        # os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
         self.dropout = nn.Dropout(p=dropout)
         self.last_shape = None
     # @track_io_split('tracker')
@@ -223,22 +223,21 @@ class MultiHeadedAttention(nn.Module):
         x, attn = attention(query, key, value, mask=mask, dropout=self.dropout)
         if self.save_attn and attn.size(3) == 98:
             seq_len = attn.size(2)
-            if seq_len == 1:
-                
-                torch.save(self.attns, self.save_path)
-                self.attns.clear()
 
-                # update for next save
-                self.save_count += 1
-                self.save_path = f'US-Report-Gen/tracker/batch_{self.save_count}/attn.pt'
-                os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
-            
-            
             attn_shape = tuple(attn.shape)
             # print(tuple(attn.shape))
             self.attns[attn_shape] = attn.detach().cpu()
             self.last_seq_len = seq_len
-            
+
+            if seq_len == 151:
+                    self.save_path = f'US-Report-Gen/tracker/batch_{self.save_count}/attn.pt'
+                    os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
+                    torch.save(self.attns, self.save_path)
+                    self.attns.clear()
+
+                    self.save_count += 1
+                    
+                  
         x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
         return self.linears[-1](x)
 
@@ -366,12 +365,14 @@ class EncoderDecoder(GenModel):
             ys = torch.cat([state[0][0], it.unsqueeze(1)], dim=1)
         out = self.model.decode(memory, mask, ys, subsequent_mask(ys.size(1)).to(memory.device))
         
+        # print(out.shape)
+        self.last_seq_len = out.size(1)
         self.past_values.append(out.detach().cpu())
-        if out.size(1) < self.last_seq_len:
+
+        if out.size(1) == 151:
             torch.save(self.past_values, f'US-Report-Gen/tracker/batch_{self.save_count}/past_values.pt')
             self.past_values.clear()
             self.save_count += 1
-        self.last_seq_len = out.size(1)
 
         return out[:, -1], [ys.unsqueeze(0)]
 
