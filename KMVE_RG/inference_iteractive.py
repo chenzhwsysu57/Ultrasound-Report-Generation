@@ -1,112 +1,125 @@
-# 推理一个例子。
+import torch
+import matplotlib.pyplot as plt
+import torchvision.transforms.functional as F
+
 import argparse
 import sys
 import os
 import torch
 from tqdm import tqdm 
 import importlib
-from torchvision import transforms
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from PIL import Image
+from config_urg import Config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # only work in py
+import os, sys
+
+# 获取当前 notebook 文件所在的目录
+current_dir = os.getcwd()
+
+# 加到 sys.path
+sys.path.append(os.path.dirname(os.path.dirname(current_dir)))
+
+
 from modules.dataloaders import MyDataLoader
 from modules.tokenizers import Tokenizer
 from modules.metrics import compute_scores
-from config_nassir_urg import Config
-from modules.tokenizers import Tokenizer
-from KMVE_RG.models.SGF import SGF
-from KMVE_RG.models.AllOrgan import AllOrgan
 
-def compute_single_metric(ID, gt, pred):
-    single_metrics = compute_scores({0: [gt]}, {0: [pred]})
-    return {**single_metrics}
+def denormalize(tensor, mean, std):
+    """
+    反标准化一个 shape 为 [B, C, H, W] 或 [C, H, W] 的 Tensor。
+    """
+    mean = torch.tensor(mean).view(1, -1, 1, 1)
+    std = torch.tensor(std).view(1, -1, 1, 1)
+    return tensor * std + mean
 
-def get_image(uid):
-    # 从 uid 获取图片路径
-    path1 = f'/home/chenzhw/ultrasound_report_gen/USData/all_report/{uid}_1.jpeg'
-    path2 = f'/home/chenzhw/ultrasound_report_gen/USData/all_report/{uid}_2.jpeg'
-    # TODO 修改这段代码
-    image_1 = Image.open(path1).convert('RGB')
-    image_2 = Image.open(path2).convert('RGB')
-    transform = transforms.Compose([
-                transforms.Resize((224, 224)),
-                transforms.ToTensor(),
-                transforms.Normalize((0.485, 0.456, 0.406),
-                                     (0.229, 0.224, 0.225))])
-    if transform is not None:
-        image_1 = transform(image_1)
-        image_2 = transform(image_2)
-    image = torch.stack((image_1, image_2), dim=0)
-    return image
+class UIDCaption:
 
-import json
-def get_tokens(uid):
-    data = []
-    with open('/home/chenzhw/ultrasound_report_gen/USData/new_all2.json', 'r', encoding='utf-8-sig') as f:
-        data = json.load(f)
-    for split in ["train", "val", "test"]:
-        for entry in data[split]:
-            
-            if entry["uid"] == uid:
-                return {
-                        "finding": entry["finding"],
-                        "labels": entry["labels"],
-                        "split": split
-                    }
-            
-    return None
-def main():
-    import argparse
-    parser = argparse.ArgumentParser(description='inference one.')
-    parser.add_argument('--uid', type=int, default=215216, help="uid of case." )
-    parser.add_argument('--checkpoint', type=str, default='none', help="checkpoint to load model.")
-    parser.add_argument('--model', type=str, default='SGF',choices=['SGF','AllOrgan'], help="model to initiate")
-    parser.add_argument('--organ',type=str,default='Liver',help='no need if you do not use SGF model.')
-    parser.add_argument('--candidate', type=str,default=None, help="if specify, won't use model to generate candidate.")
-    parser.add_argument('--reference',type=str, default=None,help="answers to reference.")
+    '''一个 uid 对应的生成情况'''
+    def __init__(self, batch_idx):
 
-    args = parser.parse_args()
-    # load model
-    if args.model == "SGF":
-        uid_info = get_tokens(args.uid)
-        args.organ = uid_info['labels']
-        # load SGF
-        config = Config(dataset_name = args.organ, result = 'none')
-        tokenizer = Tokenizer(config)
-        # print(tokenizer.tokens)
-        model = SGF(config, tokenizer)
-        if args.checkpoint == 'none':
-            # 自动选择最好的checkpoint
-            uid_info = get_tokens(args.uid)
-            args.organ = uid_info['labels']
-            args.checkpoint = f'/home/chenzhw/ultrasound_report_gen/Nassir-US-Report-Gen/Result/Nassir/Models/{args.organ}_best.pth'
-            # load checkpoint
-            print(f"ckpt {args.checkpoint}")
-            ckpt = torch.load(args.checkpoint)
-            model.load_state_dict(ckpt['state_dict'])
+        attns = torch.load(f'/home/chenzhw/ultrasound_report_gen/US-Report-Gen/tracker/batch_{batch_idx}/attn.pt')
+        past_values = torch.load(f'/home/chenzhw/ultrasound_report_gen/US-Report-Gen/tracker/batch_{batch_idx}/past_values.pt')
+        source = torch.load(f'/home/chenzhw/ultrasound_report_gen/US-Report-Gen/tracker/batch_{batch_idx}/source.pt')
+        self.source = source
+        self.attns = attns
+        self.past_values = past_values
+        
+        
+        self.ckpt = self.source['cmd_args']['ckpt']
+        self.model = self.load_model(self.source)
+    
+    def get_images_tensor(self, image_index_in_batch):
+        return self.source['images'][image_index_in_batch]
+    
+    def get_images_denrom(self, images_index_in_batch):
+        images = self.source['images'][images_index_in_batch]  
 
-            model.eval()
-            with torch.no_grad():
-                image = get_image(args.uid)
-                image = torch.stack([image], 0)
-                uid_info = get_tokens(args.uid)
-                report_ids = tokenizer(uid_info['finding'])
-                
-                output_ids, _ = model(image,mode='sample')
-                predict_reports = ' '.join(model.tokenizer.decode_batch(output_ids.cpu().numpy()))
-                # os.system('clear')
-                if args.candidate: predict_reports = args.candidate
-                print(f'pd \033[1;35m{predict_reports}\033[0m' )
-                ground_reports = ' '.join(tokenizer.decode_batch([report_ids[1:-2]]))
-                print(f'gt \033[1;36m{ground_reports}\033[0m' )
-                split, organ = uid_info['split'],uid_info['labels']
-                print(f'split: \033[1;37m{split}\033[0m')
-                print(f'organ: \033[1;37m{organ}\033[0m')
-                print(f'uid: \033[1;37m{args.uid}\033[0m')
-                # 输出各项计算指标
-                from modules.metrics import compute_scores
-                metrics = compute_single_metric(args.uid, ground_reports, predict_reports)
-                print(metrics)
-                print(f'/home/chenzhw/ultrasound_report_gen/USData/all_report/{args.uid}_1.jpeg')
-                print(f'/home/chenzhw/ultrasound_report_gen/USData/all_report/{args.uid}_2.jpeg')
-if __name__=="__main__":
-    main()
+        images_denorm = denormalize(images, mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
+        return images_denorm
+
+    def load_model(self,source):
+        config_args = Config(**source['cmd_args'])
+        def seed_everything(seed: int):
+            if isinstance(seed, str):
+                seed = int(seed)
+            import random, os
+            import numpy as np
+            import torch
+
+            random.seed(seed)
+            os.environ['PYTHONHASHSEED'] = str(seed)
+            np.random.seed(seed)
+            torch.manual_seed(seed)
+            if torch.backends.mps.is_available():
+                torch.mps.manual_seed(seed)
+            torch.cuda.manual_seed(seed)
+            torch.backends.cudnn.deterministic = True
+            torch.backends.cudnn.benchmark = False
+
+        seed_everything(config_args.seed)
+        device = 'cuda' if torch.cuda.is_available() else 'mps' if torch.mps.is_available() else 'cpu'
+        model_module = importlib.import_module(f'KMVE_RG.models.{source["cmd_args"]["model"]}', )
+        model_class = getattr(model_module, source["cmd_args"]["model"])
+
+        tokenizer = Tokenizer(config_args)
+        model = model_class(config_args, tokenizer)
+        model = model.to(device)
+        model.eval()
+        base_dir = os.path.dirname(os.getcwd())
+        ckpt = f'{base_dir}/{source["cmd_args"]["ckpt"]}'
+        checkpoint = torch.load(ckpt)
+        model.load_state_dict(checkpoint['state_dict'])
+        return model
+    
+    def show_images(self, index):
+        images_denorm = self.get_images_denrom(index)
+        img1 = images_denorm[0].clamp(0, 1)
+        img2 = images_denorm[1].clamp(0, 1)
+
+        # 水平拼接：确保尺寸匹配（都是 [3, 224, 224]）
+        concatenated = torch.cat([img1, img2], dim=2)  # dim=2 是宽度方向
+
+        # 显示
+        plt.imshow(F.to_pil_image(concatenated))
+
+        plt.axis('off')
+        uid = self.source['images_id'][index]
+        plt.title(f'UID {uid}')
+        plt.show()
+
+
+    def show_step_attention(self, index: int, step: int):
+        
+        pass 
+    # todo, 展示第 index 个图片在第 step 步的时候，图像热力图以及根据这个热力图得到的结果。展示为热力图+title为预测的词
+
+    def step(self, history, attn):
+        pass
+    # todo, 传入新的attention矩阵，计算往前推进一步的结果，并更新history
+
+    def alter_attn(self, attn):
+        pass
+    # todo 人为修改attn
+
+
+uidcaption = UIDCaption(0)
+uidcaption.show_images(7)
