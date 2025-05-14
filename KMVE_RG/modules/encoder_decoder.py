@@ -206,7 +206,7 @@ class MultiHeadedAttention(nn.Module):
         self.linears = clones(nn.Linear(d_model, d_model), 4)
         self.attns = {} # we want only save last layer attention
         self.last_seq_len = 0 
-        self.save_attn = True
+        self.save_attn = False
         self.save_count = 0  
         self.save_path = f'US-Report-Gen/tracker/batch_{self.save_count}/attn.pt'
         # os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
@@ -327,6 +327,7 @@ class EncoderDecoder(GenModel):
         self.model = self.make_model(tgt_vocab)
         self.logit = nn.Linear(args.d_model, tgt_vocab)
         self.past_values = []
+        self.save_past_values = False
         self.last_seq_len = 0
         self.save_count = 0
     def _prepare_feature(self, fc_feats, att_feats, att_masks):
@@ -369,7 +370,7 @@ class EncoderDecoder(GenModel):
         self.last_seq_len = out.size(1)
         self.past_values.append(out.detach().cpu())
 
-        if out.size(1) == 151:
+        if self.save_past_values and out.size(1) == 151:
             torch.save(self.past_values, f'US-Report-Gen/tracker/batch_{self.save_count}/past_values.pt')
             self.past_values.clear()
             self.save_count += 1
