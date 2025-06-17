@@ -71,7 +71,8 @@ class UltrasoundReportModel:
             with open(embedding_file, 'r') as f:
                 db = json.load(f)
                 self.db = db
-
+        else:
+            self.db = None
     def preprocess(self, image_list):
         assert len(image_list) == 2, "需要传入两张图像"
         images = [self.transform(Image.open(img).convert('RGB')) for img in image_list]
@@ -245,7 +246,7 @@ class UltrasoundReportModel:
 if __name__=="__main__":
     model = UltrasoundReportModel()
     model.build_embedding_index('/home/chenzhw/ultrasound_report_gen/USData/all_report', '/home/chenzhw/ultrasound_report_gen/USData/embedding_index.json')
-    image_path = '/home/chenzhw/ultrasound_report_gen/USData/all_report/106383_2.jpeg'
+    image_path = '/home/chenzhw/ultrasound_report_gen/USData/all_report/107368_1.jpeg'
     embedding_file = '/home/chenzhw/ultrasound_report_gen/USData/embedding_index.json'
     sims = model.find_topk_similar( image_path, embedding_file, topk=5)
     for idx, (path, sim) in enumerate(sims):
