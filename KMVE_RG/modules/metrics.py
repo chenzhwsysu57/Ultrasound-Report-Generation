@@ -19,7 +19,7 @@ def timing_decorator(func):
         return result
     return wrapper
 
-@timing_decorator
+# @timing_decorator
 def compute_scores(gts, res):
     """
     Performs the MS COCO evaluation using the Python 3 implementation (https://github.com/salaniz/pycocoevalcap)

@@ -143,8 +143,13 @@ class BaseTrainer(object):
             if epoch % self.save_period == 0:
                 self._save_checkpoint(epoch, save_best=best)
             self._save_checkpoint(epoch, save_last=True)
+
+            
+            
+
         self._print_best()
         self._print_best_to_file()
+
 
     def _print_best_to_file(self):
         crt_time = time.asctime(time.localtime(time.time()))
@@ -167,7 +172,7 @@ class BaseTrainer(object):
         record_table.to_csv(record_path, index=False)
 
     
-    @timing_decorator
+    # @timing_decorator
     def _save_checkpoint(self, epoch, save_best=False,save_last=False):
         state = {
             'epoch': epoch,
@@ -350,9 +355,9 @@ class TFTrainer(BaseTrainer):
         self.val_dataloader = val_dataloader
         self.test_dataloader = test_dataloader
 
-        self.lambda1 = 0.7 # tf 交叉熵的loss
-        self.lambda2 = 0.3 # 器官分类的 loss
-    
+        self.lambda_tf = 0.7 # tf 交叉熵的loss
+        self.lambda_classfy = 0.3 # 器官分类的 loss
+        self.lambda_clip = 0.4 # clip loss
 
     def logloss(self, y_true, y_pred, eps=1e-15):
         y_true = np.array(y_true)
@@ -374,13 +379,13 @@ class TFTrainer(BaseTrainer):
                                                              reports_masks.to(self.device), mesh_label.to(self.device)
 
 
-            output,pred_classified  = self.model(images, reports_ids, mode='train')
+            output, pred_classified, loss_clip  = self.model(images, reports_ids, 'train', reports_ids, reports_masks)
             ORGAN_L = self.criterionBCE(pred_classified, mesh_label)
-            
             RG_L = self.criterion(output, reports_ids, reports_masks)
-            batch_loss = self.lambda1 * RG_L
+            # print(f"loss organ {ORGAN_L}, loss clip {loss_clip}, loss autoreg {RG_L}")
+            batch_loss = self.lambda_tf * RG_L + self.lambda_clip * loss_clip
             batch_loss /= accumulation_steps
-            train_loss = train_loss + self.lambda1 * RG_L.item() 
+            train_loss = train_loss + self.lambda_tf * RG_L.item() + self.lambda_clip * loss_clip.item()
 
             batch_loss.backward()
             
@@ -406,6 +411,7 @@ class TFTrainer(BaseTrainer):
                 ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
                 val_res.extend(reports)
                 val_gts.extend(ground_truths)
+            
             val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
                                        {i: [re] for i, re in enumerate(val_res)})
 
@@ -460,7 +466,14 @@ class TFTrainer(BaseTrainer):
             df.to_csv(file_name, index=False, encoding='utf-8-sig')
             
         self.lr_scheduler.step()
+        # if torch.cuda.is_available():
+        #     torch.cuda.empty_cache()
+        
+        # import gc
 
+        # del val_res, val_gts
+        # del test_res, test_gts, test_organ, organ_metrics, results, df
+        # gc.collect()
         return log
 
 class MoETrainer(BaseTrainer):
@@ -485,7 +498,7 @@ class MoETrainer(BaseTrainer):
         loss = np.sum(- y_true * np.log(p) - (1 - y_true) * np.log(1 - p))
 
         return loss / len(y_true)
-    @timing_decorator
+    # @timing_decorator
     def _train_epoch(self, epoch):
         train_loss = 0
         self.model.train()
