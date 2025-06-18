@@ -7,38 +7,7 @@ from .datasets import MyDataset
 from torch.utils.data import Sampler
 import random
 
-# class BalancedSampler(Sampler):
-#     def __init__(self, dataset):
-#         self.dataset = dataset
-#         self.organ_indices = self._organize_indices_by_label()
-#         self.organ_order = ["Liver", "Mammary", "Thyroid"]  # 预定义采样顺序
-#         self.organ_iters = {k: iter(v) for k, v in self.organ_indices.items()}  # 迭代器字典
 
-#     def _organize_indices_by_label(self):
-#         """
-#         预处理：按照器官类别将数据索引分组，并打乱顺序。
-#         """
-#         organ_indices = {"Liver": [], "Mammary": [], "Thyroid": []}
-#         for idx, example in enumerate(self.dataset.examples):
-#             organ = example["labels"]
-#             organ_indices[organ].append(idx)
-
-#         for organ in organ_indices:
-#             random.shuffle(organ_indices[organ])  # 打乱每个类别的样本顺序
-
-#         return organ_indices
-
-#     def __iter__(self):
-#         """
-#         轮流采样 Liver → Mammary → Thyroid，直到所有数据采样完毕。
-#         """
-#         while any(len(v) > 0 for v in self.organ_indices.values()):  # 确保还有数据可采样
-#             for organ in self.organ_order:  # 轮流采样 Liver → Mammary → Thyroid
-#                 if len(self.organ_indices[organ]) > 0:  # 该类别仍有数据
-#                     yield self.organ_indices[organ].pop(0)  # 取出索引
-
-#     def __len__(self):
-#         return sum(len(indices) for indices in self.organ_indices.values())
 class BalancedSampler:
     def __init__(self, dataset):
         self.dataset = dataset
@@ -143,7 +112,8 @@ class MyDataLoader(DataLoader):
         if self.args.dataset_name == "all":
             # this code for all organ 
             mesh_label =  tuple([self.args.get_label_from_organ(label) for label in mesh_label])
-
+        else:
+            mesh_label = [0 for label in mesh_label]
         # print(mesh_label)
         
         mesh_label = torch.tensor(mesh_label)

@@ -87,7 +87,7 @@ if __name__ == '__main__':
         print("using moe.")
         from KMVE_RG.models.MoEModel import MoEModel as MyModel
         from modules.MyTrainer import MoETrainer as Trainer
-    elif cmd_line_args['dataset_name'] == "all":
+    elif cmd_line_args['dataset_name'] == "all" or "iuxray":
         print("using allorgan")
         from KMVE_RG.models.AllOrgan import AllOrgan as MyModel
         from modules.MyTrainer import TFTrainer as Trainer 
