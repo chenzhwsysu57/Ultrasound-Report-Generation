@@ -18,6 +18,14 @@ EMBEDDING_FILE = "/home/chenzhw/ultrasound_report_gen/USData/embedding_index.jso
 os.makedirs(IMAGE_SAVE_DIR, exist_ok=True)
 os.makedirs(REPORT_SAVE_DIR, exist_ok=True)
 
+response = requests.post(
+            "http://localhost:8000/init_index",
+            headers={"Content-Type": "application/json"},
+            json={"json_path": "/home/chenzhw/ultrasound_report_gen/USData/all.json", "top_k": 3}
+        )
+if response.status_code == 200:
+    print('index init ok.')
+
 def files_to_pil_images(file_list):
     images = []
     for f in file_list:
@@ -121,7 +129,7 @@ def query_similar_texts(report_text):
         response = requests.post(
             "http://localhost:8000/search",
             headers={"Content-Type": "application/json"},
-            json={"query": report_text, "top_k": 3}
+            json={"query": report_text, "top_k": 2}
         )
         if response.status_code != 200:
             return [], f"❌ 查询失败，状态码: {response.status_code}"
@@ -170,7 +178,7 @@ def query_similar_texts(report_text):
 
 # ✅ 清除所有状态
 def clear_all():
-    return [], "", None, "", [], ""
+    return [], "", None, "", [], "", [], "", "", None
 
 with gr.Blocks() as demo:
     gr.Markdown("## 超声报告生成系统")
@@ -196,7 +204,7 @@ with gr.Blocks() as demo:
 
     with gr.Row():
         sim_gallery = gr.Gallery(label="相似图像（每图查两张）")
-        sim_info = gr.Textbox(label="相似图像及报告", lines=10, interactive=False)
+        sim_info = gr.Textbox(label="相似图像的报告", lines=10, interactive=False)
     with gr.Row():
         similar_text_gallery = gr.Gallery(label="相似报告图像")
         similar_text_texts = gr.Textbox(label="相似报告", lines=10, interactive=False)
@@ -229,10 +237,14 @@ with gr.Blocks() as demo:
     )
 
     clear_btn.click(
-        fn=clear_all,
-        inputs=[],
-        outputs=[state, image_names, image_preview, output_box, sim_gallery, sim_info]
-    )
+    fn=clear_all,
+    inputs=[],
+    outputs=[
+        state, image_names, image_preview, output_box,
+        sim_gallery, sim_info, similar_text_gallery,
+        similar_text_texts, save_status, image_input
+    ]
+)
 
     query_btn.click(
         fn=partial(query_similar_images, model=model),
