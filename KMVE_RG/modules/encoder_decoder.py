@@ -368,7 +368,8 @@ class EncoderDecoder(GenModel):
         
         # print(out.shape)
         self.last_seq_len = out.size(1)
-        self.past_values.append(out.detach().cpu())
+        if self.save_past_values:
+            self.past_values.append(out.detach().cpu())
 
         if self.save_past_values and out.size(1) == 151:
             torch.save(self.past_values, f'US-Report-Gen/tracker/batch_{self.save_count}/past_values.pt')
