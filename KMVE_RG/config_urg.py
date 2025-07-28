@@ -132,16 +132,16 @@ class Config(CN):
         self.attn_pth = f'{self.Result_prefix}/Attn_pth'
 
     
-    @property
-    def resume(self):
-        max_epoch = -1
-        checkpoint_path = ''
-        for i in range(1, self.epochs + 1):
-            checkpoint_path = f'{self.Result_prefix}/Models/{self.dataset_name}_epoch_{i}_checkpoint.pth'
-            if os.path.exists(checkpoint_path):
-                max_epoch = i
-        return (f'{self.Result_prefix}/Models/{self.dataset_name}_epoch_{max_epoch}_checkpoint.pth'
-                if max_epoch != -1 else None)
+    # @property
+    # def resume(self):
+    #     max_epoch = -1
+    #     checkpoint_path = ''
+    #     for i in range(1, self.epochs + 1):
+    #         checkpoint_path = f'{self.Result_prefix}/Models/{self.dataset_name}_epoch_{i}_checkpoint.pth'
+    #         if os.path.exists(checkpoint_path):
+    #             max_epoch = i
+    #     return (f'{self.Result_prefix}/Models/{self.dataset_name}_epoch_{max_epoch}_checkpoint.pth'
+    #             if max_epoch != -1 else None)
 
     @property
     def distiller_num(self):

@@ -26,6 +26,9 @@ class AllOrgan(nn.Module):
             self.encoder_decoder = DecoderOnly(args, tokenizer)
         else:
             self.encoder_decoder = EncoderDecoder(args, tokenizer)
+        use_clip_loss = self.args.use_clip_loss if hasattr(self.args, 'use_clip_loss') else False
+        if use_clip_loss:
+            print("Using clip loss.")
         
         # 文本编码器（新增）
         self.text_encoder = TextEncoder(model_name='bert-base-chinese', output_dim=1024)
@@ -69,8 +72,9 @@ class AllOrgan(nn.Module):
             # 文本嵌入（新增）
             
             
-            use_clip_loss = True
+            use_clip_loss = self.args.use_clip_loss if hasattr(self.args, 'use_clip_loss') else False
             if use_clip_loss:
+            
                 text_embed = self.text_encoder(text_ids, text_mask)  # shape: (B, D)
                 loss_clip = self.clip_loss(image_embed, text_embed)
             else:

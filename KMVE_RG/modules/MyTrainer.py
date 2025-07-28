@@ -79,7 +79,8 @@ class BaseTrainer(object):
 
         if args.resume is not None:
             self._resume_checkpoint(args.resume)
-
+        else:
+            print('No checkpoint found. Start training from scratch.')
         self.best_recorder = {'val': {self.mnt_metric: self.mnt_best},
 
                               'test': {self.mnt_metric_test: self.mnt_best}}
@@ -193,7 +194,10 @@ class BaseTrainer(object):
             print(f"Saving last checkpoint: {self.args.dataset_name}_last.pth ...")
     def _resume_checkpoint(self, resume_path):
         resume_path = str(resume_path)
-        last_path = os.path.join(self.checkpoint_dir, f'{self.args.dataset_name}_last.pth')
+        if resume_path.endswith('.pth'):
+            last_path = resume_path
+        else:
+            last_path = os.path.join(self.checkpoint_dir, f'{self.args.dataset_name}_last.pth')
         print("Loading checkpoint: {} ...".format(last_path))
         checkpoint = torch.load(last_path)
         self.start_epoch = checkpoint['epoch'] + 1
@@ -385,7 +389,10 @@ class TFTrainer(BaseTrainer):
             # print(f"loss organ {ORGAN_L}, loss clip {loss_clip}, loss autoreg {RG_L}")
             batch_loss = self.lambda_tf * RG_L + self.lambda_clip * loss_clip
             batch_loss /= accumulation_steps
-            train_loss = train_loss + self.lambda_tf * RG_L.item() + self.lambda_clip * loss_clip.item()
+            if isinstance(loss_clip, int):
+                train_loss = train_loss + self.lambda_tf * RG_L.item() 
+            else:
+                train_loss = train_loss + self.lambda_tf * RG_L.item() + self.lambda_clip * loss_clip.item()
 
             batch_loss.backward()
             
@@ -475,6 +482,58 @@ class TFTrainer(BaseTrainer):
         # del test_res, test_gts, test_organ, organ_metrics, results, df
         # gc.collect()
         return log
+
+    @torch.no_grad()
+    def retrieval_index(self, save_dir):
+        self.model.eval()
+        os.makedirs(save_dir, exist_ok=True)
+
+        dataloaders = {
+            "train": self.train_dataloader,
+            "val": self.val_dataloader,
+            "test": self.test_dataloader
+        }
+
+        tokenizer = self.model.tokenizer  # 假设你在 TFTrainer 中有 self.tokenizer
+
+        for split_name, dataloader in dataloaders.items():
+            all_image_embeds = []
+            all_text_embeds = []
+            all_image_ids = []
+            all_captions = []
+
+            for batch_idx, (images_id, images, cap_lens, reports_ids, reports_masks, mesh_label) in tqdm(
+                enumerate(dataloader), total=len(dataloader), desc=f'Indexing {split_name} split'
+            ):
+                images = images.to(self.device)
+                reports_ids = reports_ids.to(self.device)
+                reports_masks = reports_masks.to(self.device)
+
+                # 计算 image 和 text embedding
+                att_feats_0, fc_feats_0, _, dense_vec1 = self.model.visual_extractor(images[:, 0])
+                att_feats_1, fc_feats_1, _, dense_vec2 = self.model.visual_extractor(images[:, 1])
+                dense_vec = torch.cat((dense_vec1, dense_vec2), dim=1)  # (B, D)
+                image_embed = dense_vec
+
+                text_embed = self.model.text_encoder(reports_ids, reports_masks)  # (B, D)
+
+                # decode captions (List[str])
+                captions = tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
+                captions = [c.replace(' ', '') for c in captions]
+                # 拆分每条样本加入
+                all_image_embeds.extend(image_embed.cpu())  # 每条 shape: (D,)
+                all_text_embeds.extend(text_embed.cpu())    # 每条 shape: (D,)
+                all_image_ids.extend(images_id)             # 每条: str/int
+                all_captions.extend(captions)               # 每条: str
+
+            # 保存为文件
+            torch.save({
+                'image_ids': all_image_ids,  # List[str] or List[int]
+                'captions': all_captions,    # List[str]
+                'image_embed': torch.stack(all_image_embeds),  # Tensor (N, D)
+                'text_embed': torch.stack(all_text_embeds)     # Tensor (N, D)
+            }, os.path.join(save_dir, f"{split_name}_retrieval_index.pt"))
+
 
 class MoETrainer(BaseTrainer):
     def __init__(self, model, criterion, metric_ftns, optimizer, args, lr_scheduler, train_dataloader, val_dataloader, test_dataloader):
